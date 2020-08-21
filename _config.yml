@@ -9,7 +9,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Aswini Abraham # add your name
 author-img: profilepic1.jpg # add your photo
-about-author: I am a student of statistics trying to explore practical applications of statistics in everyday life. # add description
+about-author: I am a student of statistics trying to explore practical applications of statistics in everyday life # add description
 social-twitter: # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: artemsheludko # add your Github handle
