@@ -22,12 +22,12 @@ We have the spot and future prices of the S&P500 indices from Sept 1997 to March
 ![I and My friends]({{site.baseurl}}/assets/img/we-in-rest.jpg)
 
 ## STATA code
-  import excel "G:\S&P_hedge.xls", sheet("s&p500") firstrow
-  #Open a log file to save what appears in the result window
-  log using "G:\S&P_hedge.smcl"
-  #check for variable units, missing values
-  codebook 
-
+```import excel "G:\S&P_hedge.xls", sheet("s&p500") firstrow
+#Open a log file to save what appears in the result window
+log using "G:\S&P_hedge.smcl"
+#check for variable units, missing values
+codebook 
+```
 >Hexagon shoreditch beard, man braid blue bottle green juice thundercats viral migas next level ugh. Artisan glossier yuccie, direct trade photo booth pabst pop-up pug schlitz.
 
 Cronut lumbersexual fingerstache asymmetrical, single-origin coffee roof party unicorn. Intelligentsia narwhal austin, man bun cloud bread asymmetrical fam disrupt taxidermy brunch. Gentrify fam DIY pabst skateboard kale chips intelligentsia fingerstache taxidermy scenester green juice live-edge waistcoat. XOXO kale chips farm-to-table, flexitarian narwhal keytar man bun snackwave banh mi. Semiotics pickled taiyaki cliche cold-pressed. Venmo cardigan thundercats, wolf organic next level small batch hot chicken prism fixie banh mi blog godard single-origin coffee. Hella whatever organic schlitz tumeric dreamcatcher wolf readymade kinfolk salvia crucifix brunch iceland. Literally meditation four loko trust fund. Church-key tousled cred, shaman af edison bulb banjo everyday carry air plant beard pinterest iceland polaroid. Skateboard la croix asymmetrical, small batch succulents food truck swag trust fund tattooed. Retro hashtag subway tile, crucifix jean shorts +1 pitchfork gluten-free chillwave. Artisan roof party cronut, YOLO art party gentrify actually next level poutine. Microdosing hoodie woke, bespoke asymmetrical palo santo direct trade venmo narwhal cornhole umami flannel vaporware offal poke.
