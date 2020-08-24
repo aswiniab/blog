@@ -22,21 +22,45 @@ We have the spot and future prices of the S&P500 indices from Sept 1997 to March
 ## STATA code
 ```
 import excel "G:\S&P_hedge.xls", sheet("s&p500") firstrow
+
 # open a log file to records what appears in the result window
 log using "G:\S&P_hedge.smcl"
+
+# codebook helps to check the unit of variables and missing values
 codebook 
 ```
+The output shows that variable- 'Date' is recorded to have daily units whereas in actual it is monthly
 ![codebook_date]({{site.baseurl}}/assets/img/codebook_Date.png)
 
->Hexagon shoreditch beard, man braid blue bottle green juice thundercats viral migas next level ugh. Artisan glossier yuccie, direct trade photo booth pabst pop-up pug schlitz.
+Hence we generate a new variable 'date' which contains the monthly equivalent of 'Date'
+```
+generate date= mofd(Date)
 
-Cronut lumbersexual fingerstache asymmetrical, single-origin coffee roof party unicorn. Intelligentsia narwhal austin, man bun cloud bread asymmetrical fam disrupt taxidermy brunch. Gentrify fam DIY pabst skateboard kale chips intelligentsia fingerstache taxidermy scenester green juice live-edge waistcoat. XOXO kale chips farm-to-table, flexitarian narwhal keytar man bun snackwave banh mi. Semiotics pickled taiyaki cliche cold-pressed. Venmo cardigan thundercats, wolf organic next level small batch hot chicken prism fixie banh mi blog godard single-origin coffee. Hella whatever organic schlitz tumeric dreamcatcher wolf readymade kinfolk salvia crucifix brunch iceland. Literally meditation four loko trust fund. Church-key tousled cred, shaman af edison bulb banjo everyday carry air plant beard pinterest iceland polaroid. Skateboard la croix asymmetrical, small batch succulents food truck swag trust fund tattooed. Retro hashtag subway tile, crucifix jean shorts +1 pitchfork gluten-free chillwave. Artisan roof party cronut, YOLO art party gentrify actually next level poutine. Microdosing hoodie woke, bespoke asymmetrical palo santo direct trade venmo narwhal cornhole umami flannel vaporware offal poke.
+# change display format of 'date' from daily to monthly
+format %tm date
 
-* Hexagon shoreditch beard
-* Intelligentsia narwhal austin
-* Literally meditation four
-* Microdosing hoodie woke
+codebook date
+```
+The output shows that 'date' variable has monthly unit
+![codebook_date]({{site.baseurl}}/assets/img/codebook_date2.png)
 
-Wayfarers lyft DIY sriracha succulents twee adaptogen crucifix gastropub actually hexagon raclette franzen polaroid la croix. Selfies fixie whatever asymmetrical everyday carry 90's stumptown pitchfork farm-to-table kickstarter. Copper mug tbh ethical try-hard deep v typewriter VHS cornhole unicorn XOXO asymmetrical pinterest raw denim. Skateboard small batch man bun polaroid neutra. Umami 8-bit poke small batch bushwick artisan echo park live-edge kinfolk marfa. Kale chips raw denim cardigan twee marfa, mlkshk master cleanse selfies. Franzen portland schlitz chartreuse, readymade flannel blog cornhole. Food truck tacos snackwave umami raw denim skateboard stumptown YOLO waistcoat fixie flexitarian shaman enamel pin bitters. Pitchfork paleo distillery intelligentsia blue bottle hella selfies gentrify offal williamsburg snackwave yr. Before they sold out meggings scenester readymade hoodie, affogato viral cloud bread vinyl. Thundercats man bun sriracha, neutra swag knausgaard jean shorts. Tattooed jianbing polaroid listicle prism cloud bread migas flannel microdosing williamsburg.
+```
+# as we are to perform time series analysis, indiacte that date is the time series time indicating
+  variable and it has monthly data
+tsset date, monthly
+```
+We want to run ur analysis based on retuns of S&P500 index, instead of price levels. So the next step is to transform the spot and future prices into percentage returns. As commonly followed in academic finance reserch, we use continuesly compounded retruns (ie, logarithmic returns)for our analysis instead of simple returns
 
-Echo park try-hard irony tbh vegan pok pok. Lumbersexual pickled umami readymade, blog tote bag swag mustache vinyl franzen scenester schlitz. Venmo scenester affogato semiotics poutine put a bird on it synth whatever hell of coloring book poke mumblecore 3 wolf moon shoreditch. Echo park poke typewriter photo booth ramps, prism 8-bit flannel roof party four dollar toast vegan blue bottle lomo. Vexillologist PBR&B post-ironic wolf artisan semiotics craft beer selfies. Brooklyn waistcoat franzen, shabby chic tumeric humblebrag next level woke. Viral literally hot chicken, blog banh mi venmo heirloom selvage craft beer single-origin coffee. Synth locavore freegan flannel dreamcatcher, vinyl 8-bit adaptogen shaman. Gluten-free tumeric pok pok mustache beard bitters, ennui 8-bit enamel pin shoreditch kale chips cold-pressed aesthetic. Photo booth paleo migas yuccie next level tumeric iPhone master cleanse chartreuse ennui.
+```
+simple return Ft (%)= 100* (F‐L.F)/L.F‐L
+continuesly compunded return ft (%)= 100* ln(F/L.F)
+```
+The summary statistics of futures and spot returns shows that the two return series are very similar in terms of mean, std dev, min and max, as expected from the economic theory.
+
+```
+regress rspot rfutures
+```
+```
+log close
+save "G:\ECON803\STATA_selfstudy\Regression_SandP.dta", replace
+```
