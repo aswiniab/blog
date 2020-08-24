@@ -22,7 +22,7 @@ We have the spot and future prices of the S&P500 indices from Sept 1997 to March
 ![I and My friends]({{site.baseurl}}/assets/img/we-in-rest.jpg)
 
 ## STATA code
-`` import excel "G:\S&P_hedge.xls", sheet("s&p500") firstrow
+`` import excel "G:\S&P_hedge.xls", sheet("s&p500") firstrow </br>
 #Open a log file to save what appears in the result window
 log using "G:\S&P_hedge.smcl"
 #check for variable units, missing values
