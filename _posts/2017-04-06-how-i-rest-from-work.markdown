@@ -7,8 +7,6 @@ img: hedge.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Linear regression, STATA]
 ---
-# Linear Regression using STATA
-
 ## What is a Regression Model?
 Regression is an attempt to explain movements in a variable by reference to movements in one or more variables. An example is how asset prices vary with their level of market risk. 
 
