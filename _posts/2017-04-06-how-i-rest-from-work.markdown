@@ -14,14 +14,21 @@ Regression is an attempt to explain movements in a variable by reference to move
 An investor wishes to hedge a long position in the S&P500 (or its constituent stocks) using a short position in futures contracts. The investor is interested in the optimal hedge ratio, i.e., the number of units of the futures asset to sell per unit of the spot assets held.
 
 ## Methodology
-The changes in the log of the spot and futures prices are known as spot and futures returns. If a regression model is estimated for the return of spot and future price series, the slope parameter measures the optimal hedge ratio as well as the short run relationship between the two series. 
+The changes in the log of the spot and futures prices are known as spot and futures returns. In a regression model estimated for the return of spot and future price series, the slope parameter measures the optimal hedge ratio as well as the short run relationship between the two series. 
 
 ## Data
-We have the spot and future prices of the S&P500 indices from Sept 1997 to March 2018 collected on a monthly basis.  
+We have the spot and future prices of the S&P500 indices from Sept 1997 to March 2018 collected on a monthly basis visualised below:   
 
 ![I and My friends]({{site.baseurl}}/assets/img/we-in-rest.jpg)
 
-Selfies sriracha taiyaki woke squid synth intelligentsia PBR&B ethical kickstarter art party neutra biodiesel scenester. Health goth kogi VHS fashion axe glossier disrupt, vegan quinoa. Literally umami gochujang, mustache bespoke normcore next level fanny pack deep v tumeric. Shaman vegan affogato chambray. Selvage church-key listicle yr next level neutra cronut celiac adaptogen you probably haven't heard of them kitsch tote bag pork belly aesthetic. Succulents wolf stumptown art party poutine. Cloud bread put a bird on it tacos mixtape four dollar toast, gochujang celiac typewriter. Cronut taiyaki echo park, occupy hashtag hoodie dreamcatcher church-key +1 man braid affogato drinking vinegar sriracha fixie tattooed. Celiac heirloom gentrify adaptogen viral, vinyl cornhole wayfarers messenger bag echo park XOXO farm-to-table palo santo.
+## STATA code
+``` import excel "G:\S&P_hedge.xls", sheet("s&p500") firstrow
+# Open a log file to save what appears in the result window
+log using "G:\S&P_hedge.smcl"
+# check for variable units, missing values
+codebook```
+
+
 
 >Hexagon shoreditch beard, man braid blue bottle green juice thundercats viral migas next level ugh. Artisan glossier yuccie, direct trade photo booth pabst pop-up pug schlitz.
 
