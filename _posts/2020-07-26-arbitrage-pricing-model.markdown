@@ -26,7 +26,10 @@ In the case presented here, the following factors have been identified to impact
 - Credit spread (difference in annualised average yield sbetween a paortfolio of bonds rated AAA and a portfolio of bonds rated BAA)
 
 | Factor | Impact on Microsoft's stock return |
-|---|---|
+|:---:|:---:|
 |S&P500 index|Positive|
-
-
+|Consumer price index|Positive|
+|Industrial production index|Positive|
+|Treasury bill yields|Positive|
+|Consumer credit|Positive|
+|Credit spread|Positive|
