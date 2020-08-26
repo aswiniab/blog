@@ -43,7 +43,7 @@ To prepare for analysis and model development, the following data from March 198
 |Data|Abbreviation|Source|
 |:---:|:---:|:---:|
 |Microsoft stock return|MICROSOFT|[finance.yahoo.com](https://finance.yahoo.com)|
-|S&P Price index|SANDP||
+|S&P Price index|SANDP|[finance.yahoo.com](https://finance.yahoo.com)|
 |Consumer Price Index|CPI||
 |Industrial Production Index|IP||
 |US Treasury bill yield for 3 months|USTB3M||
