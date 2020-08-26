@@ -13,9 +13,20 @@ Arbitrage pricing model is based on Arbitrage Pricing Theory (APT) which capture
 
 We wish to develop a model to predict the fair price of Microsoft's stock using Arbitrage Pricing Theory (APT) 
 
-### Model development 
+### Development of Model
 
-**1.Identify factors**
+**Step1.Identification of factors affecting the stock**
 The first step is to identify factors that we believe affects the return on the asset. 
-In our case, it has been identified that 
+In the case presented here, the following factors have been identified to impact the return of Microsoft stock:
+- S&P500 index
+- Consumer price index
+- Industrial production index
+- Treasury bill yields
+- Consumer credit
+- Credit spread (difference in annualised average yield sbetween a paortfolio of bonds rated AAA and a portfolio of bonds rated BAA)
+
+| Factor | Impact on Microsoft's stock return |
+|---|---|
+|S&P500 index|Positive|
+
 
