@@ -42,7 +42,7 @@ To prepare for analysis and model development, the following data from March 198
 
 |Data|Abbreviation|Source|
 |:---:|:---:|:---:|
-|Microsoft stock return|MICROSOFT||
+|Microsoft stock return|MICROSOFT|[finance.yahoo.com](https://finance.yahoo.com)|
 |S&P Price index|SANDP||
 |Consumer Price Index|CPI||
 |Industrial Production Index|IP||
