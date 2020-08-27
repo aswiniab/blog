@@ -34,7 +34,7 @@ Consumer credit is personal debt taken on to purchase goods and services. A cred
 Credit spread measures the difference in yield between U.S. Treasury bonds and other debt securities of lesser quality, such as corporate bonds.Credit spreads widen when U.S. Treasury markets are favored over corporate bonds, typically in times of uncertainty or when economic conditions are expected to deteriorate.
 M1 includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
 
-### 3. How can we model stock return?
+### 3. How can we model the stock return?
 The total return for a stock is the sum of capital gains/losses and dividend income.
 To model the stock return, we first gather the input data and apply data transformations. With the transformed data, we use a linear regression model to explain the relationship between the predictors and the stock return. 
 
