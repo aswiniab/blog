@@ -7,13 +7,13 @@ img: apt2.jpeg # Add image post (optional)
 tags: [Arbitrage Pricing Theory, APT, STATA] # add tag
 ---
 
-### 1.Why do we need an arbitrage pricing model? 
+### 1. Why do we need an arbitrage pricing model? 
 Occasionaly, assets gets mispriced in the market – either overvalued or undervalued – for a brief period of time. Market action would eventually correct the situation, moving price back to its fair market value. However, to an arbitrageur, temporarily mispriced securities represent a short-term opportunity to profit without any risk. 
 Arbitrage pricing model helps us to estimate the fair market price of a stock. It is based on Arbitrage Pricing Theory (APT) that holds that an asset’s returns can be forecasted with the linear relationship of an asset’s expected returns and the macroeconomic factors that affect the asset’s risk.  The APT aims to pinpoint the fair market price of a security that may be temporarily incorrectly priced. 
 
 Let us try to develop an arbitrage pricing model for returns on Microsoft stock.
 
-### 2.What factors affect the stock price?
+### 2. What factors affect the stock price?
 
  Through various studies, the following factors have been identified to impact Microsoft stock price:
 
@@ -34,7 +34,7 @@ Consumer credit is personal debt taken on to purchase goods and services. A cred
 Credit spread measures the difference in yield between U.S. Treasury bonds and other debt securities of lesser quality, such as corporate bonds.Credit spreads widen when U.S. Treasury markets are favored over corporate bonds, typically in times of uncertainty or when economic conditions are expected to deteriorate.
 M1 includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
 
-### 3.How can we model stock return?
+### 3. How can we model stock return?
 The total return for a stock is the sum of capital gains/losses and dividend income.
 To model the stock return, we first gather the input data and apply data transformations. With the transformed data, we use a linear regression model to explain the relationship between the predictors and the stock return. 
 
@@ -54,3 +54,8 @@ To prepare for analysis and model development, the following data from March 198
 |Credit Spread|BMINUSA|[Fred Economic Data](https://fred.stlouisfed.org)|
 
 BMINUSA is calculated calculated as the spread between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
+
+#### 3.2 Data Transformation
+##### 3.2.1 Target variable
+##### 3.2.1 Predictors
+
