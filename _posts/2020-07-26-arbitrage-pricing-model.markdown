@@ -52,4 +52,4 @@ To prepare for analysis and model development, the following data from March 198
 |M1 money stock|M1SUPPLY|[Fred Economic Data](https://fred.stlouisfed.org)|
 |Consumer Credit|CCREDIT|[Fred Economic Data](https://fred.stlouisfed.org)|
 |Credit Spread|BMINUSA|[Fred Economic Data](https://fred.stlouisfed.org)|
-
+BMINUSA is calculated calculated as the spread between [Moody's Seasoned Baa Corporate Bond] (https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate] (https://fred.stlouisfed.org/series/EFFRM)
