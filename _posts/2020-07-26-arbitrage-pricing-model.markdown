@@ -32,6 +32,7 @@ The industrial production index (IPI) is a monthly economic indicator measuring 
 Treasury bill yields is a means of 'narrow' money supply. As the treasury bill yeilds increases, stock as an investment vehicle becomes unattractive relative to treasury bonds.
 Consumer credit is personal debt taken on to purchase goods and services. A credit card is one form of consumer credit. Although any type of personal loan could be labeled consumer credit, the term is usually used to describe unsecured debt that is taken on to buy everyday goods and services. Increased consumer credit indicate increased consumer spending, leading to increased production and transctions in the market. Hence, it has a positive impact on the stock returns.
 Credit spread measures the difference in yield between U.S. Treasury bonds and other debt securities of lesser quality, such as corporate bonds.Credit spreads widen when U.S. Treasury markets are favored over corporate bonds, typically in times of uncertainty or when economic conditions are expected to deteriorate.
+M1 includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
 
 ### 3.How can we model stock return?
 The total return for a stock is the sum of capital gains/losses and dividend income.
@@ -45,10 +46,10 @@ To prepare for analysis and model development, the following data from March 198
 |Microsoft stock return|MICROSOFT|[finance.yahoo.com](https://finance.yahoo.com)|
 |S&P Price index|SANDP|[finance.yahoo.com](https://finance.yahoo.com)|
 |Consumer Price Index|CPI|[US Inflation Calculator](https://www.usinflationcalculator.com)|
-|Industrial Production Index|IP||
-|US Treasury bill yield for 3 months|USTB3M||
-|US Treasury bill yield for 10 years|USTB10Y||
-||M1SUPPLY|
-|Consumer Credit|CCREDIT|
-||BMINUSA||
+|Industrial Production Index|INDPRO|[Fred Economic Data](https://fred.stlouisfed.org)|
+|US Treasury bill yield for 3 months|USTB3M|[Fred Economic Data](https://fred.stlouisfed.org)|
+|US Treasury bill yield for 10 years|USTB10Y|[Fred Economic Data](https://fred.stlouisfed.org)|
+|M1 money stock|M1SUPPLY|[Fred Economic Data](https://fred.stlouisfed.org)|
+|Consumer Credit|CCREDIT|[Fred Economic Data](https://fred.stlouisfed.org)|
+|Credit Spread|BMINUSA|[Fred Economic Data](https://fred.stlouisfed.org)|
 
