@@ -39,7 +39,17 @@ The total return for a stock is the sum of capital gains/losses and dividend inc
 To model the stock return, we first gather the input data and apply data transformations. With the transformed data, we use a linear regression model to explain the relationship between the predictors and the stock return. 
 
 #### 3.1 Data gathering
-To prepare for analysis and model development, the following data from March 1986 till March 2018 were collected and cleaned:
+To prepare for analysis and model development, the following data since March 1986 were collected and cleaned:
+* MICROSOFT: closing value (currency in USD) of Microsoft soft on 1st day of the month.
+* SANDP: closing value of S&P500 (currency in USD) on 1st day of the month.
+* CPI: monthly data on consumer price index  
+* INDPRO:The Industrial Production Index (INDPRO) is an economic indicator that measures real output for all facilities located in the United States manufacturing,  
+  mining, and electric, and gas utilities.
+* USTB3M: the monthly average of US Treasury Bill Yield (in percentage) for 3 months maturity 
+* USTB10Y: the monthly average of US Treasury Bill Yield (in percentage) for 10 year maturity in percentage
+* M1SUPPLY: the monthly average seasonally adjusted M1 money stock value in billions of dollars 
+* CCREDIT: Total Consumer Credit Owned and Securitized, Outstanding monthly end of period data in billions of dollars not seasonally adjusted 
+* BMINUSA: Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
 
 |Data|Abbreviation|Source|
 |:---:|:---:|:---:|
@@ -53,7 +63,6 @@ To prepare for analysis and model development, the following data from March 198
 |Consumer Credit|CCREDIT|[Fred Economic Data](https://fred.stlouisfed.org)|
 |Credit Spread|BMINUSA|[Fred Economic Data](https://fred.stlouisfed.org)|
 
-BMINUSA is calculated calculated as the spread between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
 
 #### 3.2 Data Transformation
 ##### 3.2.1 Target variable
