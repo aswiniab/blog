@@ -69,8 +69,24 @@ Now that we have prepared our dataset we can start with the actual analysis. The
 
 ##### 3.2.1 Target variable
 The target variable in this model is the closing price (in USD) of Microsoft stock recorded monthly. Going forward, this will be referred to as 'MICROSOFT'.
+* rmsoft
 
 ##### 3.2.1 Predictors
-There are eight predictors used for this regression model:
+There are eight macroeconomic variables which act as predctors in this regression model:
+* dspread = BMINUSA - L.BMINUSA
+* dcredit = CCREDIT - L.CCREDIT
+* dprod = INDPRO - L.INDPRO
+* rsandp = 100 * (ln (MICROSOFT/L.MICROSOFT) )
+* dmoney = M1SUPPLY - L.M1SUPPLY
+* inflation = 100 * (ln (CPI/L.CPI) )
+* term = USTB10Y - USTB3M
 
+Next we need to apply further transformations to some of the
+transformed series, so we generate another set of variables:
+
+* dinflation = inflation - L.inflation
+* mustb3m = USTB3M / 12
+* rterm = term - L.term
+* ermsoft = rmsoft - mustb3m
+* ersandp = rsandp - mustb3m
 
