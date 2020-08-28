@@ -65,6 +65,12 @@ To prepare for analysis and model development, the following data since March 19
 
 
 #### 3.2 Data Transformation
+Now that we have prepared our dataset we can start with the actual analysis. The first stage is to generate a set of changes or differences for each of the variables, since the APT posits that the stock returns can be explained by reference to the unexpected changes in the macroeconomic variables rather than their levels. The unexpected value of a variable can be defined as the difference between the actual (realised) value of the variable and its expected value. The question then arises that what is the expected value of the variables? It can be assumed that the investors have naive expectations that the next period value of the variable is equal to the current value.This being the case, the entire change in the variable from one period to the next is the unexpected change (because investors are assumed to expect no change). 
+
 ##### 3.2.1 Target variable
+The target variable in this model is the closing price (in USD) of Microsoft stock recorded monthly. Going forward, this will be referred to as 'MICROSOFT'.
+
 ##### 3.2.1 Predictors
+There are eight predictors used for this regression model:
+
 
