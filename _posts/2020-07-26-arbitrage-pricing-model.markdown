@@ -87,6 +87,7 @@ transformed series, so we generate another set of variables:
 * dinflation = inflation - L.inflation
 * mustb3m = USTB3M / 12
 * rterm = term - L.term
-* ermsoft = rmsoft - mustb3m
-* ersandp = rsandp - mustb3m
+* ermsoft = rmsoft - mustb3m // excess return for stock
+* ersandp = rsandp - mustb3m // excess return for index
 
+We can now run the regression. The STATA codes are given below:
