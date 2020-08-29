@@ -96,7 +96,7 @@ The APT posits that the stock returns can be explained by reference to the unexp
 
 > Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg.,
 y_t=β_1+β_2 x_1t+β_3 x_2t+β_4 x_3t+β_5 x_4t+⋯+γ_1 y_(t-1)+γ_2 x_(1t-1)+⋯+γ_k x_(kt-1)+u_t
-![equation](http://www.sciweavers.org/download/Tex2Img_1598726436.jpg)
+![equation](http://www.sciweavers.org/download/Tex2Img_1598726952.jpg)
 
 This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels. 
 What are unexpected changes in the macroeconomic variables? The unexpected value of a variable can be defined as the difference between the actual (realised) value of the variable and its expected value. The question then arises that what is the expected value of the variables? It can be assumed that the investors have naive expectations that the next period value of the variable is equal to the current value. This being the case, the entire change in the variable from one period to the next is the unexpected change (because investors are assumed to expect no change).
