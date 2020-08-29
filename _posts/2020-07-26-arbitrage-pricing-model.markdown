@@ -67,11 +67,7 @@ To prepare for analysis and model development, the following data since March 19
 #### 3.2 Data Transformation
 Now that we have prepared our dataset we can start with the actual analysis. 
 Lets import the data file and check the variables using STATA.
-```
-import excel "G:\Portfolio\data.xlsx", sheet("MSFT") firstrow
-# To output details of variable 'Date'
-codebook Date
-```
+
 {% highlight ruby %}
 import excel "G:\Portfolio\data.xlsx", sheet("MSFT") firstrow
 #=> To output details of variable 'Date'
