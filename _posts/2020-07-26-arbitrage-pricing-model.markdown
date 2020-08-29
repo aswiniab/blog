@@ -90,7 +90,8 @@ We apply log transformation to the following data series since all the values ar
 
 ##### 3.2.2 Transformation from levels to first differences
 The APT posits that the stock returns can be explained by reference to the unexpected changes in the macroeconomic variables rather than their levels. This is required as we are dealing with a dynamic model here. The current value of the stock return depends on previous values of stock along with other variables. 
-Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg.,
+
+> Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg.,
 y_t=β_1+β_2 x_1t+β_3 x_2t+β_4 x_3t+β_5 x_4t+⋯+γ_1 y_(t-1)+γ_2 x_(1t-1)+⋯+γ_k x_(kt-1)+u_t
 
 This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels. 
