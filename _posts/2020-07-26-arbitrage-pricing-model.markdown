@@ -40,16 +40,16 @@ To model the stock return, we first gather the input data and apply data transfo
 
 #### 3.1 Data gathering
 To prepare for analysis and model development, the following data since March 1986 were collected and cleaned:
-* MICROSOFT: closing value (currency in USD) of Microsoft soft on 1st day of the month.
-* SANDP: closing value of S&P500 (currency in USD) on 1st day of the month.
+* MICROSOFT: closing value (currency in USD) of Microsoft soft on 1st day of the month
+* SANDP: closing value of S&P500 (currency in USD) on 1st day of the month
 * CPI: monthly data on consumer price index  
 * INDPRO:The Industrial Production Index (INDPRO) is an economic indicator that measures real output for all facilities located in the United States manufacturing,  
-  mining, and electric, and gas utilities.
+  mining, and electric, and gas utilities
 * USTB3M: the monthly average of US Treasury Bill Yield (in percentage) for 3 months maturity 
 * USTB10Y: the monthly average of US Treasury Bill Yield (in percentage) for 10 year maturity in percentage
 * M1SUPPLY: the monthly average seasonally adjusted M1 money stock value in billions of dollars 
 * CCREDIT: Total Consumer Credit Owned and Securitized, Outstanding monthly end of period data in billions of dollars not seasonally adjusted 
-* BMINUSA: Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
+* BMINUSA: Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread  between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
 
 |Data|Abbreviation|Source|
 |:---:|:---:|:---:|
@@ -82,7 +82,7 @@ format %tm Date
 tsset Date, monthly
 codebook Date
 ```
-The 'Date'variable now has units 'months' which is correct.
+The 'Date' variable now has units 'months' which is correct.
 ![Date_month]({{site.baseurl}}/assets/img/APT_output/Date_months.png)
 
 #### 3.2.1 Log-Transformation
@@ -94,8 +94,7 @@ We apply log transformation to the following data series since all the values ar
 ##### 3.2.2 Transformation from levels to first differences
 The APT posits that the stock returns can be explained by reference to the unexpected changes in the macroeconomic variables rather than their levels. This is required as we are dealing with a dynamic model here. The current value of the stock return depends on previous values of stock along with other variables. 
 
-> Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg.,
-> ![equation](http://www.sciweavers.org/download/Tex2Img_1598726952.jpg)
+> Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg., ![equation](http://www.sciweavers.org/download/Tex2Img_1598726952.jpg)
 
 This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels. 
 What are unexpected changes in the macroeconomic variables? The unexpected value of a variable can be defined as the difference between the actual (realised) value of the variable and its expected value. The question then arises that what is the expected value of the variables? It can be assumed that the investors have naive expectations that the next period value of the variable is equal to the current value. This being the case, the entire change in the variable from one period to the next is the unexpected change (because investors are assumed to expect no change).
@@ -118,13 +117,13 @@ generate ermsoft=rmsoft-mustb3m
 ```
 **Predictors**
 There are seven macroeconomic variables which act as preditors in this regression model. Their first differences is given by:
-•	dspread = BMINUSA - L.BMINUSA
-•	dcredit = CCREDIT - L.CCREDIT
-•	dprod = INDPRO - L.INDPRO
-•	rsandp = 100 * (ln (MICROSOFT/L.MICROSOFT) )
-•	dmoney = M1SUPPLY - L.M1SUPPLY
-•	inflation = 100 * (ln (CPI/L.CPI) )
-•	term = USTB10Y - USTB3M
+*	dspread = BMINUSA - L.BMINUSA
+*	dcredit = CCREDIT - L.CCREDIT
+*	dprod = INDPRO - L.INDPRO
+*	rsandp = 100 * (ln (MICROSOFT/L.MICROSOFT) )
+*	dmoney = M1SUPPLY - L.M1SUPPLY
+*	inflation = 100 * (ln (CPI/L.CPI) )
+*	term = USTB10Y - USTB3M
 
 STATA code:
 ```
@@ -137,9 +136,9 @@ generate inflation = 100*(ln(CPI/L.CPI))
 generate term = USTB10Y-L.USTB3M
 ```
 Next we need to apply further transformations to some of the transformed series, so we generate another set of variables:
-•	dinflation = inflation - L.inflation
-•	rterm = term - L.term
-•	ersandp = rsandp - mustb3m 
+*	dinflation = inflation - L.inflation
+*	rterm = term - L.term
+*	ersandp = rsandp - mustb3m 
 
 ```
 generate dinflation = inflation-L.inflation
