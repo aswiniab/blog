@@ -72,6 +72,11 @@ import excel "G:\Portfolio\data.xlsx", sheet("MSFT") firstrow
 # To output details of variable 'Date'
 codebook Date
 ```
+{% highlight ruby %}
+import excel "G:\Portfolio\data.xlsx", sheet("MSFT") firstrow
+#=> To output details of variable 'Date'
+{% endhighlight %}
+
 It can be observed that the 'Date' variable has units 'days' while actually it should be 'months'.
 ![Date_days]({{site.baseurl}}/assets/img/APT_output/Date_days.png)
 
