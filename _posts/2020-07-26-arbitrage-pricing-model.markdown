@@ -58,13 +58,13 @@ To prepare for analysis and model development, the following data for the period
 |Credit Spread|BMINUSA|[Fred Economic Data](https://fred.stlouisfed.org)|
 |Money Supply|M1SUPPLY|[Fred Economic Data](https://fred.stlouisfed.org)|
 
-* SANDP: captures the closing value of S&P 500 stock index in USD as on the first day of every month for the period. 
-*	CPI: captures the consumer price index data series for the period mentioned. The data is based upon base year 1982 which has CPI 100. What does this mean? A CPI of 195.3, as an example from year 2005, indicates 95.3% inflation since 1982.
-* INDPRO: captures the seasonally adjusted monthly value of the index. The data has 2012 as the base year with an index value of 100. 
-* USTB3M and USTB10Y:  captures the average monthly value of US treasury bill yield with a maturity period of 3 months and 10 years respectively.
-* CCREDIT: captures total consumer credit in billions of dollars (not seasonally adjusted) outstanding at the end of a month for period March 1986 to June 2020. 
-* BMINUSA: captures Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread  between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
-* M1SUPPLY: captures the monthly average seasonally adjusted money supply value in billions of dollars. It includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
+* **SANDP** captures the closing value of S&P 500 stock index in USD as on the first day of every month for the period. 
+*	**CPI** captures the consumer price index data series for the period mentioned. The data is based upon base year 1982 which has CPI 100. What does this mean? A CPI of 195.3, as an example from year 2005, indicates 95.3% inflation since 1982.
+* **INDPRO** captures the seasonally adjusted monthly value of the index. The data has 2012 as the base year with an index value of 100. 
+* **USTB3M and USTB10Y**  captures the average monthly value of US treasury bill yield with a maturity period of 3 months and 10 years respectively.
+* **CCREDIT** captures total consumer credit in billions of dollars (not seasonally adjusted) outstanding at the end of a month for period March 1986 to June 2020. 
+* **BMINUSA** captures Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread  between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
+* **M1SUPPLY** captures the monthly average seasonally adjusted money supply value in billions of dollars. It includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
 
 #### 3.2 Data Transformation
 Now that we have prepared our dataset we can start with the actual analysis. 
