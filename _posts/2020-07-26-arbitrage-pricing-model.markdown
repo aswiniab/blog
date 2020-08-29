@@ -75,18 +75,20 @@ codebook Date
 {% highlight ruby %}
 import excel "G:\Portfolio\data.xlsx", sheet("MSFT") firstrow
 #=> To output details of variable 'Date'
+codebook Date
 {% endhighlight %}
 
 It can be observed that the 'Date' variable has units 'days' while actually it should be 'months'.
 ![Date_days]({{site.baseurl}}/assets/img/APT_output/Date_days.png)
 
-```
+{% highlight ruby %}
 # replace Date unit with month
 replace Date = mofd(Date)
 format %tm Date
 tsset Date, monthly
 codebook Date
-```
+{% endhighlight %}
+
 The 'Date' variable now has units 'months' which is correct.
 ![Date_month]({{site.baseurl}}/assets/img/APT_output/Date_months.png)
 
@@ -115,11 +117,11 @@ the excess return of the Microsoft stock is given by:
 ermsoft = rmsoft – mustb3m
 
 The STATA codes are:
-```
+{% highlight ruby %}
 generate rmsoft = 100*(ln(MICROSOFT/L.MICROSOFT))
 generate mustb3m=USTB3M/12
 generate ermsoft=rmsoft-mustb3m
-```
+{% endhighlight %}
 **Predictors**
 There are seven macroeconomic variables which act as preditors in this regression model. Their first differences is given by:
 *	dspread = BMINUSA - L.BMINUSA
@@ -131,7 +133,7 @@ There are seven macroeconomic variables which act as preditors in this regressio
 *	term = USTB10Y - USTB3M
 
 STATA code:
-```
+{% highlight ruby %}
 generate dspread = BMINUSA-L.BMINUSA
 generate dcredit = CCREDIT-L.CCREDIT
 generate dprod = INDPRO-L.INDPRO
@@ -139,30 +141,30 @@ generate rsandp = 100*(ln(SANDP/L.SANDP))
 generate dmoney = M1SUPPLY-L.M1SUPPLY
 generate inflation = 100*(ln(CPI/L.CPI))
 generate term = USTB10Y-L.USTB3M
-```
+{% endhighlight %}
 Next we need to apply further transformations to some of the transformed series, so we generate another set of variables:
 *	dinflation = inflation - L.inflation
 *	rterm = term - L.term
 *	ersandp = rsandp - mustb3m 
 
-```
+{% highlight ruby %}
 generate dinflation = inflation-L.inflation
 generate rterm=term-L.term
 generate ersandp=rsandp-mustb3m
-```
+{% endhighlight %}
 
 #### 3.3 Regression Analysis
 We can now ready run the regression. 
-```
+{% highlight ruby %}
 regress ermsoft ersandp rterm dpro dcredit dinflation dmoney  dspread
-```
+{% endhighlight %}
 ![Date_month]({{site.baseurl}}/assets/img/APT_output/regression.png)
 
-```
+{% highlight ruby %}
 test (dpro dcredit dmoney dspread)
-```
-![Date_month]({{site.baseurl}}/assets/img/APT_output/Ftest.png)
+{% endhighlight %}
 
+![Date_month]({{site.baseurl}}/assets/img/APT_output/Ftest.png)
 
 Note that the signs of the coefficients estimates match with the expected impact of the variable given in table 1. The regression output shows that only ersandp, dinflation and rterm factors have significant impact on ermsoft. Hence, the model can be reduced as:
 ![img](http://www.sciweavers.org/tex2img.php?eq=ermsoft_%7Bt%7D%20%3D%201.33%20%2B%201.28%20ersandp_%7Bt%7D%20%2B%202.19%20dinflation_%7Bt%7D%20%2B%204.73%20rterm_%7Bt%7D%20%2B%20u_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
