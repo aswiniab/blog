@@ -73,7 +73,7 @@ import excel "G:\Portfolio\data.xlsx", sheet("MSFT") firstrow
 codebook Date
 ```
 It can be observed that the 'Date' variable has units 'days' while actually it should be 'months'.
-![Date_days]({{site.baseurl}}/assets/img/APT_output/Date_unit_days.png)
+![Date_days]({{site.baseurl}}/assets/img/APT_output/Date_days.png)
 
 ```
 # replace Date unit with month
@@ -83,7 +83,7 @@ tsset Date, monthly
 codebook Date
 ```
 The 'Date'variable now has units 'months' which is correct.
-![Date_month]({{site.baseurl}}/assets/img/APT_output/Date_unit_months.png)
+![Date_month]({{site.baseurl}}/assets/img/APT_output/Date_months.png)
 
 #### 3.2.1 Log-Transformation
 We apply log transformation to the following data series since all the values are positive and exhibit high positive skewness. This helps in linearizing the model. 
@@ -152,7 +152,7 @@ We can now ready run the regression.
 ```
 regress ermsoft ersandp rterm dpro dcredit dinflation dmoney  dspread
 ```
-![Date_month]({{site.baseurl}}/assets/img/APT_output/regression_output.png)
+![Date_month]({{site.baseurl}}/assets/img/APT_output/regression.png)
 
 ```
 test (dpro dcredit dmoney dspread)
