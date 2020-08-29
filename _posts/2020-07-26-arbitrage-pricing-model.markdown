@@ -18,6 +18,7 @@ Let us try to develop an arbitrage pricing model for returns on Microsoft stock.
 Several studies have been conducted on factors that could affect stock returns. The following factors have been identified to have a potential impact on stock price:
 
 *Table1:Factors affecting stock price and their potential impact*
+
 | Factor | Impact on stock price |
 |:---:|:---:|
 |S&P500 index|Positive|
@@ -43,7 +44,9 @@ To model the stock return, we first gather the input data and apply data transfo
 
 #### 3.1 Data gathering
 To prepare for analysis and model development, the following data for the period March 1986 to June 2020 were collected and cleaned:
+
 *Table2:Data sources*
+
 |Data|Variable|Source|
 |:---:|:---:|:---:|
 |Microsoft stock return|MICROSOFT|[finance.yahoo.com](https://finance.yahoo.com)|
