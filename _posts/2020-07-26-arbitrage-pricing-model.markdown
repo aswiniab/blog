@@ -8,16 +8,17 @@ tags: [Arbitrage Pricing Theory, APT, STATA] # add tag
 ---
 
 ### 1. Why do we need an arbitrage pricing model? 
-Occasionaly, assets gets mispriced in the market – either overvalued or undervalued – for a brief period of time. Market action would eventually correct the situation, moving price back to its fair market value. However, to an arbitrageur, temporarily mispriced securities represent a short-term opportunity to profit without any risk. 
-Arbitrage pricing model helps us to estimate the fair market price of a stock. It is based on Arbitrage Pricing Theory (APT) that holds that an asset’s returns can be forecasted with the linear relationship of an asset’s expected returns and the macroeconomic factors that affect the asset’s risk.  The APT aims to pinpoint the fair market price of a security that may be temporarily incorrectly priced. 
+Occasionaly, assets gets mispriced in the market – either overvalued or undervalued – for a brief period of time. Market action would eventually correct the situation, moving price back to its fair market value. However, to an arbitrageur, temporarily mispriced securities represent a short-term opportunity to profit, virtually without risk. 
+Arbitrage pricing model helps us to estimate the fair market price of a stock. It is based on Arbitrage Pricing Theory (APT) that holds that an asset’s returns can be forecasted with the linear relationship of an asset’s expected returns and the macroeconomic factors that affect the asset’s risk.  The expected return is the profit or loss an investor anticipates on an investment, usually expressed in percentage.
 
 Let us try to develop an arbitrage pricing model for returns on Microsoft stock.
 
-### 2. What factors affect the stock price?
+### 2. What factors affect the Microsoft stock price?
 
- Through various studies, the following factors have been identified to impact Microsoft stock price:
+Several studies have been conducted on factors that could affect stock returns. The following factors have been identified to have a potential impact on stock price:
 
-| Factor | Impact on Microsoft stock price |
+*Table1:Factors affecting stock price and their potential impact*
+| Factor | Impact on stock price |
 |:---:|:---:|
 |S&P500 index|Positive|
 |Consumer price index|Negative|
@@ -25,44 +26,42 @@ Let us try to develop an arbitrage pricing model for returns on Microsoft stock.
 |Treasury bill yields|Negative|
 |Consumer credit|Positive|
 |Credit spread|Negative|
+|Money supply|Positive|
 
-The S&P 500 is largely considered an essential benchmark index for the U.S. stock market. Composed of 500 large-cap companies across a breadth of industry sectors, the index captures the pulse of the American corporate economy. A high value of the the index indicate that the stock market is optimistic. 
-The Consumer Price Index (CPI) is a measure of the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services. If the CPI index increases, the return from the stock looks less attractive. 
-The industrial production index (IPI) is a monthly economic indicator measuring real output in the manufacturing, mining, electric and gas industries, relative to a base year. A increased IPI indiacte increased industrial activity and is expected to have a postive impac on the reurn of stocks.
-Treasury bill yields is a means of 'narrow' money supply. As the treasury bill yeilds increases, stock as an investment vehicle becomes unattractive relative to treasury bonds.
-Consumer credit is personal debt taken on to purchase goods and services. A credit card is one form of consumer credit. Although any type of personal loan could be labeled consumer credit, the term is usually used to describe unsecured debt that is taken on to buy everyday goods and services. Increased consumer credit indicate increased consumer spending, leading to increased production and transctions in the market. Hence, it has a positive impact on the stock returns.
-Credit spread measures the difference in yield between U.S. Treasury bonds and other debt securities of lesser quality, such as corporate bonds.Credit spreads widen when U.S. Treasury markets are favored over corporate bonds, typically in times of uncertainty or when economic conditions are expected to deteriorate.
-M1 includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
+*	**S&P 500** is a stock market index that measures the stock performance of 500 large companies listed on stock exchanges in the United States. Many consider it to be one of the best representations of the U.S. stock market.
+*	**Consumer Price Index (CPI)** is a measure of the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services. If the CPI index increases, the return from the stock looks less attractive. It is used for calculating inflation.
+*	**Industrial Production Index (IPI)** is a monthly economic indicator measuring real output in the manufacturing, mining, electric and gas industries, relative to a base year. A increased IPI indicate increased industrial activity and is expected to have a positive impact on the return of stocks.
+*	**Treasury yield** is the effective interest rate (expressed as percentage) that the U.S. government pays to borrow money for different lengths of time. As the treasury bill yield increases, stock as an investment vehicle becomes unattractive relative to treasury bonds.
+*	**Consumer credit** is personal debt taken on to purchase goods and services. A credit card is one form of consumer credit. Although any type of personal loan could be labelled consumer credit, the term is usually used to describe unsecured debt that is taken on to buy everyday goods and services. Increased consumer credit indicate increased consumer spending, leading to increased production and transactions in the market. Hence, it has a positive impact on the stock returns.
+*	**Credit spread** measures the difference in yield between U.S. Treasury bonds and other debt securities of lesser quality, such as corporate bonds.Credit spreads widen when U.S. Treasury markets are favored over corporate bonds, typically in times of uncertainty or when economic conditions are expected to deteriorate.
+*	**Money supply** is all the currency and other liquid instruments in a country's economy on the date measured that can be used almost as easily as cash. The more the money supply, the higher price of stock.
+ 
 
 ### 3. How can we model the stock return?
 The total return for a stock is the sum of capital gains/losses and dividend income.
 To model the stock return, we first gather the input data and apply data transformations. With the transformed data, we use a linear regression model to explain the relationship between the predictors and the stock return. 
 
 #### 3.1 Data gathering
-To prepare for analysis and model development, the following data since March 1986 were collected and cleaned:
-* MICROSOFT: closing value (currency in USD) of Microsoft soft on 1st day of the month
-* SANDP: closing value of S&P500 (currency in USD) on 1st day of the month
-* CPI: monthly data on consumer price index  
-* INDPRO:The Industrial Production Index (INDPRO) is an economic indicator that measures real output for all facilities located in the United States manufacturing,  
-  mining, and electric, and gas utilities
-* USTB3M: the monthly average of US Treasury Bill Yield (in percentage) for 3 months maturity 
-* USTB10Y: the monthly average of US Treasury Bill Yield (in percentage) for 10 year maturity in percentage
-* M1SUPPLY: the monthly average seasonally adjusted M1 money stock value in billions of dollars 
-* CCREDIT: Total Consumer Credit Owned and Securitized, Outstanding monthly end of period data in billions of dollars not seasonally adjusted 
-* BMINUSA: Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread  between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
-
-|Data|Abbreviation|Source|
+To prepare for analysis and model development, the following data for the period March 1986 to June 2020 were collected and cleaned:
+*Table2:Data sources*
+|Data|Variable|Source|
 |:---:|:---:|:---:|
 |Microsoft stock return|MICROSOFT|[finance.yahoo.com](https://finance.yahoo.com)|
-|S&P Price index|SANDP|[finance.yahoo.com](https://finance.yahoo.com)|
+|S&P 500 index|SANDP|[finance.yahoo.com](https://finance.yahoo.com)|
 |Consumer Price Index|CPI|[US Inflation Calculator](https://www.usinflationcalculator.com)|
 |Industrial Production Index|INDPRO|[Fred Economic Data](https://fred.stlouisfed.org)|
-|US Treasury bill yield for 3 months|USTB3M|[Fred Economic Data](https://fred.stlouisfed.org)|
-|US Treasury bill yield for 10 years|USTB10Y|[Fred Economic Data](https://fred.stlouisfed.org)|
-|M1 money stock|M1SUPPLY|[Fred Economic Data](https://fred.stlouisfed.org)|
+|Treasury bill yields |USTB3M, USTB10Y|[Fred Economic Data](https://fred.stlouisfed.org)|
 |Consumer Credit|CCREDIT|[Fred Economic Data](https://fred.stlouisfed.org)|
 |Credit Spread|BMINUSA|[Fred Economic Data](https://fred.stlouisfed.org)|
+|Money Supply|M1SUPPLY|[Fred Economic Data](https://fred.stlouisfed.org)|
 
+* SANDP: captures the closing value of S&P 500 stock index in USD as on the first day of every month for the period. 
+*	CPI: captures the consumer price index data series for the period mentioned. The data is based upon base year 1982 which has CPI 100. What does this mean? A CPI of 195.3, as an example from year 2005, indicates 95.3% inflation since 1982.
+* INDPRO: captures the seasonally adjusted monthly value of the index. The data has 2012 as the base year with an index value of 100. 
+* USTB3M and USTB10Y:  captures the average monthly value of US treasury bill yield with a maturity period of 3 months and 10 years respectively.
+* CCREDIT: captures total consumer credit in billions of dollars (not seasonally adjusted) outstanding at the end of a month for period March 1986 to June 2020. 
+* BMINUSA: captures Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread  between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
+* M1SUPPLY: captures the monthly average seasonally adjusted money supply value in billions of dollars. It includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
 
 #### 3.2 Data Transformation
 Now that we have prepared our dataset we can start with the actual analysis. 
