@@ -70,7 +70,7 @@ Lets import the data file and check the variables using STATA.
 
 {% highlight ruby %}
 import excel "G:\Portfolio\data.xlsx", sheet("MSFT") firstrow
-#=> To output details of variable 'Date'
+# To output details of variable 'Date'
 codebook Date
 {% endhighlight %}
 
