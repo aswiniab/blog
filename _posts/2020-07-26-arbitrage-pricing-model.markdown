@@ -94,7 +94,7 @@ We apply log transformation to the following data series since all the values ar
 ##### 3.2.2 Transformation from levels to first differences
 The APT posits that the stock returns can be explained by reference to the unexpected changes in the macroeconomic variables rather than their levels. This is required as we are dealing with a dynamic model here. The current value of the stock return depends on previous values of stock along with other variables. 
 
-> Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg., ![equation](http://www.sciweavers.org/download/Tex2Img_1598726952.jpg)
+> Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg., ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D%3D%20%5Cbeta%20_%7B1%7D%2B%5Cbeta_%7B2%7D%20x_%7B2t%7D%2B%5Cbeta_%7B3%7D%20x_%7B3t%7D%2B%5Cbeta_%7B4%7D%20x_%7B4t%7D%2B...%2B%20%5Cgamma_%7B1%7D%20y_%7Bt-1%7D%2B%5Cgamma_%7B2%7D%20x_%7B2t-1%7D%2B%E2%8B%AF%2B%5Cgamma_%7Bk%7D%20x_%7Bkt-1%7D%2Bu_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img])
 
 This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels. 
 What are unexpected changes in the macroeconomic variables? The unexpected value of a variable can be defined as the difference between the actual (realised) value of the variable and its expected value. The question then arises that what is the expected value of the variables? It can be assumed that the investors have naive expectations that the next period value of the variable is equal to the current value. This being the case, the entire change in the variable from one period to the next is the unexpected change (because investors are assumed to expect no change).
@@ -160,6 +160,6 @@ test (dpro dcredit dmoney dspread)
 
 
 Note that the signs of the coefficients estimates match with the expected impact of the variable given in table 1. The regression output shows that only ersandp, dinflation and rterm factors have significant impact on ermsoft. Hence, the model can be reduced as:
-![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D%3D%20%5Cbeta%20_%7B1%7D%2B%5Cbeta_%7B2%7D%20x_%7B2t%7D%2B%5Cbeta_%7B3%7D%20x_%7B3t%7D%2B%5Cbeta_%7B4%7D%20x_%7B4t%7D%2B...%2B%20%5Cgamma_%7B1%7D%20y_%7Bt-1%7D%2B%5Cgamma_%7B2%7D%20x_%7B2t-1%7D%2B%E2%8B%AF%2B%5Cgamma_%7Bk%7D%20x_%7Bkt-1%7D%2Bu_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img])
+
 
 Using this model the fair market price of Microsoft stock can be estimated. In the event the market misprices the stock, the arbitrage opportunity can be harnessed to gain.
