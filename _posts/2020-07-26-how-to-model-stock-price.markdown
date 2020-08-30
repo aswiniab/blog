@@ -196,6 +196,6 @@ The result suggests that the null hypothesis cannot be rejected. Hence, we can c
 The model can be reduced as:
 ![img](http://www.sciweavers.org/tex2img.php?eq=ermsoft_%7Bt%7D%20%3D%201.33%20%2B%201.28%20ersandp_%7Bt%7D%20%2B%202.19%20dinflation_%7Bt%7D%20%2B%204.73%20rterm_%7Bt%7D%20%2B%20u_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
 
-![img]http://www.sciweavers.org/tex2img.php?eq=ermsoft_%7Bt%7D%20%3D%201.37%20%2B%201.21%20ersandp_%7Bt%7D%20%2B%203.36%20rterm_%7Bt%7D%20%2B%202.31%20dinflation_%7Bt%7D%20%2B%20u_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]
+![img](http://www.sciweavers.org/tex2img.php?eq=ermsoft_%7Bt%7D%20%3D%201.37%20%2B%201.21%20ersandp_%7Bt%7D%20%2B%203.36%20rterm_%7Bt%7D%20%2B%202.31%20dinflation_%7Bt%7D%20%2B%20u_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
 
 Using this model the fair market price of Microsoft stock can be estimated. In the event the market misprices the stock, the arbitrage opportunity can be harnessed to gain.
