@@ -106,7 +106,7 @@ To find this, first we find the rate of return of Microsoft stock. For purposes 
 
 *rmsoft = 100 * (ln (MICROSOFT / L.MICROSOFT) )*
 
-Next step is to find the 'excess rate of reurn' of Microsoft stock. The excess rate of return of the stock is given by subtracting the risk free rate from the rate of the stock. The US treasury bill yield of 3 months maturity (USTB3M) is usually taken as the risk free rate. The monthly risk free rate is given by 
+Next step is to find the 'excess rate of reurn' of Microsoft stock. The excess rate of return of the stock is given by subtracting the risk free rate from the rate of the stock. The US treasury bill yield of 3 months maturity (USTB3M) is usually taken as the risk free rate. The monthly risk free rate is given by: 
 
 *mustb3m = USTB3M / 12* 
 
@@ -123,20 +123,36 @@ generate ermsoft=rmsoft-mustb3m
 
 **Predictors**
 As mentioned earlier (refer Table 1), there are seven macroeconomic variables which act as preditors in this regression model. 
-*	**S&P 500:**  Excess return of S&P 500 stock contribute towards explaining the excess return of the target stock. As in the case of target variable, first we find the rate of retrun of S&P500. *rsandp=100 * (ln (MICROSOFT/L.MICROSOFT) )*
-Excess return of S&P 500 is given by: *ersandp = rsandp - mustb3m *
+*	**S&P 500:**  Excess return of S&P 500 stock contribute towards explaining the excess return of the target stock. As in the case of target variable, first we find the rate of retrun of S&P500. 
 
-* **Inflation:** Small changes in the natural log of a variable CPI is directly interpretable as inflation. *inflation = 100 * (ln (CPI/L.CPI) ).* The first difference is given by *dinflation = inflation-L.inflation*
+*rsandp=100 * (ln (MICROSOFT/L.MICROSOFT) )*
+Excess return of S&P 500 is given by: 
 
-* **Industrial Production:** The first difference of the variable is given by *dprod = INDPRO - L.INDPRO*
+*ersandp = rsandp - mustb3m *
 
-* **Term spread:** is given by *term = USTB10Y - USTB3M*. The first difference is given by *rterm=term-L.term*
+* **Inflation:** Small changes in the natural log of a variable CPI is directly interpretable as inflation. *inflation = 100 * (ln (CPI/L.CPI) ).* The first difference is given by: 
 
-* **Consumer credit:** is given by *dcredit = CCREDIT - L.CCREDIT*
+*dinflation = inflation-L.inflation*
 
-* **Credit spread:** is given by *dspread = BMINUSA - L.BMINUSA*
+* **Industrial Production:** The first difference of the variable is given by: 
 
-*	**Money supply** is given by *dmoney = M1SUPPLY - L.M1SUPPLY*
+*dprod = INDPRO - L.INDPRO*
+
+* **Term spread:** is given by *term = USTB10Y - USTB3M*. The first difference is given by: 
+
+*rterm=term-L.term*
+
+* **Consumer credit:** is given by: 
+
+*dcredit = CCREDIT - L.CCREDIT*
+
+* **Credit spread:** is given by: 
+
+*dspread = BMINUSA - L.BMINUSA*
+
+*	**Money supply** is given by: 
+
+*dmoney = M1SUPPLY - L.M1SUPPLY*
 
 STATA code:
 {% highlight ruby %}
@@ -176,7 +192,10 @@ test (dpro dcredit dmoney dspread)
 The result suggests that the null hypothesis cannot be rejected. Hence, we can confirm that *dprod, dcredit, dmoney* and *dspread* do not have significant impact on *ermsoft*
 ![Date_month]({{site.baseurl}}/assets/img/APT_output/Ftest.png)
 
+### 4. The model
 The model can be reduced as:
 ![img](http://www.sciweavers.org/tex2img.php?eq=ermsoft_%7Bt%7D%20%3D%201.33%20%2B%201.28%20ersandp_%7Bt%7D%20%2B%202.19%20dinflation_%7Bt%7D%20%2B%204.73%20rterm_%7Bt%7D%20%2B%20u_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+
+![img]http://www.sciweavers.org/tex2img.php?eq=ermsoft_%7Bt%7D%20%3D%201.37%20%2B%201.21%20ersandp_%7Bt%7D%20%2B%203.36%20rterm_%7Bt%7D%20%2B%202.31%20dinflation_%7Bt%7D%20%2B%20u_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]
 
 Using this model the fair market price of Microsoft stock can be estimated. In the event the market misprices the stock, the arbitrage opportunity can be harnessed to gain.
