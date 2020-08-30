@@ -103,10 +103,15 @@ The first stage is to generate a set of changes or differences for each of the v
 **Target variable**
 The variable whose behaviour we seek to explain is the 'excess rate of return of the Microsoft stock' in percentage.
 To find this, first we find the rate of return of Microsoft stock. For purposes of business analysis, small changes in the natural log of a variable are directly interpretable as rate of change, to a very close approximation. Hence, we calculate the difference in the natural log of the variable and multiply it with 100 to get the rate of return in percentage. 
+
 *rmsoft = 100 * (ln (MICROSOFT / L.MICROSOFT) )*
+
 Next step is to find the 'excess rate of reurn' of Microsoft stock. The excess rate of return of the stock is given by subtracting the risk free rate from the rate of the stock. The US treasury bill yield of 3 months maturity (USTB3M) is usually taken as the risk free rate. The monthly risk free rate is given by 
+
 *mustb3m = USTB3M / 12* 
+
 Excess rate of return of the Microsoft stock is given by:
+
 *ermsoft = rmsoft – mustb3m*
 
 The STATA codes are:
