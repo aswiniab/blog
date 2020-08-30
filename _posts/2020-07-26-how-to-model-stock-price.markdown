@@ -1,17 +1,17 @@
 ---
 layout: post
-title: Arbitrage Pricing Model
+title: How to model stock price
 date: 2020-07-26 00:00:00 +0300
 description: Arbitrage Pricing Model captures the sensitivity of an asset's returns to changes in certain macroeconomic variables that affects it
 img: apt2.jpeg # Add image post (optional)
 tags: [Arbitrage Pricing Theory, APT, STATA] # add tag
 ---
 
-### 1. Why do we need an arbitrage pricing model? 
-Occasionaly, assets gets mispriced in the market – either overvalued or undervalued – for a brief period of time. Market action would eventually correct the situation, moving price back to its fair market value. However, to an arbitrageur, temporarily mispriced securities represent a short-term opportunity to profit, virtually without risk. 
-Arbitrage pricing model helps us to estimate the fair market price of a stock. It is based on Arbitrage Pricing Theory (APT) that holds that an asset’s returns can be forecasted with the linear relationship of an asset’s expected returns and the macroeconomic factors that affect the asset’s risk.  The expected return is the profit or loss an investor anticipates on an investment, usually expressed in percentage.
+### 1. Why do we need to model stock price? 
+Occasionaly, assets gets mispriced in the market – either overvalued or undervalued – for a brief period of time. Market action would eventually correct the situation, moving price back to its fair market value. To an arbitrageur, temporarily mispriced securities represent a short-term opportunity to profit, virtually without risk. A model that estimates the fair market price of a stock helps an arbitrageur to purchase the stock when they are priced lower than their fair price and sell later at a profit.
+Such a model is based on Arbitrage Pricing Theory (APT) that holds that an asset’s returns can be forecasted with the linear relationship of an asset’s expected returns and the macroeconomic factors that affect the asset’s risk.  The expected return is the profit or loss an investor anticipates on an investment, usually expressed in percentage.
 
-Let us try to develop an arbitrage pricing model for returns on Microsoft stock.
+Let us try to develop a model for returns on Microsoft stock.
 
 ### 2. What factors affect the Microsoft stock price?
 
