@@ -4,7 +4,7 @@ title: How to model stock price
 date: 2020-07-26 00:00:00 +0300
 description: Arbitrage Pricing Model captures the sensitivity of an asset's returns to changes in certain macroeconomic variables that affects it
 img: apt2.jpeg # Add image post (optional)
-tags: [Arbitrage Pricing Theory, APT, STATA] # add tag
+tags: [Modeling stock return, Arbitrage Pricing Theory, STATA] # add tag
 ---
 
 ### 1. Why do we need to model stock price? 
