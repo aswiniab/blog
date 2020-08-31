@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to model stock price
+title: How to Model Stock Price
 date: 2020-07-26 00:00:00 +0300
 description: Arbitrage Pricing Model captures the sensitivity of an asset's returns to changes in certain macroeconomic variables that affects it
 img: apt2.jpeg # Add image post (optional)
