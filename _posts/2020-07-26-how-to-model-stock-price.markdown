@@ -11,11 +11,9 @@ tags: [Modeling stock return, Arbitrage Pricing Theory, STATA] # add tag
 Occasionaly, assets gets mispriced in the market – either overvalued or undervalued – for a brief period of time. Market action would eventually correct the situation, moving price back to its fair market value. To an arbitrageur, temporarily mispriced securities represent a short-term opportunity to profit, virtually without risk. A model that estimates the fair market price of a stock helps an arbitrageur to purchase the stock when they are priced lower than their fair price and sell later at a profit.
 Such a model is based on Arbitrage Pricing Theory (APT) that holds that an asset’s returns can be forecasted with the linear relationship of an asset’s expected returns and the macroeconomic factors that affect the asset’s risk.  The expected return is the profit or loss an investor anticipates on an investment, usually expressed in percentage.
 
-Let us try to develop a model for returns on Microsoft stock.
-
 ### 2. What factors affect the stock price?
 
-Several studies have been conducted on factors that could affect stock returns. There are various factors that affect the stock price and they vary for the stock depending on factors like industry, technology involved etc.The following factors have been identified to have a potential impact on stock price of Microsoft:
+Several studies have been conducted on factors that could affect stock returns. There are various factors that affect the stock price and they vary for the stock depending on factors like industry, technology involved etc. In this article, let us look at the factors that affect the stock price of Microsoft. The following factors have been identified to have a potential impact on Microsoft stock price:
 
 *Table1:Factors affecting stock price and their potential impact*
 
@@ -33,8 +31,8 @@ Several studies have been conducted on factors that could affect stock returns. 
 *	**Inflation** is the rate at which the average price level of a basket of selected goods and services in an economy increases over some period of time. It is calculated from the Consumer Price Index (CPI) and is often expressed as a percentage. If the inflation rate increases, the return from the stock looks less attractive. 
 *	**Industrial Production** is measured in terms of Industrial Production Index (IPI), a monthly economic indicator measuring real output in the manufacturing, mining, electric and gas industries, relative to a base year. A increased IPI indicate increased industrial activity and is expected to have a positive impact on the return of stocks.
 *	**Term spread** measures the difference between the interest rates of two bonds with different maturities or expiration dates. Yield spreads between Treasury bonds of different maturities indicate how investors are viewing economic conditions. Widening spreads indicates stable economic conditions in the future whereas falling spreads indicates worsening economy.
-*	**Consumer credit** is personal debt taken on to purchase goods and services. A credit card is one form of consumer credit. Although any type of personal loan could be labelled consumer credit, the term is usually used to describe unsecured debt that is taken on to buy everyday goods and services. Increased consumer credit indicate increased consumer spending, leading to increased production and transactions in the market. Hence, it has a positive impact on the stock returns.
-*	**Credit spread** measures the difference in yield between U.S. Treasury bonds and other debt securities of lesser quality, such as corporate bonds.Credit spreads widen when U.S. Treasury markets are favored over corporate bonds, typically in times of uncertainty or when economic conditions are expected to deteriorate.
+*	**Consumer credit** is the personal debt taken to purchase goods and services. A credit card is one form of consumer credit. Although any type of personal loan could be labelled consumer credit, the term is usually used to describe unsecured debt that is taken on to buy everyday goods and services. Increased consumer credit indicate increased consumer spending, leading to increased production and transactions in the market. Hence, it has a positive impact on the stock returns.
+*	**Credit spread** measures the difference in yield between U.S. Treasury bonds and other debt securities of lesser quality, such as corporate bonds. Credit spreads widen when U.S. Treasury markets are favored over corporate bonds, typically in times of uncertainty or when economic conditions are expected to deteriorate.
 *	**Money supply** is all the currency and other liquid instruments in a country's economy on the date measured that can be used almost as easily as cash. The more the money supply, the higher price of stock.
  
 
@@ -58,14 +56,14 @@ To prepare for analysis and model development, the following data for the period
 |Credit Spread|BMINUSA|[Fred Economic Data](https://fred.stlouisfed.org)|
 |Money Supply|M1SUPPLY|[Fred Economic Data](https://fred.stlouisfed.org)|
 
-* **MICROSOFT** captures the closing value of Microsoft stock in USD as on the first day of every month for the period mentioned.
-* **SANDP** captures the closing value of S&P 500 stock index in USD as on the first day of every month for the period mentioned. 
-*	**CPI** captures the consumer price index data series for the period mentioned.It is used to calculate the inflation rate. The data is based upon base year 1982 which has CPI 100. What does this mean? A CPI of 195.3, as an example from year 2005, indicates 95.3% inflation since 1982.
-* **INDPRO** captures the seasonally adjusted monthly value of the index. The data has 2012 as the base year with an index value of 100. 
+* **MICROSOFT** represents the closing value of Microsoft stock in USD as on the first day of every month for the period mentioned.
+* **SANDP** represents the closing value of S&P 500 stock index in USD as on the first day of every month for the period mentioned. 
+*	**CPI** represents the consumer price index data series for the period mentioned.It is used to calculate the inflation rate. The data is based upon base year 1982 which has CPI 100. What does this mean? A CPI of 195.3, as an example from year 2005, indicates 95.3% inflation since 1982.
+* **INDPRO** represents the seasonally adjusted monthly value of the index. The data has 2012 as the base year with an index value of 100. 
 * **USTB3M and USTB10Y**  captures the average monthly value of US treasury bill yield with a maturity period of 3 months and 10 years respectively. It is used to calculate the term spread.
-* **CCREDIT** captures total consumer credit in billions of dollars (not seasonally adjusted) outstanding at the end of a month for period March 1986 to June 2020. 
-* **BMINUSA** captures Moody's Seasoned Baa Corporate Bond Minus Federal Funds Rate monthly data on percent units not seasonally adjusted. BMINUSA is calculated as the spread  between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
-* **M1SUPPLY** captures the monthly average seasonally adjusted money supply value in billions of dollars. It includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
+* **CCREDIT** represents total consumer credit in billions of dollars (not seasonally adjusted) outstanding at the end of a month for period March 1986 to June 2020. 
+* **BMINUSA** is calculated as the spread  between [Moody's Seasoned Baa Corporate Bond](https://fred.stlouisfed.org/series/BAA) and [Effective Federal Funds Rate](https://fred.stlouisfed.org/series/EFFRM)
+* **M1SUPPLY** represents the monthly averaged, seasonally adjusted, money supply value (in billions of dollars). It includes funds that are readily accessible for spending such as currency, traveler's checks, demand deposits, and Other Checkable Deposits (OCDs). 
 
 #### 3.2 Data Transformation
 Now that we have prepared our dataset we can start with the actual analysis. We use statistical software- STATA for analysis here.
@@ -95,7 +93,7 @@ The 'Date' variable now has units 'months' which is correct.
 The APT posits that the stock returns can be explained by reference to the unexpected changes in the macroeconomic variables rather than their levels. 
 
 > Why should we shift to first differences rather than levels? 
-> This is required as we are dealing with a dynamic model here. Dynamic model is a model where the current value of yt depends on previous values of y or on previous values of one or more of the variables, eg., ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D%3D%20%5Cbeta%20_%7B1%7D%2B%5Cbeta_%7B2%7D%20x_%7B2t%7D%2B%5Cbeta_%7B3%7D%20x_%7B3t%7D%2B%5Cbeta_%7B4%7D%20x_%7B4t%7D%2B...%2B%20%5Cgamma_%7B1%7D%20y_%7Bt-1%7D%2B%5Cgamma_%7B2%7D%20x_%7B2t-1%7D%2B%E2%8B%AF%2B%5Cgamma_%7Bk%7D%20x_%7Bkt-1%7D%2Bu_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img])The current value of the stock return depends on previous values of stock along with other variables. This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in t>his case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels. 
+> This is required as we are dealing with a dynamic model here. Dynamic model is a model where the current value of ![yt]([img]http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) depends on previous values of y or on previous values of one or more of the variables, eg., ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D%3D%20%5Cbeta%20_%7B1%7D%2B%5Cbeta_%7B2%7D%20x_%7B2t%7D%2B%5Cbeta_%7B3%7D%20x_%7B3t%7D%2B%5Cbeta_%7B4%7D%20x_%7B4t%7D%2B...%2B%20%5Cgamma_%7B1%7D%20y_%7Bt-1%7D%2B%5Cgamma_%7B2%7D%20x_%7B2t-1%7D%2B%E2%8B%AF%2B%5Cgamma_%7Bk%7D%20x_%7Bkt-1%7D%2Bu_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img])The current value of the stock return depends on previous values of stock along with other variables. This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels. 
 >What are unexpected changes in the macroeconomic variables? 
 >The unexpected value of a variable can be defined as the difference between the actual (realised) value of the variable and its expected value. The question then arises that what is the expected value of the variables? It can be assumed that the investors have naive expectations that the next period value of the variable is equal to the current value. This being the case, the entire change in the variable from one period to the next is the unexpected change (because investors are assumed to expect no change).
 The first stage is to generate a set of changes or differences for each of the variables.
@@ -198,3 +196,10 @@ The model can be reduced as:
 ![img](http://www.sciweavers.org/tex2img.php?eq=ermsoft_%7Bt%7D%20%3D%201.37%20%2B%201.21%20ersandp_%7Bt%7D%20%2B%203.36%20rterm_%7Bt%7D%20%2B%202.31%20dinflation_%7Bt%7D%20%2B%20u_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
 
 Using this model the fair market price of Microsoft stock can be estimated. In the event the market misprices the stock, the arbitrage opportunity can be harnessed to gain.
+
+### References
+1. [https://www.investopedia.com](https://www.investopedia.com)
+2. [https://en.wikipedia.org](https://en.wikipedia.org)
+3. Book- 'Introductory Econometrics for Finance' (fourth edition) by Chris Brooks 
+4. Book- 'STATA guide to accompany Introductory Econometrics for Finance' (fourth edition) by Lisa Schopohl, Robert Wichmann, Chris Brooks
+5. Blog post on ['How to Model Gold Price' by Alex Kim](https://towardsdatascience.com/how-to-model-gold-price-940e809ac665)
