@@ -76,4 +76,7 @@ The regression result is given below:
 
 Looking at the results, we find that the long-term relationship between spot and futures prices is almost 1:1 (as expected). The intercept of the price level regression can be considered to approximate the cost of carry.
 
-
+### References
+1. Book- 'Introductory Econometrics for Finance' (fourth edition) by Chris Brooks 
+2. Book- 'STATA guide to accompany Introductory Econometrics for Finance' (fourth edition) by Lisa Schopohl, Robert Wichmann, Chris Brooks
+3. [https://www.investopedia.com](https://www.investopedia.com)
