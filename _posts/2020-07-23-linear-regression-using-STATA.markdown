@@ -73,5 +73,7 @@ regress Spot Futures
 {% endhighlight %}
 The regression result is given below:
 ![codebook_date]({{site.baseurl}}/assets/img/hedge/img5RegressSpotFutures.png)
+
 Looking at the results, we find that the long-term relationship between spot and futures prices is almost 1:1 (as expected). The intercept of the price level regression can be considered to approximate the cost of carry.
+
 
