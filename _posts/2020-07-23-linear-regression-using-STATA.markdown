@@ -17,7 +17,7 @@ An investor wishes to hedge a long position in the S&P500 (or its constituent st
 The changes in the log of the spot and futures prices are known as spot and futures returns. In a regression model estimated for the return of spot and future price series, the slope parameter measures the optimal hedge ratio as well as the short run relationship between the two series. 
 
 ## Data
-We have the spot and future prices of the S&P500 indices from Sept 1997 to March 2018 collected on a monthly basis visualised below:   
+We have the spot and future prices of the S&P500 indices from Sept 1997 to March 2018 collected on a monthly basis.  
 
 ## STATA code
 ```
