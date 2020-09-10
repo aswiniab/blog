@@ -5,7 +5,7 @@ date: 2020-07-23 13:32:20 +0300
 description: Estimation of an optimal hedge ratio # Add post description (optional)
 img: hedge.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
-tags: [Linear regression, STATA]
+tags: [Hedge ratio, Linear regression, STATA]
 ---
 ## What is a Regression Model?
 Regression is an attempt to explain movements in a variable by reference to movements in one or more variables. An example is how asset prices vary with their level of market risk. 
