@@ -20,7 +20,7 @@ The changes in the log of the spot and futures prices are known as spot and futu
 We have the spot and future prices of the S&P500 indices from Sept 1997 to March 2018 collected on a monthly basis.  
 
 ## STATA code
-```
+{% highlight ruby %}
 import excel "G:\S&P_hedge.xls", sheet("s&p500") firstrow
 
 # open a log file to records what appears in the result window
@@ -28,7 +28,7 @@ log using "G:\S&P_hedge.smcl"
 
 # codebook helps to check the unit of variables and missing values
 codebook 
-```
+{% endhighlight %}
 The output shows that variable- 'Date' is recorded to have daily units whereas in actual it is monthly
 ![codebook_date]({{site.baseurl}}/assets/img/codebook_Date.png)
 
