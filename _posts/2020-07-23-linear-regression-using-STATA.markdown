@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linear Regression using STATA
+title: Estimation of an optimal hedge ratio
 date: 2020-07-23 13:32:20 +0300
 description: Estimation of an optimal hedge ratio # Add post description (optional)
 img: hedge.png # Add image post (optional)
@@ -45,16 +45,13 @@ The output shows that 'date' variable has monthly unit
 ![codebook_date]({{site.baseurl}}/assets/img/codebook_date2.png)
 
 {% highlight ruby %}
-# as we are to perform time series analysis, indiacte that date is the time series time indicating
-  variable and it has monthly data
+# as we are to perform time series analysis, indicate that date is the time series variable and it has monthly data
 tsset date, monthly
 {% endhighlight %}
-We want to run ur analysis based on retuns of S&P500 index, instead of price levels. So the next step is to transform the spot and future prices into percentage returns. As commonly followed in academic finance reserch, we use continuesly compounded retruns (ie, logarithmic returns)for our analysis instead of simple returns
-
-{% highlight ruby %}
+We want to run ur analysis based on retuns of S&P500 index, instead of price levels. So the next step is to transform the spot and future prices into percentage returns. As commonly followed in academic finance research, we use continuously compounded retruns (ie, logarithmic returns)for our analysis instead of simple returns
 simple return Ft (%)= 100* (F‐L.F)/L.F‐L
 continuesly compunded return ft (%)= 100* ln(F/L.F)
-{% endhighlight %}
+
 The summary statistics of futures and spot returns shows that the two return series are very similar in terms of mean, std dev, min and max, as expected from the economic theory.
 
 {% highlight ruby %}
