@@ -58,6 +58,7 @@ generate rspot= 100*(ln(Spot)-(ln(L.Spot)))
 {% endhighlight %}
 Now, let us look at the summary statistics of 'rfututes' and 'rspot'
 ![codebook_date]({{site.baseurl}}/assets/img/hedge/img3_summarise.png)
+
 The summary statistics of futures returns ('rfutures') and spot returns ('rspot') shows that the two return series are very similar in terms of mean, standard deviation, minimum and maximum, as expected from the economic theory.
 Let us now estimate a regression to explain variation in the spot rates with variationin the futures rates.
 {% highlight ruby %}
@@ -65,6 +66,7 @@ regress rspot rfutures
 {% endhighlight %}
 The regression result is given below:
 ![codebook_date]({{site.baseurl}}/assets/img/hedge/img4RegressRspotRfutures.png)
+
 The parameter estimates for the intercept (αˆ) and slope (βˆ) are 0.013 and 0.975, respectively. The estimated return regression slope parameter measures the optimal hedge ratio as well as the short run relationship between the two series. Hence, the optimal hedge ratio is 0.975 here.
 
 Regression of raw spot and futures indices can be interpreted as measuring the long run relationship between them. The code and output of regression of raw spot and futures indices is given below:
