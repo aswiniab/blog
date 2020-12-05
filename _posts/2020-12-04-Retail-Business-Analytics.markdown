@@ -16,8 +16,11 @@ In this project, we choose the Euclidean method to measure the distance. Once th
 The K-means clustering algorithm is the most common and computationally efficient clustering technique available. It works with continues variables. However, the disadvantage is that we have specify in advance the number of clusters to be created.
 
 The objective of K-means clustering is to partition the data {1,2,.,n} into k-clusters {C1, C2,..,Ck} such that:
+
 	1. C_1⋃C_2  …⋃C_k={1,2,..,n}
+	
 	2. C_k∩ C_(k^' )=0 for all k≠k'
+	
 	3. within-cluster variation is minimum
 	
 The following steps summarizes the k-means clustering algorithm:
