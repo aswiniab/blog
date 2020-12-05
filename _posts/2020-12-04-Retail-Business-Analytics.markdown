@@ -1,5 +1,16 @@
 ---
 layout: post
+title: Retail Business Analytics
+date: 2020-12-04 00:00:00 +0300
+description: Analysis of grocery purchase data of 2000 customers to identify groups of customers with similar preferences
+img: apt2.jpeg # Add image post (optional)
+tags: [Machine Learning, Unsupervised Learning, Clustering, K-means clustering] # add tag
+---
+
+
+
+---
+layout: post
 title: Retail Business Analytics: Customer Segmentation Using Purchase Data
 date: 2020-12-04 00:00:00 +0300
 description: Analysis of the grocery purchase data of 2000 customers to identify groups of customers with similar preferences.
