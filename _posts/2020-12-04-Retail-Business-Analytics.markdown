@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Retail Business Analytics- Cusomer Segmentation using purchase data
+title: Retail Business Analytics- Customer Segmentation using Purchase Data
 date: 2020-12-04 00:00:00 +0300
 description: Analysis of grocery purchase data of 2000 customers to identify groups of customers with similar preferences
 img: customer segmentation.jpeg # Add image post (optional)
