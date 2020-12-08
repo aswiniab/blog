@@ -154,7 +154,5 @@ The distance between cluster centers shows that:
 
 ### References:
 
-1.https://towardsdatascience.com/log-book-guide-to-distance-measuring-approaches-for-k-means-clustering-f137807e8e21
-2.https://www.statsandr.com/blog/clustering-analysis-k-means-and-hierarchical-clustering-by-hand-and-in-r/
-3.Image: https://www.itagroup.com/insights/keys-successful-customer-segmentation-cmb-insights
+1. Image: https://www.itagroup.com/insights/keys-successful-customer-segmentation-cmb-insights
 
