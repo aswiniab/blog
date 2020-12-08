@@ -32,3 +32,7 @@ The following steps summarizes the k-means clustering algorithm:
 	
 The analysis is carried out using R software, in the following steps. 
 
+### 1. Reading the dataset
+As the data file is in excel format, it is opened and read using the read_excel function present in the ‘readxl’ library.  
+![img1]({{site.baseurl}}/assets/img/customer_segmentation/img1.png)
+
