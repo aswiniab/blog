@@ -51,6 +51,7 @@ The function complete.cases() returns a logical vector indicating which cases ar
 It shows that the data has no missing values. 
 
 The summary statistics of the imported data is obtained using ‘describe’ function present in ‘psych’ library.
+
 ![img4_1]({{site.baseurl}}/assets/img/customer_segmentation/img4_1.png)
 ![img4_2]({{site.baseurl}}/assets/img/customer_segmentation/img4_2.png)
 
