@@ -73,7 +73,7 @@ The plot shows that the within-cluster sum of squares decreases with increase in
 ### 4. K-means clustering:
 k-means clustering is performed to segment the cutomers into 6 clusters based on the similarity of items purchased by them. For this, we use the *kmeans* function  present in *stats* package of R. The output of *kmeans* function gives the size of each cluster cluster, the cluster means, distance between cluster means along with other components.
 
-Before looking into the output of *kmeans* function, it would be good to see the pictorical representation of the clustering. This is obtained using *fviz_cluster* function present in the *factoextra* package of R.
+Before looking into the output of *kmeans* function, it would be good to check the cluster plot. This is obtained using *fviz_cluster* function present in the *factoextra* package of R. Observations are represented by points in the plot, using two principal components that explains the maximum variation in the data.
 
 **Plot of clusters:**
 ![img7_1]({{site.baseurl}}/assets/img/customer_segmentation/img7_1.png)
