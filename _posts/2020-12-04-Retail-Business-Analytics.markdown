@@ -79,7 +79,7 @@ Before looking into the output of *kmeans* function, it would be good to check t
 ![img7_1]({{site.baseurl}}/assets/img/customer_segmentation/img7_1.png)
 ![img7_2]({{site.baseurl}}/assets/img/customer_segmentation/img7_2.png)
 
-The plot shows that there is considerable overlap between the clusters.Cluster-2 and cluster-5 seems to be the farthest from each other.
+The plot shows that there is considerable overlap between the clusters. Cluster-2 and cluster-5 seems to be the farthest from each other.
 
 **Size of clusters:**
 The size of clusters is given by the *size* component of *kmeans* output.
@@ -96,7 +96,7 @@ The size of clusters is given by the *size* component of *kmeans* output.
 **Cluster means:**
 ![img9]({{site.baseurl}}/assets/img/customer_segmentation/img9.png)
 
-The cluster means output shows that velue contributed by each attribute to the each of the cluster centroids. The attribues that contribute signiifcantly to each of the cluster centroids are identified and is shown in table below:  
+The cluster means output shows the value contributed by each attribute to different cluster centroids. The attribues that contribute signiifcantly to each of the cluster centroids are identified in table below:  
 
 |Cluster-1|Cluster-2|Cluster-3|Cluster-4|Cluster-5|Cluster-6|
 |:---:|:---:|:---:|:---:|:---:|:---:|
