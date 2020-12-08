@@ -33,10 +33,12 @@ The following steps summarizes the k-means clustering algorithm:
 The analysis is carried out using R software, in the following steps. 
 
 ### 1. Reading the dataset
-As the data file is in excel format, it is opened and read using the read_excel function present in the ‘readxl’ library.  
+As the data file is in excel format, it is opened and read using the read_excel function present in the ‘readxl’ library.
+
 ![img1]({{site.baseurl}}/assets/img/customer_segmentation/img1.png)
 
 Thus, a data frame variable df is created. A preview of the first few rows of the data is shown below:
+
 ![img2]({{site.baseurl}}/assets/img/customer_segmentation/img2.png)
 
 ### 2. Data exploration / preprocessing:
@@ -44,6 +46,7 @@ Missing, invalid and inconsistent values are addressed in this step. Finally, th
 
 **Missing values:**
 The function complete.cases() returns a logical vector indicating which cases are complete.
+
 ![img3]({{site.baseurl}}/assets/img/customer_segmentation/img3.png)
 It shows that the data has no missing values. 
 
@@ -51,8 +54,9 @@ The summary statistics of the imported data is obtained using ‘describe’ fun
 ![img4_1]({{site.baseurl}}/assets/img/customer_segmentation/img4_1.png)
 ![img4_2]({{site.baseurl}}/assets/img/customer_segmentation/img4_2.png)
 
-**Standardization**
-The value of distance measures intimately related to the scale on which the measurements are made. Hence, the data is scaled to avert possible misleading calculations. 
+**Standardization:**
+The value of distance measures intimately related to the scale on which the measurements are made. Hence, the data is scaled to avert possible misleading calculations.
+
 ![img5_1]({{site.baseurl}}/assets/img/customer_segmentation/img5_1.png)
 ![img5_2]({{site.baseurl}}/assets/img/customer_segmentation/img5_2.png)
 
@@ -60,6 +64,7 @@ The value of distance measures intimately related to the scale on which the meas
 A disadvantage of k-means clustering is that we need to specify in advance how many clusters we want the algorithm to “discover”. 
 Elbow or Within-cluster Sum of Square (WSS) method:
 The WSS method looks at the total within-cluster sum of squares as a function of number of clusters. Packages factoextra and NbClust are required for this.
+
 ![img6]({{site.baseurl}}/assets/img/customer_segmentation/img6.png)
 
 
