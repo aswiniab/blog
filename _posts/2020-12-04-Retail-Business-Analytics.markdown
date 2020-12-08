@@ -68,4 +68,64 @@ The WSS method looks at the total within-cluster sum of squares as a function of
 
 ![img6]({{site.baseurl}}/assets/img/customer_segmentation/img6.png)
 
+Plot of cluster
+![img7_1]({{site.baseurl}}/assets/img/customer_segmentation/img7_1.png)
+![img7_2]({{site.baseurl}}/assets/img/customer_segmentation/img7_2.png)
+
+The output of kmeans function gives the size of each cluster cluster, the cluster means, distance between cluster means along with other components.
+
+Size of clusters:
+![img8]({{site.baseurl}}/assets/img/customer_segmentation/img8.png)
+
+Cluster means:
+![img9]({{site.baseurl}}/assets/img/customer_segmentation/img9.png)
+
+The following are the significant attributes contributing to the custer means:
+|Cluster-1|Cluster-2|Cluster-3|Cluster-4|Cluster-5|Cluster-6|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+||redwine|cheese|milk|leeks|lasagna|
+||bulmers|mayonnaise|tea|peas|chicken-tikka|
+||kronenbourg|bread|muesli|carrots|pizza|
+||whiskey|ham|instant coffee|spinach||
+||fosters|lettuce|coco pops|potatoes||
+|||||broccoli||
+
+
+Pie charts showing composition of each cluster:
+
+Cluster-1:
+![img13_1]({{site.baseurl}}/assets/img/customer_segmentation/img13_1.png)
+
+Cluster-2:
+![img13_2]({{site.baseurl}}/assets/img/customer_segmentation/img13_2.png)
+
+Cluster-3:
+![img13_3]({{site.baseurl}}/assets/img/customer_segmentation/img13_3.png)
+
+Cluster-4:
+![img13_4]({{site.baseurl}}/assets/img/customer_segmentation/img13_4.png)
+
+Cluster-5:
+![img13_5]({{site.baseurl}}/assets/img/customer_segmentation/img13_5.png)
+
+Cluster-6:
+![img13_6]({{site.baseurl}}/assets/img/customer_segmentation/img13_6.png)
+
+From this, it can be inferred that
+
+* cluster 1 represent the general customers who do not exhibit any strong preferences. But a closer look shows that they tend to buy more soft-drinks and chocolates. 
+* cluster 2  represent the customers who prefer alcoholic beverages
+* cluster 3  represent the customers who prefer sandwiches
+* cluster 4 represent the customers who prefer milk/coffee and breakfast cereals. 
+* cluster 5 represent the customer group who prefer vegetables
+* cluster 6 represent the customers who prefer fast-food like pizza, lasagna
+
+
+Distance between cluster centers:
+![img10]({{site.baseurl}}/assets/img/customer_segmentation/img10.png)
+
+* Cluster-1 (general customers) and cluster-6 (customers who prefer fast-food) are the nearest. It indicates that the general customers and fast-food lovers have similar characteristics. 
+* Cluster-2 (customers who prefer alcoholic beverages) and Cluster-5 (customers who prefer vegetables) are farthest, indicating that they have very different characteristics.
+
+### Refernces:
 
