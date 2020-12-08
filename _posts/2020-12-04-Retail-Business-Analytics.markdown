@@ -7,7 +7,7 @@ img: customer_segmentation.jpg # Add image post (optional)
 tags: [Machine Learning, Unsupervised Learning, Clustering, K-means clustering] # add tag
 ---
 
-The goal of this project is to segment the customers of a grocery store based on their purchase data. The data set lists the quantities of 42 different items purchased by 2000 customers in individual shopping trips. Hence, the similarity on items purchased is used as the metric for grouping customers. A classification of this type is useful for targeted marketing and improving/tweaking products to meet customer requirements. 
+The goal of this project is to segment the customers of a grocery store based on their purchase data. The data set lists the quantities of 42 different items purchased by 2000 customers in individual shopping trips. The similarity of items purchased can be used to group customers.  A segmentation of this type is useful for targeted marketing and improving/tweaking products to meet customer requirements. 
 
 Here, all we have is the set of attributes (42 grocery items) measured on a set of observations (2000 customers). There is no response variable. Hence, usual procedures of building a model that explains/predicts the response variable based on the values of the input attributes is ruled out. The class of algorithms that analyzes this type of unlabeled data is called unsupervised learning, where the aim is to discover hidden patterns in the data. Clustering is an unsupervised learning technique used to uncover distinct clusters of observations within a set of data. Clusters are groups of data-points such that members of the same group have similar features while members of different groups have dissimilar features. Here, the similarity/ dissimilarity between observations or clusters is measured in terms of distance between them. At the start of the analysis we do not know how many clusters are there, or whether they even exist. 
 
@@ -80,7 +80,7 @@ Size of clusters:
 Cluster means:
 ![img9]({{site.baseurl}}/assets/img/customer_segmentation/img9.png)
 
-The following are the significant attributes contributing to the custer means:
+The following are the significant attributes contributing to the cluster means:
 |Cluster-1|Cluster-2|Cluster-3|Cluster-4|Cluster-5|Cluster-6|
 |:---:|:---:|:---:|:---:|:---:|:---:|
 ||redwine|cheese|milk|leeks|lasagna|
