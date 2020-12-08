@@ -16,7 +16,7 @@ A preview of the first few rows of the data is shown below:
 In the data set, all we have is 42 attributes (grocery items) measured on 2000 customers. There is no response variable. Hence, the usual procedures of building a model that explains/predicts the response variable based on the values of the input attributes is ruled out. The class of algorithms that analyzes this type of unlabeled data is called unsupervised learning. The objective of unsupervised learning is to discover hidden patterns in the data. Clustering is an unsupervised learning technique used to uncover distinct clusters of observations within a set of data. Clusters are groups of data-points such that members of the same group have similar features while members of different groups have dissimilar features. At the start of the analysis we do not know how many clusters are there, or if any exist. In clustering technique, the similarity/ dissimilarity between observations or clusters is measured in terms of distance between them.  
 
 There are different methods for measuring the distance between observations such as *euclidean, manhattan, minkowski* etc. Which distance measure to choose will depend on the type of data and the nature of question that is being asked. Euclidean distance is the most common distance measure. It measures the straight-line distance between the data points. 
-In this project, we choose the Euclidean method to measure the distance. Once the distance method is selected, the next question is- how do we measure the distance between two groups of observations, or between a group and a single observation? One method is to compute all pairwise dissimilarities between observations two clusters and use the average of them. 
+In this project, we choose the Euclidean method to measure the distance. Once the distance method is selected, the next question is- how do we measure the distance between two groups of observations, or between a group and a single observation? One method is to compute all pairwise distances between observations in the two clusters and use the average of them. 
 
 The K-means clustering algorithm is the most common and computationally efficient clustering technique available. It works with continues variables. However, the disadvantage is that we have to specify in advance the number of clusters to be created.
 
@@ -71,7 +71,7 @@ The WSS method looks at the total within-cluster sum of squares as a function of
 The plot shows that the within-cluster sum of squares decreases with increase in umber of clusters. Due to other practical reasons, we chose to divide the customers into 6 clusters.
 
 ### 4. K-means clustering:
-k-means clustering is performed to segment the cutomers into 6 clusters based on the similarity of items purchased by them. For this, we use the *kmeans* function  present in *stats* package of R. The output of *kmeans* function gives the size of each cluster cluster, the cluster means, distance between cluster means along with other components.
+k-means clustering is performed to segment the cutomers into 6 clusters based on the similarity of items purchased by them. For this, we use the *kmeans* function  present in *stats* package of R. The output of *kmeans* function gives the size of each cluster, cluster means, distance between cluster means along with other components.
 
 Before looking into the output of *kmeans* function, it would be good to check the cluster plot. This is obtained using *fviz_cluster* function present in the *factoextra* package of R. Observations are represented by points in the plot, using two principal components that explains the maximum variation in the data.
 
@@ -107,14 +107,6 @@ The cluster means output shows the value contributed by each attribute to differ
 ||fosters|lettuce|coco pops|potatoes||
 |||||broccoli||
 
-From this, it can be inferred that
-* Cluster-1 represents the general customers who do not exhibit any strong preferences. But a closer look shows that they tend to buy more soft-drinks and chocolates. 
-* Cluster-2  represents the customers who prefer alcoholic beverages
-* Cluster-3  represents the customers who prefer sandwiches
-* Cluster-4 represents the customers who prefer milk/coffee and breakfast cereals. 
-* Cluster-5 represents the customer group who prefer vegetables
-* Cluster-6 represents the customers who prefer fast-food like pizza, lasagna
-
 **Pie charts:** 
 Pie charts showing composition of each cluster is given below:
 
@@ -136,11 +128,11 @@ Cluster-5:
 Cluster-6:
 ![img13_6]({{site.baseurl}}/assets/img/customer_segmentation/img13_6.png)
 
-From this, it can be inferred that
+From the compostion of clusters and the significant attributes contributing to clsuter centroids, it can be inferred that: 
 
 * Cluster-1 represent the general customers who do not exhibit any strong preferences. But a closer look shows that they tend to buy more soft-drinks and chocolates. 
 * Cluster-2  represent the customers who prefer alcoholic beverages
-* Cluster-3  represent the customers who prefer sandwiches
+* Cluster-3  represent the customers who prefer to prepare sandwiches at home
 * Cluster-4 represent the customers who prefer milk/coffee and breakfast cereals. 
 * Cluster-5 represent the customer group who prefer vegetables
 * Cluster-6 represent the customers who prefer fast-food like pizza, lasagna
@@ -149,8 +141,19 @@ From this, it can be inferred that
 ![img10]({{site.baseurl}}/assets/img/customer_segmentation/img10.png)
 
 The distance between cluster centers shows that:
-* Cluster-1 (general customers) and Cluster-6 (customers who prefer fast-food) are the nearest. It indicates that the general customers and fast-food lovers have similar characteristics. 
-* Cluster-2 (customers who prefer alcoholic beverages) and Cluster-5 (customers who prefer vegetables) are farthest, indicating that they have very different characteristics.-
+* Cluster-1 (general customers) and Cluster-6 (customers who prefer fast-food) are the nearest. It indicates that the general customers and customers who prefer fast-food have similar preferences. 
+* Cluster-2 (customers who prefer alcoholic beverages) and Cluster-5 (customers who prefer vegetables) are farthest, indicating that they have very dissimilar preferences.
+
+### 4. Conclusion:
+From the analysis presented baove, it can be concluded that the customers of the grocery store are mainly of 6 groups: 
+Group-1: those who prefer to puchase alcoholic beverages
+Group-2: those who prefer purchase items to prepare sandwiches
+Group-3: those who purchase breakfast items
+Group-4: those who purchase vegetables
+Group-5: those who purchase fast-food 
+Group-6: those who prefer softdrinks
+
+Those who prefer to puchase vegetables have very dissimlar preferences compared to those who prefer alcoholic beverages. Those who prefer softdrinks have similarities to all other groups. 
 
 ### References:
 
