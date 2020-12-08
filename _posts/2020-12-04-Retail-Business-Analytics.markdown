@@ -149,7 +149,7 @@ From this, it can be inferred that
 ![img10]({{site.baseurl}}/assets/img/customer_segmentation/img10.png)
 
 The distance between cluster centers shows that:
-* Cluster-1 (general customers) and cluster-6 (customers who prefer fast-food) are the nearest. It indicates that the general customers and fast-food lovers have similar characteristics. 
+* Cluster-1 (general customers) and Cluster-6 (customers who prefer fast-food) are the nearest. It indicates that the general customers and fast-food lovers have similar characteristics. 
 * Cluster-2 (customers who prefer alcoholic beverages) and Cluster-5 (customers who prefer vegetables) are farthest, indicating that they have very different characteristics.-
 
 ### References:
