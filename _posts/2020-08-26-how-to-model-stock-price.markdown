@@ -93,7 +93,7 @@ The 'Date' variable now has units 'months' which is correct.
 The APT posits that the stock returns can be explained by reference to the unexpected changes in the macroeconomic variables rather than their levels. 
 
 ***Why should we shift to first differences rather than levels?*** 
-*This is required as we are dealing with a dynamic model here. Dynamic model is a model where the current value of ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) depends on previous values of ![img](http://www.sciweavers.org/tex2img.php?eq=y&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) or on previous values of one or more of the variables, eg., y_t=β_1+β_2 x_1t+β_3 x_2t+β_4 x_3t+β_5 x_4t+⋯+γ_1 y_(t-1)+γ_2 x_(1t-1)+⋯+γ_k x_(kt-1)+u_t *
+*This is required as we are dealing with a dynamic model here. Dynamic model is a model where the current value of ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) depends on previous values of ![img](http://www.sciweavers.org/tex2img.php?eq=y&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) or on previous values of one or more of the variables, eg., y_t=β_1+β_2 x_1t+β_3 x_2t+β_4 x_3t+β_5 x_4t+⋯+γ_1 y_(t-1)+γ_2 x_(1t-1)+⋯+γ_k x_(kt-1)+u_t*
 
 *The current value of the stock return depends on previous values of stock along with other variables. This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels.* 
 
