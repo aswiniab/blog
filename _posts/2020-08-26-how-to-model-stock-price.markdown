@@ -196,7 +196,7 @@ The result suggests that the null hypothesis cannot be rejected. Hence, we can c
 ### 4. The model
 The model can be reduced as:
 
-ermsoft= 1.38+ 1.21 ersandp + 3.36 rterm -0.1 dprod -0.02 dcredit+2.3 dinfation -0.01dmoney +1.4 dspread
+ermsoft_t = 1.33 + 1.28 ersand_t + 2.19 dinflation_t + 4.73 rterm_t + u_t
 
 Using this model the fair market price of Microsoft stock can be estimated. In the event the market misprices the stock, the arbitrage opportunity can be harnessed to gain.
 
