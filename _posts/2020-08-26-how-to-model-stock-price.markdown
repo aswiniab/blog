@@ -92,11 +92,14 @@ The 'Date' variable now has units 'months' which is correct.
 #### 3.2.1 Transformation from levels to first differences
 The APT posits that the stock returns can be explained by reference to the unexpected changes in the macroeconomic variables rather than their levels. 
 
-> Why should we shift to first differences rather than levels? 
-> This is required as we are dealing with a dynamic model here. Dynamic model is a model where the current value of ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) depends on previous values of ![img](http://www.sciweavers.org/tex2img.php?eq=y&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) or on previous values of one or more of the variables, eg., ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D%3D%20%5Cbeta%20_%7B1%7D%2B%5Cbeta_%7B2%7D%20x_%7B2t%7D%2B%5Cbeta_%7B3%7D%20x_%7B3t%7D%2B%5Cbeta_%7B4%7D%20x_%7B4t%7D%2B...%2B%20%5Cgamma_%7B1%7D%20y_%7Bt-1%7D%2B%5Cgamma_%7B2%7D%20x_%7B2t-1%7D%2B%E2%8B%AF%2B%5Cgamma_%7Bk%7D%20x_%7Bkt-1%7D%2Bu_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img])The current value of the stock return depends on previous values of stock along with other variables. This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels. 
->What are unexpected changes in the macroeconomic variables? 
->The unexpected value of a variable can be defined as the difference between the actual (realised) value of the variable and its expected value. The question then arises that what is the expected value of the variables? It can be assumed that the investors have naive expectations that the next period value of the variable is equal to the current value. This being the case, the entire change in the variable from one period to the next is the unexpected change (because investors are assumed to expect no change).
-The first stage is to generate a set of changes or differences for each of the variables.
+***Why should we shift to first differences rather than levels?*** 
+*This is required as we are dealing with a dynamic model here. Dynamic model is a model where the current value of ![img](http://www.sciweavers.org/tex2img.php?eq=y_%7Bt%7D&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) depends on previous values of ![img](http://www.sciweavers.org/tex2img.php?eq=y&bc=White&fc=Gray&im=jpg&fs=12&ff=arev&edit=0[/img]) or on previous values of one or more of the variables, eg., y_t=β_1+β_2 x_1t+β_3 x_2t+β_4 x_3t+β_5 x_4t+⋯+γ_1 y_(t-1)+γ_2 x_(1t-1)+⋯+γ_k x_(kt-1)+u_t *
+
+*The current value of the stock return depends on previous values of stock along with other variables. This makes the errors to be correlated with one another, violating one of the assumption of Classical Linear Regression Model (CLRM). The errors are said to be ‘autocorrelated’ in this case.  A potential remedy for autocorrelated residuals would be to switch to a model in first differences rather than in levels.* 
+
+***What are unexpected changes in the macroeconomic variables?*** 
+*The unexpected value of a variable can be defined as the difference between the actual (realised) value of the variable and its expected value. The question then arises that what is the expected value of the variables? It can be assumed that the investors have naive expectations that the next period value of the variable is equal to the current value. This being the case, the entire change in the variable from one period to the next is the unexpected change (because investors are assumed to expect no change).*
+*The first stage is to generate a set of changes or differences for each of the variables.*
 
 **Target variable**
 The variable whose behaviour we seek to explain is the 'excess rate of return of the Microsoft stock' in percentage.
@@ -193,7 +196,7 @@ The result suggests that the null hypothesis cannot be rejected. Hence, we can c
 ### 4. The model
 The model can be reduced as:
 
-![img](http://www.sciweavers.org/tex2img.php?eq=%20ermsoft_%7Bt%7D%20%3D%201.38%2B%201.21%20ersandp_%7Bt%7D%20%2B%203.36%20rterm_%7Bt%7D%20-0.1%20dprod_%7Bt%7D%20-0.02%20dcredit_%7Bt%7D%2B2.3%20dinfation_%7Bt%7D%20-0.01dmoney_%7Bt%7D%20%2B1.4%20dspread_%7Bt%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+ermsoft= 1.38+ 1.21 ersandp + 3.36 rterm -0.1 dprod -0.02 dcredit+2.3 dinfation -0.01dmoney +1.4 dspread
 
 Using this model the fair market price of Microsoft stock can be estimated. In the event the market misprices the stock, the arbitrage opportunity can be harnessed to gain.
 
