@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Image Classification using Neural Networks
+title: Image Classification- Cassava Leaf Disease
 date: 2021-02-16 00:00:00 +0300
 description: using Deep Neural Networks
 
