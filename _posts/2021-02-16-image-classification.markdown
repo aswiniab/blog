@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Image Classification  
+title: Image Classification using Neural Networks
 date: 2021-02-16 00:00:00 +0300
 description: using Deep Neural Networks
 
