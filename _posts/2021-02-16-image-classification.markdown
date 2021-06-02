@@ -8,4 +8,4 @@ img: cassavaCOLLAGE.jpg
 tags: [Deep Learning, Neural Networks, Machine Learning]
 ---
 
-<iframe src="https://jovian.ai/embed?url=https://jovian.ai/aswiniabraham/cassava-project/v/15" title="Jovian Viewer" height="800" width="100%" style="margin 0 auto; max-width: 800px;" frameborder="0" scrolling="auto"></iframe>
+<iframe src="https://jovian.ai/embed?url=https://jovian.ai/aswiniabraham/cassava-project/v/15" title="Jovian Viewer" height="800" width="100%" style="margin 0 auto; max-width: 1600px;" frameborder="0" scrolling="auto"></iframe>
