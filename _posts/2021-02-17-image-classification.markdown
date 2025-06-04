@@ -1126,7 +1126,7 @@ plot_accuracies(history)
 
 
     
-![png](cassava-project_files/cassava-project_82_0.png)
+![m2_1]({{site.baseurl}}/assets/img/cassava/m2_1.png)
     
 
 
@@ -1136,8 +1136,7 @@ plot_losses(history)
 ```
 
 
-    
-![png](cassava-project_files/cassava-project_83_0.png)
+![m2_2]({{site.baseurl}}/assets/img/cassava/m2_2.png)
     
 
 
@@ -1361,7 +1360,7 @@ plot_accuracies(history)
 
 
     
-![png](cassava-project_files/cassava-project_102_0.png)
+![m3_1]({{site.baseurl}}/assets/img/cassava/m3_1.png)
     
 
 
@@ -1372,7 +1371,7 @@ plot_losses(history)
 
 
     
-![png](cassava-project_files/cassava-project_103_0.png)
+![m3_2]({{site.baseurl}}/assets/img/cassava/m3_2.png)
     
 
 
@@ -1908,7 +1907,7 @@ plot_accuracies(history)
 
 
     
-![png](cassava-project_files/cassava-project_143_0.png)
+![m5_1]({{site.baseurl}}/assets/img/cassava/m5_1.png)
     
 
 
@@ -1919,7 +1918,7 @@ plot_losses(history)
 
 
     
-![png](cassava-project_files/cassava-project_144_0.png)
+![m5_2]({{site.baseurl}}/assets/img/cassava/m5_2.png)
     
 
 
