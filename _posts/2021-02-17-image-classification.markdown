@@ -36,13 +36,7 @@ Let us begin by downloading the dataset.
 
 ```python
 !pip install jovian opendatasets --upgrade --quiet
-```
-
-
-```python
 import opendatasets as od
-#dataset_url='https://www.kaggle.com/aswiniabraham/cassava-leaf-disease-image-folders-600x800'
-
 dataset_url='https://www.kaggle.com/c/cassava-leaf-disease-classification/data'
 od.download(dataset_url)
 ```
@@ -98,17 +92,10 @@ import matplotlib
 import matplotlib.pyplot as plt
 from torchvision.transforms import ToTensor
 %matplotlib inline
-
 matplotlib.rcParams['figure.facecolor'] = '#ffffff'
-```
 
-
-```python
 os.listdir('./data')
 ```
-
-
-
 
     ['train_images',
      'test_tfrecords',
@@ -305,53 +292,17 @@ for i in range(len(images_labels.label.unique())):
             if file == filename:
                 shutil.move('./data/train_images/' + file, new_dir + '/' + file)
                 c += 1
-                if c % 500 == 0:
+                if c % 5000 == 0:
                     print(f"Moved {c} images.")
                 break
 #print(f"Moved all {c} images.")
 ```
 
-    Moved 500 images.
-    Moved 1000 images.
-    Moved 1500 images.
-    Moved 2000 images.
-    Moved 2500 images.
-    Moved 3000 images.
-    Moved 3500 images.
-    Moved 4000 images.
-    Moved 4500 images.
+
     Moved 5000 images.
-    Moved 5500 images.
-    Moved 6000 images.
-    Moved 6500 images.
-    Moved 7000 images.
-    Moved 7500 images.
-    Moved 8000 images.
-    Moved 8500 images.
-    Moved 9000 images.
-    Moved 9500 images.
     Moved 10000 images.
-    Moved 10500 images.
-    Moved 11000 images.
-    Moved 11500 images.
-    Moved 12000 images.
-    Moved 12500 images.
-    Moved 13000 images.
-    Moved 13500 images.
-    Moved 14000 images.
-    Moved 14500 images.
     Moved 15000 images.
-    Moved 15500 images.
-    Moved 16000 images.
-    Moved 16500 images.
-    Moved 17000 images.
-    Moved 17500 images.
-    Moved 18000 images.
-    Moved 18500 images.
-    Moved 19000 images.
-    Moved 19500 images.
     Moved 20000 images.
-    Moved 20500 images.
     Moved 21000 images.
     
 
@@ -519,7 +470,7 @@ show_example(img, label)
 
 
     
-![png](cassava-project_files/cassava-project_28_1.png)
+![cassava1]({{site.baseurl}}/assets/img/cassava/cassava1.png)
     
 
 
@@ -527,10 +478,7 @@ show_example(img, label)
 ```python
 batch_size=15
 data_loader = DataLoader(dataset, batch_size, shuffle=True, num_workers=4, pin_memory=True)
-```
 
-
-```python
 for images, _ in data_loader:
     print('images.shape:', images.shape)
     fig, ax = plt.subplots(figsize=(12, 12))
@@ -545,7 +493,7 @@ for images, _ in data_loader:
 
 
     
-![png](cassava-project_files/cassava-project_30_1.png)
+![cassava2]({{site.baseurl}}/assets/img/cassava/cassava2.png)
     
 
 
@@ -555,35 +503,6 @@ In-order to avoid overfitting, we apply the following transformations while load
 * **randomised data augmentaton:** applying randomly chosen transformations such as cropping, horizondal flipping, changing brightness/contrast/saturation of images.
 * **data normalization:** to prevent the values from any one channel from disproportionately affecting the losses and gradients while training by having a higher or wider range of values than others.
 * **Early stopping of model's training**, when validation loss starts to increase.
-
-
-```python
-'''def GetStat(data):
-  """Function to calculate the mean and std of the input tensors.
-  Args:
-  Input: ImageFolder containing tensors
-  Return: tuple of mean and std 
-  """
-  loader = DataLoader(data,
-                         batch_size=batch_size,
-                         num_workers=0,
-                         shuffle=False)
-  mean = 0.
-  std = 0.
-  for images, _ in loader:
-      batch_samples = images.size(0) # batch size (the last batch can have smaller size!)
-      images = images.view(batch_samples, images.size(1), -1)
-      mean += images.mean(2).sum(0)
-      std += images.std(2).sum(0)
-
-  mean /= len(loader.dataset)
-  std /= len(loader.dataset)
-  mean= mean.numpy()
-  std=std.numpy()
-  return (mean, std)
-stats=GetStat(train_ds)
-print(stats)'''
-```
 
 
 ```python
@@ -599,10 +518,7 @@ train_tfms = tt.Compose([tt.RandomCrop((128,128), padding=4, padding_mode='refle
                          tt.ToTensor(), 
                          tt.Normalize(*stats,inplace=True)])
 valid_tfms = tt.Compose([tt.CenterCrop(128),tt.ToTensor(), tt.Normalize(*stats)])
-```
 
-
-```python
 # PyTorch datasets
 train_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/train', train_tfms)
 valid_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/test', valid_tfms)
@@ -613,10 +529,7 @@ Define data loaders for training and validation, to load the data in batches.
 
 ```python
 batch_size=10
-```
 
-
-```python
 # PyTorch data loaders
 train_dl = DataLoader(train_ds, batch_size, shuffle=True, num_workers=3, pin_memory=True)
 valid_dl = DataLoader(valid_ds, batch_size*2, num_workers=3, pin_memory=True)
@@ -955,7 +868,7 @@ plot_accuracies(history)
 
 
     
-![png](cassava-project_files/cassava-project_66_0.png)
+![cassava3]({{site.baseurl}}/assets/img/cassava/cassava3.png)
     
 
 
@@ -966,7 +879,7 @@ plot_losses(history)
 
 
     
-![png](cassava-project_files/cassava-project_67_0.png)
+![cassava4]({{site.baseurl}}/assets/img/cassava/cassava4.png)
     
 
 
@@ -977,7 +890,7 @@ plot_lrs(history)
 
 
     
-![png](cassava-project_files/cassava-project_68_0.png)
+![cassava5]({{site.baseurl}}/assets/img/cassava/cassava5.png)
     
 
 
