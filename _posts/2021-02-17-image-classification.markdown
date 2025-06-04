@@ -7,8 +7,6 @@ description: using Deep Neural Networks
 img: cassavaCOLLAGE.jpg 
 tags: [Deep Learning, Neural Networks, Machine Learning]
 ---
-# Image Classification- Cassava Leaf Disease 
-
 ### Comparison of different neural network models using PyTorch
 
 Image classification is a supervised learning problem: define a set of target classes (objects to identify in images), and train a model to recognize them using labelled example photos. [[Source]](https://developers.google.com/machine-learning/practica/image-classification)
