@@ -8,4 +8,4 @@ fig-caption: Photo from Unsplash by CardMapr.nl
 tags: [Credit Risk, Machine Learning] # add tag
 ---
 
-[View Cassava Project](..assets/img/cassava-project.html)
+[View Cassava Project](..assets/cassava-project.html)
