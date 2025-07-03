@@ -161,7 +161,7 @@ images_labels.head(5)
 label_map = pd.read_json('./data/label_num_to_disease_map.json', orient='index')
 label_map
 {% endhighlight %} 
-```output
+
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -207,8 +207,6 @@ label_map
   </tbody>
 </table>
 </div>
-```
-
 
 
 {% highlight ruby %}
