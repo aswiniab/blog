@@ -1,7 +1,7 @@
-@import 'variables';
-@import 'normalize';
-@import 'syntax';   
-@import 'post-page';
+@import 'parts/variables';
+@import 'parts/normalize';
+@import 'parts/syntax';   
+@import 'parts/post-page';
 
 *, *::after, *::before {
   box-sizing: border-box;
