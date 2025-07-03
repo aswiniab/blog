@@ -1,6 +1,7 @@
-@import 'normalize';
-@import 'syntax';
-@import 'variables';
+@import 'parts/_variables';
+@import 'parts/_normalize';
+@import 'parts/_syntax';   
+@import 'parts/_post-page';
 
 *, *::after, *::before {
   box-sizing: border-box;
