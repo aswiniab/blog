@@ -38,14 +38,14 @@ dataset_url='https://www.kaggle.com/c/cassava-leaf-disease-classification/data'
 od.download(dataset_url)
 {% endhighlight %}
 
-{% highlight ruby %}
+```output
     Please provide your Kaggle credentials to download this dataset. Learn more: http://bit.ly/kaggle-creds
     Your Kaggle username: aswiniabraham
     Your Kaggle Key: ········
       0%|          | 10.0M/5.76G [00:00<01:04, 96.4MB/s]
     Downloading cassava-leaf-disease-classification.zip to ./cassava-leaf-disease-classification
     100%|██████████| 5.76G/5.76G [00:58<00:00, 105MB/s] 
-{% endhighlight %} 
+```
     
 {% highlight ruby %}
 %%time
