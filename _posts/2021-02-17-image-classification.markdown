@@ -32,14 +32,7 @@ The dataset consist of 21,367 labeled images of cassava plant leaves collected d
 Let us begin by downloading the dataset.
 
 
-<pre class="custom-code-block">
-<code>
-!pip install jovian opendatasets --upgrade --quiet
-import opendatasets as od
-dataset_url='https://www.kaggle.com/c/cassava-leaf-disease-classification/data'
-od.download(dataset_url)
-</code>
-</pre>
+<pre> ```python !pip install jovian opendatasets --upgrade --quiet import opendatasets as od dataset_url='https://www.kaggle.com/c/cassava-leaf-disease-classification/data' od.download(dataset_url) ``` </pre>
 
 ```python
     Please provide your Kaggle credentials to download this dataset. Learn more: http://bit.ly/kaggle-creds
