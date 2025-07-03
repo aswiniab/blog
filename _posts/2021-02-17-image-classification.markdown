@@ -54,10 +54,11 @@ from zipfile import ZipFile
 with ZipFile('cassava-leaf-disease-classification/cassava-leaf-disease-classification.zip') as zipper:
     zipper.extractall('./data')
 {% endhighlight %}
-```
+```output
     CPU times: user 26.1 s, sys: 10.6 s, total: 36.7 s
     Wall time: 2min 1s
 ```
+
 {% highlight ruby %}
 import os
 import torch
@@ -79,9 +80,11 @@ from torchvision.transforms import ToTensor
 %matplotlib inline
 matplotlib.rcParams['figure.facecolor'] = '#ffffff'
 {% endhighlight %} 
+
 {% highlight ruby %}
 os.listdir('./data')
 {% endhighlight %} 
+
 ```output
     ['train_images',
      'test_tfrecords',
@@ -392,7 +395,7 @@ for index in range(len(class_folders)):
 Now, let us craete a test dataset using 10% of random images from each sub-class of the train dataset.
 
 
-```python
+{% highlight ruby %}
 import random
 random_seed=42
 
@@ -406,12 +409,12 @@ for folder in class_folders:
       if file == filename:
         shutil.move(train_dir + '/' + folder + '/' + file, new_dir + '/' + file)
         break
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 ls -l
-```
+{% endhighlight %}
 
     total 165892
 
@@ -434,26 +437,26 @@ ls -l
 
 
 
-```python
+{% highlight ruby %}
 dataset= ImageFolder('./data',transform=ToTensor())
-```
+{% endhighlight %}
 
 ## View some elements of the dataset
 
 Let us picturise a few training images.
 
 
-```python
+{% highlight ruby %}
 def show_example(img, label):
     print('Label: ', dataset.classes[label], "("+str(label)+")")
     plt.imshow(img.permute(1, 2, 0))
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 img, label = dataset[0]
 show_example(img, label)
-```
+{% endhighlight %}
 
     Label:  test (0)
     
@@ -465,7 +468,7 @@ show_example(img, label)
 
 
 
-```python
+{% highlight ruby %}
 batch_size=15
 data_loader = DataLoader(dataset, batch_size, shuffle=True, num_workers=4, pin_memory=True)
 
@@ -476,7 +479,7 @@ for images, _ in data_loader:
     #denorm_images = denormalize(images, *stats)
     ax.imshow(make_grid(images, nrow=5).permute(1, 2, 0).clamp(0,1))
     break
-```
+{% endhighlight %}
 
     images.shape: torch.Size([15, 3, 600, 800])
     
@@ -495,7 +498,7 @@ In-order to avoid overfitting, we apply the following transformations while load
 * **Early stopping of model's training**, when validation loss starts to increase.
 
 
-```python
+{% highlight ruby %}
 # Data transforms (normalization & data augmentation)
 
 stats=((0.43043306, 0.4969931 , 0.3137205 ), (0.21940342, 0.22414596, 0.20117915))
@@ -512,18 +515,18 @@ valid_tfms = tt.Compose([tt.CenterCrop(128),tt.ToTensor(), tt.Normalize(*stats)]
 # PyTorch datasets
 train_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/train', train_tfms)
 valid_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/test', valid_tfms)
-```
+{% endhighlight %}
 
 Define data loaders for training and validation, to load the data in batches.
 
 
-```python
+{% highlight ruby %}
 batch_size=10
 
 # PyTorch data loaders
 train_dl = DataLoader(train_ds, batch_size, shuffle=True, num_workers=3, pin_memory=True)
 valid_dl = DataLoader(valid_ds, batch_size*2, num_workers=3, pin_memory=True)
-```
+{% endhighlight %}
 
 ### Base Model Class and Training on GPU
 
@@ -532,7 +535,7 @@ valid_dl = DataLoader(valid_ds, batch_size*2, num_workers=3, pin_memory=True)
 Let's create a base model class, which contains everything except the model architecture i.e. it wil not contain the __init__ and __forward__ methods. We will later extend this class to try out different architectures.
 
 
-```python
+{% highlight ruby %}
 def accuracy(outputs, labels):
     _, preds = torch.max(outputs, dim=1)
     return torch.tensor(torch.sum(preds == labels).item() / len(preds))
@@ -561,14 +564,14 @@ class ImageClassificationBase(nn.Module):
     def epoch_end(self, epoch, result):
         print("Epoch [{}], last_lr: {:.5f}, train_loss: {:.4f}, val_loss: {:.4f}, val_acc: {:.4f}".format(
             epoch, result['lrs'][-1], result['train_loss'], result['val_loss'], result['val_acc']))
-```
+{% endhighlight %}
 
 ### Using GPU
 
 To seamlessly use a GPU, if one is available, we define a couple of helper functions (get_default_device & to_device) and a helper class DeviceDataLoader to move our model & data to the GPU as required. 
 
 
-```python
+{% highlight ruby %}
 def get_default_device():
     """Pick GPU if available, else CPU"""
     if torch.cuda.is_available():
@@ -596,13 +599,13 @@ class DeviceDataLoader():
     def __len__(self):
         """Number of batches"""
         return len(self.dl)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 device = get_default_device()
 device
-```
+{% endhighlight %}
 
 
 
@@ -614,17 +617,17 @@ device
 Let's move our data loaders to the appropriate device.
 
 
-```python
+{% highlight ruby %}
 train_dl = DeviceDataLoader(train_dl, device)
 valid_dl = DeviceDataLoader(valid_dl, device)
-```
+{% endhighlight %}
 
 ### Helper functions for plotting loss and accuracy
 
 Let us also define a couple of helper functions for plotting the losses & accuracies.
 
 
-```python
+{% highlight ruby %}
 def plot_losses(history):
     train_losses = [x.get('train_loss') for x in history]
     val_losses = [x['val_loss'] for x in history]
@@ -634,27 +637,27 @@ def plot_losses(history):
     plt.ylabel('loss')
     plt.legend(['Training', 'Validation'])
     plt.title('Loss vs. No. of epochs');
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 def plot_accuracies(history):
     accuracies = [x['val_acc'] for x in history]
     plt.plot(accuracies, '-x')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
     plt.title('Accuracy vs. No. of epochs');
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 def plot_lrs(history):
     lrs = np.concatenate([x.get('lrs', []) for x in history])
     plt.plot(lrs)
     plt.xlabel('Batch no.')
     plt.ylabel('Learning rate')
     plt.title('Learning Rate vs. Batch no.');
-```
+{% endhighlight %}
 
 ### Training loop
 
@@ -667,7 +670,7 @@ We define a fit_one_cycle function for training the model. We do the following p
 Let's define a fit_one_cycle function now. We'll also record the learning rate used for each batch.
 
 
-```python
+{% highlight ruby %}
 from tqdm.notebook import tqdm
 
 @torch.no_grad() 
@@ -684,7 +687,6 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader,
                   weight_decay=0, grad_clip=None, opt_func=torch.optim.SGD):
     torch.cuda.empty_cache() 
     history = [] 
-    
     # Set up cutom optimizer with weight decay
     optimizer = opt_func(model.parameters(), max_lr, weight_decay=weight_decay)
     # Set up one-cycle learning rate scheduler
@@ -699,19 +701,15 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader,
         for batch in tqdm(train_loader):
             loss = model.training_step(batch)
             train_losses.append(loss)
-            loss.backward()
-            
+            loss.backward()            
             # Gradient clipping
             if grad_clip: #if any gradients > set value, hey get clipped
-                nn.utils.clip_grad_value_(model.parameters(), grad_clip)
-            
+                nn.utils.clip_grad_value_(model.parameters(), grad_clip)            
             optimizer.step() # perform gradient descent, add weight decay to loss, derivative for weight decay, perform gradient decsendt
-            optimizer.zero_grad()
-            
+            optimizer.zero_grad()            
             # Record & update learning rate
             lrs.append(get_lr(optimizer)) # record lr for each batch
-            sched.step() #calc next lr based on one cycle policy
-        
+            sched.step() #calc next lr based on one cycle policy        
         # Validation phase
         result = evaluate(model, val_loader)
         result['train_loss'] = torch.stack(train_losses).mean().item()
@@ -719,24 +717,23 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader,
         model.epoch_end(epoch, result)
         history.append(result)
     return history
-```
+{% endhighlight %}
 
 ## Model-1: Feed Forward Neural Networks
 
 
-```python
+{% highlight ruby %}
 input_size= 3*128*128
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 class FeedFwdModel(ImageClassificationBase):
     def __init__(self, input_size,output_size):
         super().__init__()
         self.linear1=nn.Linear(input_size,32)
         self.linear2=nn.Linear(32,32)
-        self.linear3=nn.Linear(32,output_size)
-        
+        self.linear3=nn.Linear(32,output_size)        
     def forward(self, xb):
         # Flatten images into vectors
         out = xb.view(xb.size(0), -1)
@@ -748,20 +745,20 @@ class FeedFwdModel(ImageClassificationBase):
         out=self.linear3(out)
         out=F.relu(out)
         return out
-```
+{% endhighlight %}
 
 You can now instantiate the model, and move it the appropriate device.
 
 
-```python
+{% highlight ruby %}
 model= to_device(FeedFwdModel(input_size,len(train_ds.classes)), device)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history = [evaluate(model, valid_dl)]
 history
-```
+{% endhighlight %}
 
 
 
@@ -771,22 +768,22 @@ history
 
 
 
-```python
+{% highlight ruby %}
 epochs = 8
 max_lr = 0.01
 grad_clip = 0.1
 weight_decay = 1e-4
 opt_func = torch.optim.Adam
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 %%time
 history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl, 
                              grad_clip=grad_clip, 
                              weight_decay=weight_decay, 
                              opt_func=opt_func)
-```
+{% endhighlight %}
 
 
       0%|          | 0/1927 [00:00<?, ?it/s]
@@ -847,14 +844,14 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     
 
 
-```python
+{% highlight ruby %}
 train_time='29:01'
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_accuracies(history)
-```
+{% endhighlight %}
 
 
     
@@ -863,9 +860,9 @@ plot_accuracies(history)
 
 
 
-```python
+{% highlight ruby %}
 plot_losses(history)
-```
+{% endhighlight %}
 
 
     
@@ -874,9 +871,9 @@ plot_losses(history)
 
 
 
-```python
+{% highlight ruby %}
 plot_lrs(history)
-```
+{% endhighlight %}
 
 
     
@@ -888,7 +885,7 @@ Let us record the hyperparameters and final metrics achieved by the model for re
 
 
 
-```python
+{% highlight ruby %}
 jovian.reset()
 jovian.log_hyperparams(arch='feed forward network', 
                        epochs=epochs, 
@@ -897,31 +894,31 @@ jovian.log_hyperparams(arch='feed forward network',
                        weight_decay=weight_decay, 
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
-```
+{% endhighlight %}
 
     [jovian] Hyperparams logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 jovian.log_metrics(val_loss=history[-1]['val_loss'], 
                    val_acc=history[-1]['val_acc'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
-```
+{% endhighlight %}
 
     [jovian] Metrics logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 torch.save(model.state_dict(), 'cassava-feedfwd.pth')
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-feedfwd.pth'])
-```
+{% endhighlight %}
 
 
     <IPython.core.display.Javascript object>
@@ -939,7 +936,7 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-fee
 ## Model-2: Convolutional Neural Networks
 
 
-```python
+{% highlight ruby %}
 class CnnModel(ImageClassificationBase):
     def __init__(self, num_classes):
         super().__init__()
@@ -949,35 +946,31 @@ class CnnModel(ImageClassificationBase):
             nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(2, 2), # output: 64 x 64 x 64
-
             nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
             nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(2, 2), # output: 128 x 32 x 32
-
             nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
             nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(2, 2), # output: 256 x 16 x 16
-
             nn.Flatten(), 
             nn.Linear(256*16*16, 4096),
             nn.ReLU(),
             nn.Linear(4096, 256),
             nn.ReLU(),
-            nn.Linear(256, num_classes))
-        
+            nn.Linear(256, num_classes))        
     def forward(self, xb):
         return self.network(xb)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 model= CnnModel(len(train_ds.classes))
 to_device(model, device)
-```
+{% endhighlight %}
 
 
 
@@ -1011,15 +1004,15 @@ to_device(model, device)
 
 
 
-```python
+{% highlight ruby %}
 history= []
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history = [evaluate(model, valid_dl)]
 history
-```
+{% endhighlight %}
 
 
 
@@ -1029,22 +1022,22 @@ history
 
 
 
-```python
+{% highlight ruby %}
 epochs = 8
 max_lr = 0.01
 grad_clip = 0.1
 weight_decay = 1e-4
 opt_func = torch.optim.Adam
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 %%time
 history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl, 
                              grad_clip=grad_clip, 
                              weight_decay=weight_decay, 
                              opt_func=opt_func)
-```
+{% endhighlight %}
 
 
       0%|          | 0/1927 [00:00<?, ?it/s]
@@ -1105,14 +1098,14 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     
 
 
-```python
+{% highlight ruby %}
 train_time='30:46'
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_accuracies(history)
-```
+{% endhighlight %}
 
 
     
@@ -1121,9 +1114,9 @@ plot_accuracies(history)
 
 
 
-```python
+{% highlight ruby %}
 plot_losses(history)
-```
+{% endhighlight %}
 
 
 ![m2_2]({{site.baseurl}}/assets/img/cassava/m2_2.png)
@@ -1133,7 +1126,7 @@ plot_losses(history)
 Let us record the hyperparameters and final metrics achieved by the model.
 
 
-```python
+{% highlight ruby %}
 jovian.reset()
 jovian.log_hyperparams(arch='convolutional neural network', 
                        epochs=epochs, 
@@ -1142,31 +1135,31 @@ jovian.log_hyperparams(arch='convolutional neural network',
                        weight_decay=weight_decay, 
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
-```
+{% endhighlight %}
 
     [jovian] Hyperparams logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 jovian.log_metrics(val_loss=history[-1]['val_loss'], 
                    val_acc=history[-1]['val_acc'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
-```
+{% endhighlight %}
 
     [jovian] Metrics logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 torch.save(model.state_dict(), 'cnn.pth')
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 jovian.commit(project='cassava_project', environment=None, outputs=['cnn.pth'])
-```
+{% endhighlight %}
 
 
     <IPython.core.display.Javascript object>
@@ -1184,7 +1177,7 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cnn.pth'])
 ## Model-3: Resnet34 and transfer learning
 
 
-```python
+{% highlight ruby %}
 # Data transforms (normalization & data augmentation)
 
 imagenet_stats = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
@@ -1196,35 +1189,35 @@ train_tfms = tt.Compose([tt.RandomCrop((128,128), padding=4, padding_mode='refle
                          tt.ToTensor(), 
                          tt.Normalize(*imagenet_stats,inplace=True)])
 valid_tfms = tt.Compose([tt.CenterCrop(128),tt.ToTensor(), tt.Normalize(*imagenet_stats)])
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # PyTorch datasets
 train_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/train', train_tfms)
 valid_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/test', valid_tfms)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 batch_size=10
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # PyTorch data loaders
 train_dl = DataLoader(train_ds, batch_size, shuffle=True, num_workers=3, pin_memory=True)
 valid_dl = DataLoader(valid_ds, batch_size*2, num_workers=3, pin_memory=True)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 train_dl = DeviceDataLoader(train_dl, device)
 valid_dl = DeviceDataLoader(valid_dl, device)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 from torchvision import models
 
 class Resnet34Model(ImageClassificationBase):
@@ -1234,26 +1227,25 @@ class Resnet34Model(ImageClassificationBase):
         self.network = models.resnet34(pretrained=pretrained)
         # Replace last layer
         self.network.fc = nn.Linear(self.network.fc.in_features, num_classes)
-
     def forward(self, xb):
         return self.network(xb)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 model = to_device(Resnet34Model(len(train_ds.classes)), device)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history= []
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history = [evaluate(model, valid_dl)]
 history
-```
+{% endhighlight %}
 
 
 
@@ -1263,22 +1255,22 @@ history
 
 
 
-```python
+{% highlight ruby %}
 epochs = 8
 max_lr = 0.01
 grad_clip = 0.1
 weight_decay = 1e-4
 opt_func = torch.optim.Adam
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 %%time
 history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl, 
                              grad_clip=grad_clip, 
                              weight_decay=weight_decay, 
                              opt_func=opt_func)
-```
+{% endhighlight %}
 
 
       0%|          | 0/1927 [00:00<?, ?it/s]
@@ -1339,14 +1331,14 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     
 
 
-```python
+{% highlight ruby %}
 train_time='38:46'
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_accuracies(history)
-```
+{% endhighlight %}
 
 
     
@@ -1355,9 +1347,9 @@ plot_accuracies(history)
 
 
 
-```python
+{% highlight ruby %}
 plot_losses(history)
-```
+{% endhighlight %}
 
 
     
@@ -1368,7 +1360,7 @@ plot_losses(history)
 Let us record the hyperparameters and final metrics achieved by the model.
 
 
-```python
+{% highlight ruby %}
 jovian.reset()
 jovian.log_hyperparams(arch='Resnet34 network', 
                        epochs=epochs, 
@@ -1377,31 +1369,31 @@ jovian.log_hyperparams(arch='Resnet34 network',
                        weight_decay=weight_decay, 
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
-```
+{% endhighlight %}
 
     [jovian] Hyperparams logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 jovian.log_metrics(val_loss=history[-1]['val_loss'], 
                    val_acc=history[-1]['val_acc'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
-```
+{% endhighlight %}
 
     [jovian] Metrics logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 torch.save(model.state_dict(), 'cassava-resnet34.pth')
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-resnet34.pth'])
-```
+{% endhighlight %}
 
 
     <IPython.core.display.Javascript object>
@@ -1419,7 +1411,7 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-res
 ## Model-4: EfficientNet B4 model
 
 
-```python
+{% highlight ruby %}
 # Data transforms (normalization & data augmentation)
 
 imagenet_stats = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
@@ -1431,40 +1423,40 @@ train_tfms = tt.Compose([tt.RandomCrop((128,128), padding=4, padding_mode='refle
                          tt.ToTensor(), 
                          tt.Normalize(*imagenet_stats,inplace=True)])
 valid_tfms = tt.Compose([tt.CenterCrop(128),tt.ToTensor(), tt.Normalize(*imagenet_stats)])
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # PyTorch datasets
 train_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/train', train_tfms)
 valid_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/test', valid_tfms)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 batch_size=10
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # PyTorch data loaders
 train_dl = DataLoader(train_ds, batch_size, shuffle=True, num_workers=3, pin_memory=True)
 valid_dl = DataLoader(valid_ds, batch_size*2, num_workers=3, pin_memory=True)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 train_dl = DeviceDataLoader(train_dl, device)
 valid_dl = DeviceDataLoader(valid_dl, device)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 ! pip install efficientnet-pytorch
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 from efficientnet_pytorch import EfficientNet
 
 class Enetb4Model(ImageClassificationBase):
@@ -1472,74 +1464,73 @@ class Enetb4Model(ImageClassificationBase):
         super().__init__()
         # Use a pretrained model
         self.network = EfficientNet.from_pretrained('efficientnet-b4', num_classes=num_classes)
-
     def forward(self, xb):
         return self.network(xb)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 model = to_device(Enetb4Model(len(train_ds.classes)), device)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history= []
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history = [evaluate(model, valid_dl)]
 history
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 epochs = 8
 max_lr = 0.01
 grad_clip = 0.1
 weight_decay = 1e-4
 opt_func = torch.optim.Adam
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 %%time
 history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl, 
                              grad_clip=grad_clip, 
                              weight_decay=weight_decay, 
                              opt_func=opt_func)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 train_time='1:05:57'
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_accuracies(history)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_losses(history)
-```
+{% endhighlight %}
 
 Let us record the hyperparameters and final metrics achieved by the model.
 
 
-```python
+{% highlight ruby %}
 !pip install jovian --upgrade --quiet
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 import jovian
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 jovian.reset()
 jovian.log_hyperparams(arch='Effiecientnet B4', 
                        epochs=epochs, 
@@ -1548,46 +1539,46 @@ jovian.log_hyperparams(arch='Effiecientnet B4',
                        weight_decay=weight_decay, 
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 jovian.log_metrics(val_loss=history[-1]['val_loss'], 
                    val_acc=history[-1]['val_acc'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 torch.save(model.state_dict(), 'cassava-enetb4.pth')
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-enetb4.pth'])
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 os.getcwd()
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 os.listdir('./')
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 from IPython.display import FileLink
 FileLink(r'cassava-enetb4.pth')
-```
+{% endhighlight %}
 
 ## Model-5: Resnext50_32x4d
 
 
-```python
+{% highlight ruby %}
 # ================================================
 # resnext50_32x4d architecture
 # ================================================
@@ -1601,20 +1592,19 @@ class ResnextModel(ImageClassificationBase):
         self.network = models.resnext50_32x4d(pretrained=pretrained)
         # Replace last layer
         self.network.fc = nn.Linear(self.network.fc.in_features, num_classes)
-
     def forward(self, xb):
         return self.network(xb)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 model = ResnextModel(len(train_ds.classes), pretrained= True)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 to_device(model, device)
-```
+{% endhighlight %}
 
 
 
@@ -1801,15 +1791,15 @@ to_device(model, device)
 
 
 
-```python
+{% highlight ruby %}
 history= []
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history = [evaluate(model, valid_dl)]
 history
-```
+{% endhighlight %}
 
 
 
@@ -1819,13 +1809,13 @@ history
 
 
 
-```python
+{% highlight ruby %}
 %%time
 history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl, 
                              grad_clip=grad_clip, 
                              weight_decay=weight_decay, 
                              opt_func=opt_func)
-```
+{% endhighlight %}
 
 
       0%|          | 0/1927 [00:00<?, ?it/s]
@@ -1886,14 +1876,14 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     
 
 
-```python
+{% highlight ruby %}
 train_time='45:17'
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_accuracies(history)
-```
+{% endhighlight %}
 
 
     
@@ -1902,9 +1892,9 @@ plot_accuracies(history)
 
 
 
-```python
+{% highlight ruby %}
 plot_losses(history)
-```
+{% endhighlight %}
 
 
     
@@ -1915,7 +1905,7 @@ plot_losses(history)
 Let us record the hyperparameters and final metrics achieved by the model.
 
 
-```python
+{% highlight ruby %}
 jovian.reset()
 jovian.log_hyperparams(arch='resnext50_32x4d', 
                        epochs=epochs, 
@@ -1924,32 +1914,32 @@ jovian.log_hyperparams(arch='resnext50_32x4d',
                        weight_decay=weight_decay, 
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
-```
+{% endhighlight %}
 
     [jovian] Hyperparams logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 jovian.log_metrics(val_loss=history[-1]['val_loss'], 
                    val_acc=history[-1]['val_acc'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
-```
+{% endhighlight %}
 
     [jovian] Metrics logged.[0m
     
 
 
-```python
+{% highlight ruby %}
 torch.save(model.state_dict(), 'cassava-resnext50.pth')
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 from IPython.display import FileLink
 FileLink(r'cassava-resnext50.pth')
-```
+{% endhighlight %}
 
 
 
@@ -1959,9 +1949,9 @@ FileLink(r'cassava-resnext50.pth')
 
 
 
-```python
+{% highlight ruby %}
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-resnext50.pth'])
-```
+{% endhighlight %}
 
 
     <IPython.core.display.Javascript object>
@@ -1979,13 +1969,13 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-res
 ## Ensemble two models
 
 
-```python
+{% highlight ruby %}
 ! pip install efficientnet-pytorch
 #! pip install timm
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # ================================================
 # efficientnet-b4 architecture
 # ================================================
@@ -2001,14 +1991,13 @@ class EnetModel(ImageClassificationBase):
         self.network = EfficientNet.from_pretrained('efficientnet-b4', num_classes=num_classes)
         #self.network=timm.create_model('tf_efficientnet_b4_ns', pretrained=pretrained)
         # Replace last layer
-        #self.network.fc = nn.Linear(self.network.fc.in_features, num_classes)
-    
+        #self.network.fc = nn.Linear(self.network.fc.in_features, num_classes)    
     def forward(self, xb):
         return self.network(xb)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # ================================================
 # resnext50_32x4d architecture
 # ================================================
@@ -2022,23 +2011,22 @@ class ResnextModel(ImageClassificationBase):
         self.network = models.resnext50_32x4d(pretrained=pretrained)
         # Replace last layer
         self.network.fc = nn.Linear(self.network.fc.in_features, num_classes)
-
     def forward(self, xb):
         return self.network(xb)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 EfficientNet.from_pretrained('efficientnet-b4', num_classes=num_classes)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 models.resnext50_32x4d(pretrained=False)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # Ensemble two models
 
 class MyEnsemble(ImageClassificationBase):
@@ -2049,29 +2037,26 @@ class MyEnsemble(ImageClassificationBase):
         # Remove last linear layer
         self.modelA.fc= nn.Identity()
         self.modelB.fc= nn.Identity()
-
         # Create new classifier
-        self.classifier= nn.Linear(1792+2040, num_classes)
-        
+        self.classifier= nn.Linear(1792+2040, num_classes)        
     def forward(self, x):
       x1= self.modelA(x.clone())
       x1= x1.view(x1.size(0),-1)
       x2= self.modelB(x)
       x2= x2.view(x2.size(0),-1)
       x= torch.cat((x1,x2),dim=1)
-
       x= self.classifier(F.relu(x))
       return x
 
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 MyEnsemble(modelA, modelB, len(train_ds.classes))
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # Load models
 modelA = EnetModel(len(train_ds.classes), pretrained= False)
 modelB = ResnextModel(len(train_ds.classes), pretrained= False)
@@ -2084,56 +2069,56 @@ model = MyEnsemble(modelA, modelB, len(train_ds.classes))
 
 # Load to device 
 model= to_device(model, device)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 epochs = 8
 max_lr = 0.01
 grad_clip = 0.1
 weight_decay = 1e-4
 opt_func = torch.optim.Adam
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 history = [evaluate(model, valid_dl)]
 history
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 %%time
 history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl, 
                              grad_clip=grad_clip, 
                              weight_decay=weight_decay, 
                              opt_func=opt_func)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 train_time=':'
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_accuracies(history)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_losses(history)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 plot_lrs(history)
-```
+{% endhighlight %}
 
 ### Testing with individual images
 
 
-```python
+{% highlight ruby %}
 def predict_image(img, model):
     # Convert to a batch of 1
     xb = to_device(img.unsqueeze(0), device)
@@ -2143,28 +2128,28 @@ def predict_image(img, model):
     _, preds  = torch.max(yb, dim=1)
     # Retrieve the class label
     return train_ds.classes[preds[0].item()]
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 img, label = valid_ds[0]
 plt.imshow(img.permute(1, 2, 0).clamp(0, 1))
 print('Label:', train_ds.classes[label], ', Predicted:', predict_image(img, model))
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 img, label = valid_ds[1002]
 plt.imshow(img.permute(1, 2, 0))
 print('Label:', valid_ds.classes[label], ', Predicted:', predict_image(img, model))
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 img, label = valid_ds[153]
 plt.imshow(img.permute(1, 2, 0))
 print('Label:', train_ds.classes[label], ', Predicted:', predict_image(img, model))
-```
+{% endhighlight %}
 
 ## Summary of training results
 
@@ -2186,9 +2171,9 @@ opt_func = torch.optim.Adam
 ## Save
 
 
-```python
+{% highlight ruby %}
 jovian.commit(project='cassava_project', environment=None)
-```
+{% endhighlight %}
 
 
     <IPython.core.display.Javascript object>
