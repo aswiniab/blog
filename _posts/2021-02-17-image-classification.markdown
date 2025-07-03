@@ -38,7 +38,7 @@ dataset_url='https://www.kaggle.com/c/cassava-leaf-disease-classification/data'
 od.download(dataset_url)
 {% endhighlight %}
 
-```python
+{% highlight ruby %}
     Please provide your Kaggle credentials to download this dataset. Learn more: http://bit.ly/kaggle-creds
     Your Kaggle username: aswiniabraham
     Your Kaggle Key: ········
@@ -51,27 +51,27 @@ od.download(dataset_url)
 
     100%|██████████| 5.76G/5.76G [00:58<00:00, 105MB/s] 
 
-```    
+{% endhighlight %} 
     
 
     
     
 
 
-```python
+{% highlight ruby %}
 %%time
 from zipfile import ZipFile
 
 with ZipFile('cassava-leaf-disease-classification/cassava-leaf-disease-classification.zip') as zipper:
     zipper.extractall('./data')
-```
+{% endhighlight %} 
 
     CPU times: user 26.1 s, sys: 10.6 s, total: 36.7 s
     Wall time: 2min 1s
-    
 
 
-```python
+
+{% highlight ruby %}
 import os
 import torch
 import torchvision
@@ -93,7 +93,7 @@ from torchvision.transforms import ToTensor
 matplotlib.rcParams['figure.facecolor'] = '#ffffff'
 
 os.listdir('./data')
-```
+{% endhighlight %} 
 
     ['train_images',
      'test_tfrecords',
