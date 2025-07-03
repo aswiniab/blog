@@ -65,3 +65,18 @@
 .css .o,
 .css .o + .nt,
 .css .nt + .nt { color: #999; }
+
+pre code {
+  background-color: #f7f7f7;
+  color: #333;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px 16px;
+  display: block;
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
