@@ -105,56 +105,78 @@ images_labels.head(5)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
+  <style scoped>
+    .dataframe {
+      font-family: 'DejaVu Sans Mono', 'Consolas', 'Courier New', monospace;
+      font-size: 14px;
+      border-collapse: collapse;
+      color: #333;
+      background-color: transparent;
+      width: auto;
     }
 
     .dataframe thead th {
-        text-align: right;
+      text-align: right;
+      font-weight: bold;
+      border-bottom: 1px solid #aaa;
+      padding: 4px 8px;
     }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>image_id</th>
-      <th>label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1000015157.jpg</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1000201771.jpg</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>100042118.jpg</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1000723321.jpg</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1000812911.jpg</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
+
+    .dataframe tbody tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dataframe tbody th,
+    .dataframe tbody td {
+      padding: 4px 8px;
+      border: none;
+      text-align: right;
+    }
+
+    .dataframe tbody th {
+      font-weight: normal;
+      color: #666;
+    }
+  </style>
+
+  <table class="dataframe">
+    <thead>
+      <tr>
+        <th></th>
+        <th>image_id</th>
+        <th>label</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>0</th>
+        <td>1000015157.jpg</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <th>1</th>
+        <td>1000201771.jpg</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <th>2</th>
+        <td>100042118.jpg</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <th>3</th>
+        <td>1000723321.jpg</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <th>4</th>
+        <td>1000812911.jpg</td>
+        <td>3</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 
 
 {% highlight ruby %}
