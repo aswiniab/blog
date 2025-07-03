@@ -53,10 +53,11 @@ from zipfile import ZipFile
 
 with ZipFile('cassava-leaf-disease-classification/cassava-leaf-disease-classification.zip') as zipper:
     zipper.extractall('./data')
-{% endhighlight %} 
+{% endhighlight %}
+{% highlight ruby %}
     CPU times: user 26.1 s, sys: 10.6 s, total: 36.7 s
     Wall time: 2min 1s
-
+{% endhighlight %}
 {% highlight ruby %}
 import os
 import torch
@@ -81,6 +82,7 @@ matplotlib.rcParams['figure.facecolor'] = '#ffffff'
 {% highlight ruby %}
 os.listdir('./data')
 {% endhighlight %} 
+{% highlight ruby %}
     ['train_images',
      'test_tfrecords',
      'sample_submission.csv',
@@ -88,7 +90,7 @@ os.listdir('./data')
      'train.csv',
      'train_tfrecords',
      'test_images']
-
+{% endhighlight %} 
 
 
 The extracted dataset contains mainly the following folders/files:
