@@ -54,10 +54,10 @@ from zipfile import ZipFile
 with ZipFile('cassava-leaf-disease-classification/cassava-leaf-disease-classification.zip') as zipper:
     zipper.extractall('./data')
 {% endhighlight %}
-{% highlight ruby %}
+```
     CPU times: user 26.1 s, sys: 10.6 s, total: 36.7 s
     Wall time: 2min 1s
-{% endhighlight %}
+```
 {% highlight ruby %}
 import os
 import torch
@@ -82,7 +82,7 @@ matplotlib.rcParams['figure.facecolor'] = '#ffffff'
 {% highlight ruby %}
 os.listdir('./data')
 {% endhighlight %} 
-{% highlight ruby %}
+```output
     ['train_images',
      'test_tfrecords',
      'sample_submission.csv',
@@ -90,8 +90,7 @@ os.listdir('./data')
      'train.csv',
      'train_tfrecords',
      'test_images']
-{% endhighlight %} 
-
+```
 
 The extracted dataset contains mainly the following folders/files:
 
@@ -99,14 +98,10 @@ The extracted dataset contains mainly the following folders/files:
 2.   **train.csv:** contains the filename of the image and the ID code of the disease.
 3. **label_num_to_disease_map.json:** The mapping between each disease code and the real disease name.
 
-
-
-```python
+{% highlight ruby %}
 images_labels = pd.read_csv('./data/train.csv')
 images_labels.head(5)
-```
-
-
+{% endhighlight %} 
 
 
 <div>
@@ -162,16 +157,11 @@ images_labels.head(5)
 </div>
 
 
-
-
-```python
+{% highlight ruby %}
 label_map = pd.read_json('./data/label_num_to_disease_map.json', orient='index')
 label_map
-```
-
-
-
-
+{% endhighlight %} 
+```output
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -217,14 +207,14 @@ label_map
   </tbody>
 </table>
 </div>
-
-
-
-
-```python
-os.listdir('./data/train_images')
 ```
 
+
+
+{% highlight ruby %}
+os.listdir('./data/train_images')
+{% endhighlight %}
+```output
     ['2528148363.jpg',
      '3174632328.jpg',
      '2406694792.jpg',
@@ -234,7 +224,7 @@ os.listdir('./data/train_images')
      '2955761671.jpg',
      '2468469374.jpg',
      ...]
-
+```
 
 
 Since all the training images are present in a single folder, we need to classify them into sub folders such that each folder contains images of its class. This kind of classification will make it possible to use the ImageFolder class of PyTorch.
@@ -244,29 +234,26 @@ Let us save the training images into seperate subfolders based on their disease 
 ## Creating custom PyTorch datatset
 
 
-```python
+{% highlight ruby %}
 os.getcwd()
+{% endhighlight %}
+
+```output
+    '/kaggle/working'
 ```
 
 
-
-
-    '/kaggle/working'
-
-
-
-
-```python
+{% highlight ruby %}
 base_dir = './data'
 
 train_dir = base_dir + '/train'
 os.mkdir(train_dir)
 test_dir = base_dir + '/test'
 os.mkdir(test_dir)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 import shutil
 
 c = 0
@@ -282,22 +269,22 @@ for i in range(len(images_labels.label.unique())):
                     print(f"Moved {c} images.")
                 break
 #print(f"Moved all {c} images.")
-```
+{% endhighlight %}
 
-
+```output
     Moved 5000 images.
     Moved 10000 images.
     Moved 15000 images.
     Moved 20000 images.
     Moved 21000 images.
-    
+ ```   
 
 Let us check if the count of images in the subfolders matches with the count of images belonging to that category. This way we can verify if we have moved all the images into the correct subfolders. 
 
 
-```python
+{% highlight ruby %}
 images_labels.groupby('label').count()
-```
+{% endhighlight %}
 
 
 
