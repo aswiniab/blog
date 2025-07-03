@@ -1,6 +1,24 @@
-.highlight {background-color: #faf9f9; border-radius: 3px; margin: 0;}
-.highlighter-rouge {color: #ce887b; font-weight: 400; border: 1px solid #607D8B; border-radius: 3px; padding: 0.1rem 0.5rem;}
-.highlight .hll { background-color: #ffc; }
+.highlight {
+  background-color: #f7f7f7;
+  color: #333;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px 16px;
+  display: block;
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+.highlighter-rouge {
+  background-color: #f7f7f7;
+  color: #333;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  border: none;
+  padding: 0;
+}
 .highlight .c { color: #999; } /* Comment */
 .highlight .err { color: #a00; background-color: #faa; } /* Error */
 .highlight .k { color: #069; } /* Keyword */
