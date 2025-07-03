@@ -416,6 +416,7 @@ for folder in class_folders:
 ls -l
 {% endhighlight %}
 
+```output
     total 165892
 
     ---------- 1 root root      263 Feb 14 22:00 __notebook_source__.ipynb
@@ -433,7 +434,7 @@ ls -l
     -rw-r--r-- 1 root root   199534 Feb 15 04:43 cassava_project.ipynb
 
     drwxr-xr-x 8 root root     4096 Feb 15 05:03 [01;34mdata[0m/
-
+```
 
 
 
@@ -457,9 +458,9 @@ def show_example(img, label):
 img, label = dataset[0]
 show_example(img, label)
 {% endhighlight %}
-
+```output
     Label:  test (0)
-    
+```   
 
 
     
@@ -480,9 +481,9 @@ for images, _ in data_loader:
     ax.imshow(make_grid(images, nrow=5).permute(1, 2, 0).clamp(0,1))
     break
 {% endhighlight %}
-
+```output
     images.shape: torch.Size([15, 3, 600, 800])
-    
+```    
 
 
     
@@ -609,9 +610,9 @@ device
 
 
 
-
+```output
     device(type='cuda')
-
+```
 
 
 Let's move our data loaders to the appropriate device.
@@ -762,9 +763,9 @@ history
 
 
 
-
+```output
     [{'val_loss': 1.6378871202468872, 'val_acc': 0.0621495321393013}]
-
+```
 
 
 
@@ -785,7 +786,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
                              opt_func=opt_func)
 {% endhighlight %}
 
-
+```output
       0%|          | 0/1927 [00:00<?, ?it/s]
 
 
@@ -841,7 +842,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     Epoch [7], last_lr: 0.00000, train_loss: 1.6094, val_loss: 1.6094, val_acc: 0.0505
     CPU times: user 1min 39s, sys: 19.8 s, total: 1min 59s
     Wall time: 29min 1s
-    
+```    
 
 
 {% highlight ruby %}
@@ -895,9 +896,9 @@ jovian.log_hyperparams(arch='feed forward network',
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
 {% endhighlight %}
-
+```output
     [jovian] Hyperparams logged.[0m
-    
+```    
 
 
 {% highlight ruby %}
@@ -906,9 +907,9 @@ jovian.log_metrics(val_loss=history[-1]['val_loss'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
 {% endhighlight %}
-
+```output
     [jovian] Metrics logged.[0m
-    
+```    
 
 
 {% highlight ruby %}
@@ -920,7 +921,7 @@ torch.save(model.state_dict(), 'cassava-feedfwd.pth')
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-feedfwd.pth'])
 {% endhighlight %}
 
-
+```output
     <IPython.core.display.Javascript object>
 
 
@@ -931,7 +932,7 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-fee
 
 
     <IPython.core.display.Javascript object>
-
+```
 
 ## Model-2: Convolutional Neural Networks
 
@@ -974,7 +975,7 @@ to_device(model, device)
 
 
 
-
+```output
     CnnModel(
       (network): Sequential(
         (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
@@ -1000,7 +1001,7 @@ to_device(model, device)
         (20): Linear(in_features=256, out_features=5, bias=True)
       )
     )
-
+```
 
 
 
@@ -1016,9 +1017,9 @@ history
 
 
 
-
+```output
     [{'val_loss': 1.5846003293991089, 'val_acc': 0.10794392973184586}]
-
+```
 
 
 
@@ -1039,7 +1040,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
                              opt_func=opt_func)
 {% endhighlight %}
 
-
+```output
       0%|          | 0/1927 [00:00<?, ?it/s]
 
 
@@ -1095,7 +1096,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     Epoch [7], last_lr: 0.00000, train_loss: 1.1834, val_loss: 1.1837, val_acc: 0.6145
     CPU times: user 3min 30s, sys: 21.7 s, total: 3min 51s
     Wall time: 30min 46s
-    
+```    
 
 
 {% highlight ruby %}
@@ -1136,9 +1137,9 @@ jovian.log_hyperparams(arch='convolutional neural network',
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
 {% endhighlight %}
-
+```output
     [jovian] Hyperparams logged.[0m
-    
+ ```   
 
 
 {% highlight ruby %}
@@ -1147,9 +1148,9 @@ jovian.log_metrics(val_loss=history[-1]['val_loss'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
 {% endhighlight %}
-
+```output
     [jovian] Metrics logged.[0m
-    
+ ```   
 
 
 {% highlight ruby %}
@@ -1161,7 +1162,7 @@ torch.save(model.state_dict(), 'cnn.pth')
 jovian.commit(project='cassava_project', environment=None, outputs=['cnn.pth'])
 {% endhighlight %}
 
-
+```output
     <IPython.core.display.Javascript object>
 
 
@@ -1172,7 +1173,7 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cnn.pth'])
 
 
     <IPython.core.display.Javascript object>
-
+```
 
 ## Model-3: Resnet34 and transfer learning
 
@@ -1249,9 +1250,9 @@ history
 
 
 
-
+```output
     [{'val_loss': 1.6652694940567017, 'val_acc': 0.24976633489131927}]
-
+```
 
 
 
@@ -1272,7 +1273,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
                              opt_func=opt_func)
 {% endhighlight %}
 
-
+```output
       0%|          | 0/1927 [00:00<?, ?it/s]
 
 
@@ -1328,7 +1329,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     Epoch [7], last_lr: 0.00000, train_loss: 1.0956, val_loss: 0.9982, val_acc: 0.6352
     CPU times: user 16min 30s, sys: 30.2 s, total: 17min
     Wall time: 38min 46s
-    
+```    
 
 
 {% highlight ruby %}
@@ -1395,7 +1396,7 @@ torch.save(model.state_dict(), 'cassava-resnet34.pth')
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-resnet34.pth'])
 {% endhighlight %}
 
-
+```output
     <IPython.core.display.Javascript object>
 
 
@@ -1406,7 +1407,7 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-res
 
 
     <IPython.core.display.Javascript object>
-
+```
 
 ## Model-4: EfficientNet B4 model
 
@@ -1608,7 +1609,7 @@ to_device(model, device)
 
 
 
-
+```output
     ResnextModel(
       (network): ResNet(
         (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
@@ -1787,7 +1788,7 @@ to_device(model, device)
         (fc): Linear(in_features=2048, out_features=5, bias=True)
       )
     )
-
+```
 
 
 
@@ -1803,9 +1804,9 @@ history
 
 
 
-
+```output
     [{'val_loss': 1.709054946899414, 'val_acc': 0.11039718985557556}]
-
+```
 
 
 
@@ -1817,7 +1818,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
                              opt_func=opt_func)
 {% endhighlight %}
 
-
+```output
       0%|          | 0/1927 [00:00<?, ?it/s]
 
 
@@ -1873,7 +1874,7 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
     Epoch [7], last_lr: 0.00000, train_loss: 1.1161, val_loss: 1.0162, val_acc: 0.6398
     CPU times: user 31min 28s, sys: 33.8 s, total: 32min 2s
     Wall time: 45min 17s
-    
+ ```   
 
 
 {% highlight ruby %}
@@ -1915,9 +1916,9 @@ jovian.log_hyperparams(arch='resnext50_32x4d',
                        grad_clip=grad_clip,
                        opt=opt_func.__name__)
 {% endhighlight %}
-
+```output
     [jovian] Hyperparams logged.[0m
-    
+```    
 
 
 {% highlight ruby %}
@@ -1926,9 +1927,9 @@ jovian.log_metrics(val_loss=history[-1]['val_loss'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
 {% endhighlight %}
-
+```output
     [jovian] Metrics logged.[0m
-    
+```    
 
 
 {% highlight ruby %}
@@ -1953,7 +1954,7 @@ FileLink(r'cassava-resnext50.pth')
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-resnext50.pth'])
 {% endhighlight %}
 
-
+```output
     <IPython.core.display.Javascript object>
 
 
@@ -1964,7 +1965,7 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-res
 
 
     <IPython.core.display.Javascript object>
-
+```
 
 ## Ensemble two models
 
@@ -2175,7 +2176,7 @@ opt_func = torch.optim.Adam
 jovian.commit(project='cassava_project', environment=None)
 {% endhighlight %}
 
-
+```output
     <IPython.core.display.Javascript object>
 
 
@@ -2186,3 +2187,4 @@ jovian.commit(project='cassava_project', environment=None)
 
 
     <IPython.core.display.Javascript object>
+```
