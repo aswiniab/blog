@@ -54,7 +54,7 @@ from zipfile import ZipFile
 with ZipFile('cassava-leaf-disease-classification/cassava-leaf-disease-classification.zip') as zipper:
     zipper.extractall('./data')
 {% endhighlight %}
-```
+```output
     CPU times: user 26.1 s, sys: 10.6 s, total: 36.7 s
     Wall time: 2min 1s
 ```
@@ -82,6 +82,7 @@ matplotlib.rcParams['figure.facecolor'] = '#ffffff'
 {% highlight ruby %}
 os.listdir('./data')
 {% endhighlight %} 
+
 ```output
     ['train_images',
      'test_tfrecords',
@@ -234,6 +235,7 @@ label_map
 {% highlight ruby %}
 os.listdir('./data/train_images')
 {% endhighlight %}
+
 ```output
     ['2528148363.jpg',
      '3174632328.jpg',
@@ -297,7 +299,7 @@ for i in range(len(images_labels.label.unique())):
     Moved 15000 images.
     Moved 20000 images.
     Moved 21000 images.
- {% endhighlight %}  
+```  
 
 Let us check if the count of images in the subfolders matches with the count of images belonging to that category. This way we can verify if we have moved all the images into the correct subfolders. 
 
@@ -305,8 +307,6 @@ Let us check if the count of images in the subfolders matches with the count of 
 {% highlight ruby %}
 images_labels.groupby('label').count()
 {% endhighlight %}
-
-
 
 
 <div>
@@ -430,8 +430,6 @@ ls -l
 
     drwxr-xr-x 8 root root     4096 Feb 15 05:03 [01;34mdata[0m/
 ```
-
-
 
 {% highlight ruby %}
 dataset= ImageFolder('./data',transform=ToTensor())
@@ -842,38 +840,24 @@ train_time='29:01'
 {% highlight ruby %}
 plot_accuracies(history)
 {% endhighlight %}
-
-
-    
+  
 ![cassava3]({{site.baseurl}}/assets/img/cassava/cassava3.png)
     
-
-
 
 {% highlight ruby %}
 plot_losses(history)
 {% endhighlight %}
-
-
-    
+   
 ![cassava4]({{site.baseurl}}/assets/img/cassava/cassava4.png)
     
-
-
 
 {% highlight ruby %}
 plot_lrs(history)
 {% endhighlight %}
-
-
     
 ![cassava5]({{site.baseurl}}/assets/img/cassava/cassava5.png)
     
-
-
 Let us record the hyperparameters and final metrics achieved by the model for reference, analysis and comparison. We can record them using jovian.log_hyperparams.
-
-
 
 {% highlight ruby %}
 jovian.reset()
