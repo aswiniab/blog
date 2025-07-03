@@ -788,57 +788,20 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
 
 ```output
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
-    Epoch [0], last_lr: 0.00396, train_loss: 1.6068, val_loss: 1.6045, val_acc: 0.0561
-    
-
-
+    Epoch [0], last_lr: 0.00396, train_loss: 1.6068, val_loss: 1.6045, val_acc: 0.0561    
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [1], last_lr: 0.00936, train_loss: 1.6418, val_loss: 2.7624, val_acc: 0.0654
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [2], last_lr: 0.00972, train_loss: 1.6118, val_loss: 1.6094, val_acc: 0.0505
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [3], last_lr: 0.00812, train_loss: 1.7070, val_loss: 1.6094, val_acc: 0.0505
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [4], last_lr: 0.00556, train_loss: 1.6094, val_loss: 1.6094, val_acc: 0.0505
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [5], last_lr: 0.00283, train_loss: 1.6338, val_loss: 1.6094, val_acc: 0.0505
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [6], last_lr: 0.00077, train_loss: 1.6094, val_loss: 1.6094, val_acc: 0.0505
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [7], last_lr: 0.00000, train_loss: 1.6094, val_loss: 1.6094, val_acc: 0.0505
     CPU times: user 1min 39s, sys: 19.8 s, total: 1min 59s
     Wall time: 29min 1s
@@ -1042,57 +1005,20 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
 
 ```output
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [0], last_lr: 0.00396, train_loss: 1.1939, val_loss: 1.1860, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [1], last_lr: 0.00936, train_loss: 34.7533, val_loss: 1.1943, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [2], last_lr: 0.00972, train_loss: 16609.8730, val_loss: 1.1914, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [3], last_lr: 0.00812, train_loss: 4.8816, val_loss: 1.1838, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [4], last_lr: 0.00556, train_loss: 1.1995, val_loss: 1.1841, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [5], last_lr: 0.00283, train_loss: 1.1852, val_loss: 1.1838, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [6], last_lr: 0.00077, train_loss: 1.1833, val_loss: 1.1839, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [7], last_lr: 0.00000, train_loss: 1.1834, val_loss: 1.1837, val_acc: 0.6145
     CPU times: user 3min 30s, sys: 21.7 s, total: 3min 51s
     Wall time: 30min 46s
@@ -1107,25 +1033,16 @@ train_time='30:46'
 {% highlight ruby %}
 plot_accuracies(history)
 {% endhighlight %}
-
-
     
 ![m2_1]({{site.baseurl}}/assets/img/cassava/m2_1.png)
     
-
-
-
 {% highlight ruby %}
 plot_losses(history)
 {% endhighlight %}
 
-
 ![m2_2]({{site.baseurl}}/assets/img/cassava/m2_2.png)
-    
-
 
 Let us record the hyperparameters and final metrics achieved by the model.
-
 
 {% highlight ruby %}
 jovian.reset()
@@ -1141,7 +1058,6 @@ jovian.log_hyperparams(arch='convolutional neural network',
     [jovian] Hyperparams logged.[0m
  ```   
 
-
 {% highlight ruby %}
 jovian.log_metrics(val_loss=history[-1]['val_loss'], 
                    val_acc=history[-1]['val_acc'],
@@ -1151,7 +1067,6 @@ jovian.log_metrics(val_loss=history[-1]['val_loss'],
 ```output
     [jovian] Metrics logged.[0m
  ```   
-
 
 {% highlight ruby %}
 torch.save(model.state_dict(), 'cnn.pth')
@@ -1165,13 +1080,10 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cnn.pth'])
 ```output
     <IPython.core.display.Javascript object>
 
-
     [jovian] Attempting to save notebook..[0m
     [jovian] Detected Kaggle notebook...[0m
     [jovian] Uploading notebook to https://jovian.ai/aswiniabraham/cassava_project[0m
     
-
-
     <IPython.core.display.Javascript object>
 ```
 
@@ -1248,13 +1160,9 @@ history = [evaluate(model, valid_dl)]
 history
 {% endhighlight %}
 
-
-
 ```output
     [{'val_loss': 1.6652694940567017, 'val_acc': 0.24976633489131927}]
 ```
-
-
 
 {% highlight ruby %}
 epochs = 8
@@ -1263,7 +1171,6 @@ grad_clip = 0.1
 weight_decay = 1e-4
 opt_func = torch.optim.Adam
 {% endhighlight %}
-
 
 {% highlight ruby %}
 %%time
@@ -1275,91 +1182,43 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
 
 ```output
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [0], last_lr: 0.00396, train_loss: 1.2018, val_loss: 1.7423, val_acc: 0.6206
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [1], last_lr: 0.00936, train_loss: 1.1898, val_loss: 1.2172, val_acc: 0.5972
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [2], last_lr: 0.00972, train_loss: 1.1844, val_loss: 1.1469, val_acc: 0.6196
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [3], last_lr: 0.00812, train_loss: 1.1836, val_loss: 1.1837, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [4], last_lr: 0.00556, train_loss: 1.1753, val_loss: 1.0930, val_acc: 0.6248
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [5], last_lr: 0.00283, train_loss: 1.1428, val_loss: 1.0670, val_acc: 0.6224
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [6], last_lr: 0.00077, train_loss: 1.1171, val_loss: 1.0275, val_acc: 0.6290
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [7], last_lr: 0.00000, train_loss: 1.0956, val_loss: 0.9982, val_acc: 0.6352
     CPU times: user 16min 30s, sys: 30.2 s, total: 17min
     Wall time: 38min 46s
 ```    
 
-
 {% highlight ruby %}
 train_time='38:46'
 {% endhighlight %}
 
-
 {% highlight ruby %}
 plot_accuracies(history)
 {% endhighlight %}
-
-
     
 ![m3_1]({{site.baseurl}}/assets/img/cassava/m3_1.png)
     
 
-
-
 {% highlight ruby %}
 plot_losses(history)
 {% endhighlight %}
-
-
-    
+  
 ![m3_2]({{site.baseurl}}/assets/img/cassava/m3_2.png)
     
-
-
 Let us record the hyperparameters and final metrics achieved by the model.
-
 
 {% highlight ruby %}
 jovian.reset()
@@ -1372,8 +1231,9 @@ jovian.log_hyperparams(arch='Resnet34 network',
                        opt=opt_func.__name__)
 {% endhighlight %}
 
+```output
     [jovian] Hyperparams logged.[0m
-    
+ ```   
 
 
 {% highlight ruby %}
@@ -1382,9 +1242,9 @@ jovian.log_metrics(val_loss=history[-1]['val_loss'],
                    train_loss=history[-1]['train_loss'],
                    time=train_time)
 {% endhighlight %}
-
+```output
     [jovian] Metrics logged.[0m
-    
+```    
 
 
 {% highlight ruby %}
@@ -1399,12 +1259,9 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-res
 ```output
     <IPython.core.display.Javascript object>
 
-
     [jovian] Attempting to save notebook..[0m
     [jovian] Detected Kaggle notebook...[0m
     [jovian] Uploading notebook to https://jovian.ai/aswiniabraham/cassava_project[0m
-    
-
 
     <IPython.core.display.Javascript object>
 ```
@@ -1433,11 +1290,9 @@ train_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/train', tra
 valid_ds = ImageFolder('./cassava-leaf-disease-image-folders-600x800/test', valid_tfms)
 {% endhighlight %}
 
-
 {% highlight ruby %}
 batch_size=10
 {% endhighlight %}
-
 
 {% highlight ruby %}
 # PyTorch data loaders
@@ -1445,17 +1300,14 @@ train_dl = DataLoader(train_ds, batch_size, shuffle=True, num_workers=3, pin_mem
 valid_dl = DataLoader(valid_ds, batch_size*2, num_workers=3, pin_memory=True)
 {% endhighlight %}
 
-
 {% highlight ruby %}
 train_dl = DeviceDataLoader(train_dl, device)
 valid_dl = DeviceDataLoader(valid_dl, device)
 {% endhighlight %}
 
-
 {% highlight ruby %}
 ! pip install efficientnet-pytorch
 {% endhighlight %}
-
 
 {% highlight ruby %}
 from efficientnet_pytorch import EfficientNet
@@ -1606,8 +1458,6 @@ model = ResnextModel(len(train_ds.classes), pretrained= True)
 {% highlight ruby %}
 to_device(model, device)
 {% endhighlight %}
-
-
 
 ```output
     ResnextModel(
@@ -1790,25 +1640,18 @@ to_device(model, device)
     )
 ```
 
-
-
 {% highlight ruby %}
 history= []
 {% endhighlight %}
-
 
 {% highlight ruby %}
 history = [evaluate(model, valid_dl)]
 history
 {% endhighlight %}
 
-
-
 ```output
     [{'val_loss': 1.709054946899414, 'val_acc': 0.11039718985557556}]
 ```
-
-
 
 {% highlight ruby %}
 %%time
@@ -1820,91 +1663,42 @@ history += fit_one_cycle(epochs, max_lr, model, train_dl, valid_dl,
 
 ```output
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [0], last_lr: 0.00396, train_loss: 1.1113, val_loss: 1.0380, val_acc: 0.6275
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [1], last_lr: 0.00936, train_loss: 1.1528, val_loss: 1.6740, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [2], last_lr: 0.00972, train_loss: 1.1777, val_loss: 1.2194, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [3], last_lr: 0.00812, train_loss: 1.2058, val_loss: 1.1862, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [4], last_lr: 0.00556, train_loss: 1.2107, val_loss: 1.1467, val_acc: 0.6145
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [5], last_lr: 0.00283, train_loss: 1.1942, val_loss: 1.1059, val_acc: 0.6221
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [6], last_lr: 0.00077, train_loss: 1.1408, val_loss: 1.0327, val_acc: 0.6341
-    
-
-
       0%|          | 0/1927 [00:00<?, ?it/s]
-
-
     Epoch [7], last_lr: 0.00000, train_loss: 1.1161, val_loss: 1.0162, val_acc: 0.6398
     CPU times: user 31min 28s, sys: 33.8 s, total: 32min 2s
     Wall time: 45min 17s
  ```   
 
-
 {% highlight ruby %}
 train_time='45:17'
 {% endhighlight %}
 
-
 {% highlight ruby %}
 plot_accuracies(history)
 {% endhighlight %}
-
-
-    
+  
 ![m5_1]({{site.baseurl}}/assets/img/cassava/m5_1.png)
     
-
-
-
 {% highlight ruby %}
 plot_losses(history)
 {% endhighlight %}
 
-
-    
 ![m5_2]({{site.baseurl}}/assets/img/cassava/m5_2.png)
     
-
-
 Let us record the hyperparameters and final metrics achieved by the model.
-
 
 {% highlight ruby %}
 jovian.reset()
@@ -1920,7 +1714,6 @@ jovian.log_hyperparams(arch='resnext50_32x4d',
     [jovian] Hyperparams logged.[0m
 ```    
 
-
 {% highlight ruby %}
 jovian.log_metrics(val_loss=history[-1]['val_loss'], 
                    val_acc=history[-1]['val_acc'],
@@ -1931,24 +1724,16 @@ jovian.log_metrics(val_loss=history[-1]['val_loss'],
     [jovian] Metrics logged.[0m
 ```    
 
-
 {% highlight ruby %}
 torch.save(model.state_dict(), 'cassava-resnext50.pth')
 {% endhighlight %}
-
 
 {% highlight ruby %}
 from IPython.display import FileLink
 FileLink(r'cassava-resnext50.pth')
 {% endhighlight %}
 
-
-
-
 <a href='cassava-resnext50.pth' target='_blank'>cassava-resnext50.pth</a><br>
-
-
-
 
 {% highlight ruby %}
 jovian.commit(project='cassava_project', environment=None, outputs=['cassava-resnext50.pth'])
@@ -1957,13 +1742,10 @@ jovian.commit(project='cassava_project', environment=None, outputs=['cassava-res
 ```output
     <IPython.core.display.Javascript object>
 
-
     [jovian] Attempting to save notebook..[0m
     [jovian] Detected Kaggle notebook...[0m
     [jovian] Uploading notebook to https://jovian.ai/aswiniabraham/cassava_project[0m
     
-
-
     <IPython.core.display.Javascript object>
 ```
 
