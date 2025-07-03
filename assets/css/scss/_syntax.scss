@@ -66,7 +66,7 @@
 .css .o + .nt,
 .css .nt + .nt { color: #999; }
 
-pre code {
+.custom-code-block {
   background-color: #f7f7f7;
   color: #333;
   font-family: 'Consolas', 'Courier New', monospace;
@@ -79,4 +79,5 @@ pre code {
   overflow-x: auto;
   line-height: 1.5;
 }
+
 
