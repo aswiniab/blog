@@ -1951,22 +1951,3 @@ opt_func = torch.optim.Adam
 |Efficientnet-B4|65.25%|0.89396|1:05:57|
 |Resnext50_32x4d|63.98%|1.01616|45:17|
 
-## Save
-
-
-{% highlight ruby %}
-jovian.commit(project='cassava_project', environment=None)
-{% endhighlight %}
-
-```output
-    <IPython.core.display.Javascript object>
-
-
-    [jovian] Attempting to save notebook..[0m
-    [jovian] Detected Kaggle notebook...[0m
-    [jovian] Uploading notebook to https://jovian.ai/aswiniabraham/cassava_project[0m
-    
-
-
-    <IPython.core.display.Javascript object>
-```
