@@ -360,37 +360,34 @@ images_labels.groupby('label').count()
 </div>
 
 
-
-
-```python
+{% highlight ruby %}
 class_folders=os.listdir(train_dir)
 class_folders
-```
+{% endhighlight %}
 
 
-
-
+```output
     ['Cassava Mosaic Disease (CMD)',
      'Healthy',
      'Cassava Green Mottle (CGM)',
      'Cassava Bacterial Blight (CBB)',
      'Cassava Brown Streak Disease (CBSD)']
+```
 
 
 
-
-```python
+{% highlight ruby %}
 index=0
 for index in range(len(class_folders)):
   print(len(os.listdir(train_dir+'/'+class_folders[index])))
-```
-
+{% endhighlight %}
+```output
     13158
     2577
     2386
     1087
     2189
-    
+```    
 
 Now, let us craete a test dataset using 10% of random images from each sub-class of the train dataset.
 
