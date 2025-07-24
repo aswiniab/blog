@@ -47,19 +47,19 @@ In this step, we do data preparation and cleaning, making the data suitable for 
 The datafile is in `.data` format,  delimited with space, and has no headers.
 
 
-```python
+{% highlight ruby %}
 import pandas as pd
 german_df = pd.read_csv('http://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data', 
                         delimiter=' ',header=None)
-```
+{% endhighlight %}
 
 Now, let's have an over-view of the dataset.
 
 
-```python
+{% highlight ruby %}
 german_df.info()
-```
-
+{% endhighlight %}
+```output
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 1000 entries, 0 to 999
     Data columns (total 21 columns):
@@ -88,7 +88,7 @@ german_df.info()
      20  20      1000 non-null   int64 
     dtypes: int64(8), object(13)
     memory usage: 164.2+ KB
-
+```
 
 The dataset contains 21 variables and 1000 observatios. 8 variables are of numeric type and 13 of object type. As the object type variables do not have any null values, we can conclude that they are of categorical type. 
 
@@ -97,13 +97,14 @@ The dataset contains 21 variables and 1000 observatios. 8 variables are of numer
 Next, let's label the variables for ease of use. The [document]((http://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.doc)) describing the dataset may be referred for this.
 
 
-```python
+{% highlight ruby %}
 urlretrieve('http://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.doc', 'german.doc')
 f = open('german.doc')
 german_doc= f.read()
 print(german_doc)
-```
+{% endhighlight %}
 
+```output
     Description of the German credit dataset.
     
     1. Title: German Credit data
@@ -259,7 +260,6 @@ print(german_doc)
     	      A202 : no
     
     
-    
     8.  Cost Matrix
     
     This dataset requires use of a cost matrix (see below)
@@ -278,33 +278,33 @@ print(german_doc)
     
     It is worse to class a customer as good when they are bad (5), 
     than it is to class a customer as bad when they are good (1).
-    
+  ```  
     
 
 
 Based on the description, we name the columns.
 
 
-```python
+{% highlight ruby %}
 german_df.columns=['account_bal','duration','payment_status','purpose',
                    'credit_amount','savings_bond_value','employed_since',
                    'intallment_rate','sex_marital','guarantor','residence_since',
                    'most_valuable_asset','age','concurrent_credits','type_of_housing',
                    'number_of_existcr','job','number_of_dependents','telephon',
                    'foreign','target']
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 german_df= german_df.replace(['A11','A12','A13','A14', 'A171','A172','A173','A174','A121','A122','A123','A124'],
                   ['neg_bal','positive_bal','positive_bal','no_acc','unskilled','unskilled','skilled','highly_skilled',
                    'none','car','life_insurance','real_estate'])
-```
+{% endhighlight %}
 
 ## 3. Exploratory Data Analysis and Visualization
 
 
-```python
+{% highlight ruby %}
 # import libraries for visualizations
 
 import numpy as np
@@ -317,35 +317,31 @@ sns.set_style('darkgrid')
 matplotlib.rcParams['font.size'] = 14
 matplotlib.rcParams['figure.figsize'] = (9, 5)
 matplotlib.rcParams['figure.facecolor'] = '#00000000'
-```
+{% endhighlight %}
 
 **3.1 Examine missing values**
 
 
-```python
+{% highlight ruby %}
 # check for missing values
 german_df.isna().any().any()
-```
+{% endhighlight %}
 
-
-
-
+```output
     False
-
+```
 
 
 **3.1 Examine distribution of target column**
 
 
-```python
+{% highlight ruby %}
 german_df.target.unique()
-```
+{% endhighlight %}
 
-
-
-
+```output
     array([1, 2])
-
+```
 
 
 The `target` column has two values:
@@ -355,36 +351,36 @@ The `target` column has two values:
 The usual convention is to use '1' for bad loans and '0' for good loans. Let's replace the values to comply to the convention. 
 
 
-```python
+{% highlight ruby %}
 from sklearn.preprocessing import LabelEncoder
 
 le= LabelEncoder()
 le.fit(german_df.target)
 german_df.target=le.transform(german_df.target)
 german_df.target.head(5)
-```
+{% endhighlight %}
 
 
 
-
+```output
     0    0
     1    1
     2    0
     3    0
     4    1
     Name: target, dtype: int64
-
+```
 
 
 An understanding of the percentage of good and bad loans would be useful for the further analysis. A pie chart would be best tool to help with this.
 
 
-```python
+{% highlight ruby %}
 good_bad_per=round(((german_df.target.value_counts()/german_df.target.count())*100))
 good_bad_per
 plt.pie(good_bad_per,labels=['Good loans', 'Bad loans'], autopct='%1.0f%%', startangle=90)
 plt.title('Percentage of good and bad loans');
-```
+{% endhighlight %}
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_24_0.png)
@@ -405,13 +401,12 @@ The pie chart shows that 30% of the loan applicants defaulted. From this informa
 * The box plots show that most of the credits amounts are between 1000 to 4500 dollars. The credit amount is positively skewed. Most of the loan duration is from 15 to 30 months. Majority of the loan applicants have age between 28 - 43.
 
 
-```python
+{% highlight ruby %}
 german_df[['credit_amount','duration','age']].describe()
-```
+{% endhighlight %}
 
 
-
-
+```output
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -487,22 +482,22 @@ german_df[['credit_amount','duration','age']].describe()
   </tbody>
 </table>
 </div>
+```
 
 
 
-
-```python
+{% highlight ruby %}
 german_df['credit_amount']=np.log(german_df['credit_amount'])
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 german_df[['credit_amount','duration','age']].describe()
-```
+{% endhighlight %}
 
 
 
-
+```output
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -578,11 +573,11 @@ german_df[['credit_amount','duration','age']].describe()
   </tbody>
 </table>
 </div>
+```
 
 
 
-
-```python
+{% highlight ruby %}
 # histograms of continues variables
 
 fig, axes = plt.subplots(1,3, figsize=(16,8))
@@ -601,14 +596,14 @@ axes[2].hist(german_df['age'])
 axes[2].set_xlabel('No. of observations')
 axes[2].set_ylabel('Age')
 axes[2].set_title('Histogram of Age');
-```
+{% endhighlight %}
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_30_0.png)
 
 
 
-```python
+{% highlight ruby %}
 # box-plots of continues variables
 
 fig, ax = plt.subplots(1,3,figsize=(20,5))
@@ -616,15 +611,16 @@ plt.suptitle('BOX PLOTS')
 sns.boxplot(german_df['credit_amount'], ax=ax[0]);
 sns.boxplot(german_df['duration'], ax=ax[1], color='salmon');
 sns.boxplot(german_df['age'], ax=ax[2], color='darkviolet');
+{% endhighlight %}
+
+```output
+    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+      FutureWarning
+    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+      FutureWarning
+    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+      FutureWarning
 ```
-
-    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      FutureWarning
-    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      FutureWarning
-    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      FutureWarning
-
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_31_1.png)
@@ -639,13 +635,13 @@ sns.boxplot(german_df['age'], ax=ax[2], color='darkviolet');
 The scatter plot shows that in general, larger loans have longer duration of repayment. Cases where large loans are given with short repayment period have turned out to be bad loans. 
 
 
-```python
+{% highlight ruby %}
 sns.scatterplot(y=german_df.credit_amount, 
                 x=german_df.duration, 
                 hue=german_df.target, 
                 s=100, 
                 );
-```
+{% endhighlight %}
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_33_0.png)
@@ -662,15 +658,15 @@ sns.scatterplot(y=german_df.credit_amount,
 The graph shows that candidates who are umeployed/unskilled pose a high risk
 
 
-```python
+{% highlight ruby %}
 german_df.groupby('job')['target'].value_counts().unstack(level=1).plot.barh(stacked=True, figsize=(10, 6))
-```
+{% endhighlight %}
 
 
 
-
+```output
     <matplotlib.axes._subplots.AxesSubplot at 0x7effccf2f210>
-
+```
 
 
 
@@ -686,9 +682,9 @@ german_df.groupby('job')['target'].value_counts().unstack(level=1).plot.barh(sta
 There is a linear relationship between the credit amount and duration. The larger the credit amount, the longer is the repayment duration.
 
 
-```python
+{% highlight ruby %}
 sns.lineplot(data=german_df, x='duration', y='credit_amount', hue='target', palette='deep');
-```
+{% endhighlight %}
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_37_0.png)
@@ -711,15 +707,15 @@ The categorical coding used in the graphs is :
 The graphs show that people with real estate assets are very risky.
 
 
-```python
+{% highlight ruby %}
 german_df.groupby('most_valuable_asset')['target'].value_counts().unstack(level=1).plot.barh(stacked=True, figsize=(10, 6))
-```
+{% endhighlight %}
 
 
 
-
+```output
     <matplotlib.axes._subplots.AxesSubplot at 0x7effcce61d90>
-
+```
 
 
 
@@ -727,13 +723,13 @@ german_df.groupby('most_valuable_asset')['target'].value_counts().unstack(level=
 
 
 
-```python
+{% highlight ruby %}
 sns.scatterplot(y=german_df.credit_amount, 
                 x=german_df.most_valuable_asset, 
                 hue=german_df.target, 
                 s=100, 
                 );
-```
+{% endhighlight %}
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_40_0.png)
@@ -744,14 +740,12 @@ sns.scatterplot(y=german_df.credit_amount,
 Most machine learning models cannot deal with categorical variables. So we need to encode the 13 categorical variables that we have in the german dataset. 
 
 
-```python
+{% highlight ruby %}
 # Number of unique classes in each object column
 german_df.select_dtypes('object').apply(pd.Series.nunique, axis = 0)
-```
+{% endhighlight %}
 
-
-
-
+```output
     account_bal             3
     payment_status          5
     purpose                10
@@ -766,7 +760,7 @@ german_df.select_dtypes('object').apply(pd.Series.nunique, axis = 0)
     telephon                2
     foreign                 2
     dtype: int64
-
+```
 
 
 We have categorical variables with 2 to 10 categories. We go for Label encoding for variables with only two categories where as for variables with more than two categories, we go for one-hot encoding. In label encoding, we assign each unique category in a categorical variable with an integer. No new columns are created. In one-hot encoding, we create a new column for each unique category in a categorical variable. The only downside to one-hot encoding is that the number of features (dimensions of the data) can explode with categorical variables with many categories. To deal with this, we can perform one-hot encoding followed by PCA or other dimensionality reduction methods to reduce the number of dimensions (while still trying to preserve information).
@@ -774,7 +768,7 @@ We have categorical variables with 2 to 10 categories. We go for Label encoding 
 For label encoding, we use the Scikit-Learn LabelEncoder and for one-hot encoding, the pandas get_dummies(df) function.
 
 
-```python
+{% highlight ruby %}
 # sklearn preprocessing for dealing with categorical variables
 from sklearn.preprocessing import LabelEncoder
 
@@ -796,21 +790,23 @@ for col in german_df:
             le_count += 1
             
 print('%d columns were label encoded.' % le_count)
+{% endhighlight %}
+
+```output
+    2 columns were label encoded.
 ```
 
-    2 columns were label encoded.
 
-
-
-```python
+{% highlight ruby %}
 # one-hot encoding of categorical variables
 german_df = pd.get_dummies(german_df)
 
 print('Encoded Features shape: ', german_df.shape)
-```
+{% endhighlight %}
 
+```output
     Encoded Features shape:  (1000, 58)
-
+```
 
 Now that we have encoded the variables, let's continue with the EDA. 
 
@@ -830,15 +826,15 @@ Negative correlation:
 * People with no checking account (`account_bal_A14`) are likely to repay the loan.
 
 
-```python
+{% highlight ruby %}
 # Find correlations with the target and sort
 correlations = german_df.corr()['target'].sort_values()
 
 # Display correlations
 print('Most Positive Correlations:\n', correlations.tail(15))
 print('\nMost Negative Correlations:\n', correlations.head(15))
-```
-
+{% endhighlight %}
+```output
     Most Positive Correlations:
      sex_marital_A92                    0.075493
     type_of_housing_A153               0.081556
@@ -874,12 +870,12 @@ print('\nMost Negative Correlations:\n', correlations.head(15))
     savings_bond_value_A63     -0.070954
     employed_since_A75         -0.059733
     Name: target, dtype: float64
-
+```
 
 Let's look at the heatmap of significant correlations.
 
 
-```python
+{% highlight ruby %}
 # Extract the significantly correlated variables
 corr_data = german_df[['target', 'account_bal_neg_bal','duration','account_bal_no_acc']]
 corr_data_corrs = corr_data.corr()
@@ -888,7 +884,7 @@ corr_data_corrs = corr_data.corr()
 # Heatmap of correlations
 sns.heatmap(corr_data_corrs, cmap = plt.cm.RdYlBu_r, vmin = -0.25, annot = True, vmax = 0.6)
 plt.title('Correlation Heatmap');
-```
+{% endhighlight %}
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_49_0.png)
@@ -905,7 +901,7 @@ For this problem, we will try to construct polynomial features.
 Here, we find interactions between the significant features. The correlation between the interaction features are target are checked.If the interaction features are found to have greater correlation with the target compared to the original features, they are included in the machine learning model as they can help the model learn better. 
 
 
-```python
+{% endhighlight %}
 # Make a new dataframe for polynomial features
 poly_features = german_df[['duration','account_bal_neg_bal','account_bal_no_acc']]
 poly_target=german_df['target']
@@ -920,21 +916,22 @@ poly_transformer.fit(poly_features)
 # Transform the features
 poly_features = poly_transformer.transform(poly_features)
 print('Polynomial Features shape: ', poly_features.shape)
-```
+{% endhighlight %}
 
+```output
     Polynomial Features shape:  (1000, 10)
-
+```
 
 This creates a considerable number of new features. To get the names we have to use the polynomial features `get_feature_names` method.
 
 
-```python
+{% highlight ruby %}
 poly_transformer.get_feature_names(input_features = ['duration','account_bal_neg_bal','account_bal_no_acc'])
-```
+{% endhighlight %}
 
 
 
-
+```output
     ['1',
      'duration',
      'account_bal_neg_bal',
@@ -945,13 +942,13 @@ poly_transformer.get_feature_names(input_features = ['duration','account_bal_neg
      'account_bal_neg_bal^2',
      'account_bal_neg_bal account_bal_no_acc',
      'account_bal_no_acc^2']
-
+```
 
 
 Now, we can see whether any of these new features are correlated with the target.
 
 
-```python
+{% highlight ruby %}
 # Create a dataframe for polynomial features 
 poly_features = pd.DataFrame(
     poly_features, columns = poly_transformer.get_feature_names(
@@ -965,11 +962,9 @@ poly_corrs = poly_features.corr()['target'].sort_values()
 
 # Display the correlations
 poly_corrs
-```
+{% endhighlight %}
 
-
-
-
+```output
     account_bal_no_acc                       -0.322436
     account_bal_no_acc^2                     -0.322436
     duration account_bal_no_acc              -0.232697
@@ -982,20 +977,18 @@ poly_corrs
     1                                              NaN
     account_bal_neg_bal account_bal_no_acc         NaN
     Name: target, dtype: float64
-
+```
 
 
 All the new variables have a greater (in terms of absolute magnitude) correlation with the target than the original features. 
 We will add these features to a copy of the german dataset and then evaluate models with and without the features. 
 
 
-```python
+{% highlight ruby %}
 list(poly_features)
-```
+{% endhighlight %}
 
-
-
-
+```output
     ['1',
      'duration',
      'account_bal_neg_bal',
@@ -1007,11 +1000,11 @@ list(poly_features)
      'account_bal_neg_bal account_bal_no_acc',
      'account_bal_no_acc^2',
      'target']
+```
 
 
 
-
-```python
+{% highlight ruby %}
 # deleting duplicate columns in poly_features
 
 for i in list(poly_features.columns):
@@ -1021,22 +1014,22 @@ for i in list(poly_features.columns):
 
 poly_features.drop(labels='1', axis=1, inplace=True)
 list(poly_features)
-```
+{% endhighlight %}
 
 
 
-
+```output
     ['duration^2',
      'duration account_bal_neg_bal',
      'duration account_bal_no_acc',
      'account_bal_neg_bal^2',
      'account_bal_neg_bal account_bal_no_acc',
      'account_bal_no_acc^2']
+```
 
 
 
-
-```python
+{% endhighlight %}
 # Print shape of original german_df
 print('Original features shape: ', german_df.shape)
 
@@ -1045,32 +1038,32 @@ german_df_poly = german_df.merge(poly_features, left_index=True, right_index=Tru
 
 # Print out the new shapes
 print('Merged polynomial features shape: ', german_df_poly.shape)
-```
-
+{% endhighlight %}
+```output
     Original features shape:  (1000, 58)
     Merged polynomial features shape:  (1000, 64)
+```
 
 
-
-```python
+{% endhighlight %}
 german_df_poly.isna().any().any()
-```
+{% endhighlight %}
 
 
 
-
+```output
     False
-
-
-
-
-```python
-list(german_df_poly)
 ```
 
 
 
+{% endhighlight %}
+list(german_df_poly)
+{% endhighlight %}
 
+
+
+```output
     ['duration',
      'credit_amount',
      'intallment_rate',
@@ -1135,7 +1128,7 @@ list(german_df_poly)
      'account_bal_neg_bal^2',
      'account_bal_neg_bal account_bal_no_acc',
      'account_bal_no_acc^2']
-
+```
 
 
 ## 6. Data split to train and test datasets
@@ -1143,47 +1136,43 @@ list(german_df_poly)
 As the german dataset is an imabalnced dataset with more number repayers compared to defaulters, we used stratified random `test_train_split` to split the dataset into random test and train datasets so that relative class frequencies are preserved.  
 
 
-```python
+{% highlight ruby %}
 from sklearn.model_selection import train_test_split
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 x, y = german_df.drop('target', axis=1), german_df['target']
 x.shape, y.shape
-```
+{% endhighlight %}
 
-
-
-
+```output
     ((1000, 57), (1000,))
+```
 
-
-
-
-```python
+{% highlight ruby %}
 x_train, x_test, y_train, y_test= train_test_split(x,y, test_size=.2, random_state=42, stratify=y)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 x_train.shape, x_test.shape
-```
+{% endhighlight %}
 
 
 
-
+```output
     ((800, 57), (200, 57))
-
-
-
-
-```python
-x_train
 ```
 
 
 
+{% highlight ruby %}
+x_train
+{% endhighlight %}
+
+
+```output
 
 <div>
 <style scoped>
@@ -1927,17 +1916,17 @@ x_train
 </table>
 <p>800 rows × 57 columns</p>
 </div>
-
-
-
-
-```python
-y_train
 ```
 
 
 
+{% highlight ruby %}
+y_train
+{% endhighlight %}
 
+
+
+```output
     828    1
     997    0
     148    0
@@ -1950,20 +1939,20 @@ y_train
     417    0
     749    0
     Name: target, Length: 800, dtype: int64
+```
 
 
 
-
-```python
+{% highlight ruby %}
 # train and test split on german_df_poly
 X, Y = german_df_poly.drop('target', axis=1), german_df_poly['target']
 print(X.shape, Y.shape)
 
 X_train, X_test, Y_train, Y_test= train_test_split(X,Y, test_size=.2, random_state=42, stratify=Y)
-```
-
+{% endhighlight %}
+```output
     (1000, 63) (1000,)
-
+```
 
 ## 7. Models
 
@@ -1996,17 +1985,17 @@ We will use Recall and AUC ROC as evaluation metric.
 **Baseline**
 
 
-```python
+{% highlight ruby %}
 y.value_counts(normalize=True)
-```
+{% endhighlight %}
 
 
 
-
+```output
     0    0.7
     1    0.3
     Name: target, dtype: float64
-
+```
 
 
 It means that the baseline accuracy is 70%, ie, even if we classify all the samples as defaulters, we will be 70% accurate. 
@@ -2014,7 +2003,7 @@ It means that the baseline accuracy is 70%, ie, even if we classify all the samp
 **Models without tuning**
 
 
-```python
+{% highlight ruby %}
 # import packages, functions, and classes
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -2028,10 +2017,10 @@ from xgboost import XGBClassifier
 
 from sklearn.metrics import roc_auc_score, recall_score, classification_report
 from sklearn.model_selection import StratifiedKFold, cross_val_score, cross_validate
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 # prepare models
 models = []
 models.append(('DT', DecisionTreeClassifier(random_state=42)))
@@ -2076,16 +2065,16 @@ ax = fig.add_subplot(111)
 plt.boxplot(results_roc_auc, showmeans=True)
 ax.set_xticklabels(names)
 plt.show();
-```
+{% endhighlight %}
 
 Gaussian NB model has the highest `roc_auc` score. However, Logistic regression, Randon forests and XGBoost has better AUC score than Gaussian NB. Now let us tune hyperparameters for each of these models.
 
 
-```python
+{% highlight ruby %}
 from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, recall_score
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.model_selection import GridSearchCV
-```
+{% endhighlight %}
 
 ### 7.2 Logistic regression
 
@@ -2097,7 +2086,7 @@ from sklearn.model_selection import GridSearchCV
 First let us choose between german_df and german_df_poly. Use C=0.0001 which is randomly chosen.
 
 
-```python
+{% highlight ruby %}
 # Logistic model on data=german_df
 log_reg = LogisticRegression(C = 0.0001, random_state=42)
 log_reg.fit(x_train, y_train)
@@ -2122,7 +2111,9 @@ print('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_
 tuned_models_train.append(('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_train,2)))
 print(classification_report(y_test, log_reg.predict(x_test)))
 '''
-```
+{% endhighlight %}
+
+```output
 
     Dataset: german_df
      Recall score on train set: 0.01
@@ -2130,17 +2121,14 @@ print(classification_report(y_test, log_reg.predict(x_test)))
      Recall score on train set: 0.18
 
 
-
-
-
     "\n# Evaluate on test dataset\nrecall_test= recall_score(y_test,log_reg.predict(x_test))\nroc_test=roc_auc_score(y_test,log_reg.predict_proba(x_test)[:, 1])\nprint('LR',' recall_test:', round(recall_test,2),' auc_roc_test:', round(roc_test,2))\ntuned_models_test.append(('LR',' recall_test:', round(recall_test,2),' auc_roc_test:', round(roc_test,2)))\n\n# Evaluate on train dataset\nroc_train= cross_val_score(log_reg, x_train, y_train, cv=skf, scoring='roc_auc').mean()\nrecall_train= cross_val_score(log_reg, x_train, y_train, cv=skf, scoring='recall').mean()\nprint('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_train,2))\ntuned_models_train.append(('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_train,2)))\nprint(classification_report(y_test, log_reg.predict(x_test)))\n"
-
+```
 
 
 We see considerable improvement in recall scaore with german_df_poly dataset. Hence, we proceed with german_df_poly for tuning regularization parameter C.
 
 
-```python
+{% highlight ruby %}
 C=[1,0.1,0.01,0.001,0.0001]
 
 # Create lists to save the values of recall score on training and test sets
@@ -2161,37 +2149,35 @@ plt.legend()
 plt.xlabel('C')
 plt.ylabel('Recall score')
 plt.title('Logistic regression: recall score vs C');
-```
+{% endhighlight %}
 
 
 ![png](german-credit-risk-blog_files/german-credit-risk-blog_83_0.png)
 
 
 
-```python
+{% highlight ruby %}
 test_recall
-```
+{% endhighlight %}
 
-
-
-
+```output
     [0.4166666666666667,
      0.38333333333333336,
      0.4166666666666667,
      0.31666666666666665,
      0.26666666666666666]
-
+```
 
 
 We get the maximum recall scoee on test set with overfitting at C=0.01
 
 
-```python
+{% highlight ruby %}
 # Final logistc model
 log_reg_poly = LogisticRegression(C = 0.01, random_state=42, solver='lbfgs', max_iter=5000).fit(X_train, Y_train)
 print('Recall score on test dataset: {:.2f}'.format(recall_score(Y_test, log_reg_poly.predict(X_test))))
 print('\nAUC ROC score on test dataset: {:.2f}'.format(roc_auc_score(Y_test,log_reg_poly.predict_proba(X_test)[:, 1])))
-```
+{% endhighlight %}
 
     Recall score on test dataset: 0.42
     
@@ -2208,7 +2194,7 @@ print('\nAUC ROC score on test dataset: {:.2f}'.format(roc_auc_score(Y_test,log_
 Now, let's try to improve this result. Let's start with number of trees.
 
 
-```python
+{% highlight ruby %}
 # Create lists to save the values of accuracy on training and test sets
 train_acc = []
 test_acc = []
@@ -2228,7 +2214,7 @@ plt.xlabel('No. of trees (n_estimators)')
 plt.ylabel('Accuracies (Recall score)')
 plt.title('Random-Forest: accuracy vs n_estimators');
 
-```
+{% endhighlight %}
 
     Best recall score on test dataset is 68.29% with 20 trees
 
@@ -2240,7 +2226,7 @@ plt.title('Random-Forest: accuracy vs n_estimators');
 Best accuracy is achived with 20 tress.
 
 
-```python
+{% highlight ruby %}
 # Initialize the set of parameters for exhaustive search and fit 
 parameters = {'max_features': [7, 10, 16, 18], 
               'min_samples_leaf': [1, 3, 5, 7], 
@@ -2248,7 +2234,7 @@ parameters = {'max_features': [7, 10, 16, 18],
 rf = RandomForestClassifier(n_estimators=20, random_state=42, n_jobs=-1)
 gcv = GridSearchCV(rf, parameters, n_jobs=-1, cv=skf, verbose=1, scoring='recall')
 gcv_fit= gcv.fit(X_train, Y_train)
-```
+{% endhighlight %}
 
     Fitting 10 folds for each of 64 candidates, totalling 640 fits
 
@@ -2261,7 +2247,7 @@ gcv_fit= gcv.fit(X_train, Y_train)
 
 
 
-```python
+{% highlight ruby %}
 # evaluate on train and test datasets
 cross_val= cross_val_score(gcv_fit.best_estimator_, X_train, Y_train, cv=skf,scoring='recall').mean()
 recall_sc=recall_score(Y_test,gcv_fit.best_estimator_.predict(X_test))
@@ -2272,7 +2258,7 @@ print("GCV best score: {:.2f}".format(gcv.best_score_))
 print("Cross val score on train dataset: {:.2f}".format(cross_val))
 print("Recall score on test dataset: {:.2f}".format(recall_sc))
 print("ROC AUC score on test dataset: {:.2f}".format(roc_sc))
-```
+{% endhighlight %}
 
     GCV best parameters:  {'max_depth': 20, 'max_features': 18, 'min_samples_leaf': 3}
     GCV best score: 0.48
@@ -2284,7 +2270,7 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_sc))
 ### 7.4 GaussianNB
 
 
-```python
+{% highlight ruby %}
 # model
 gnb= GaussianNB()
 gnb.fit(X_train, Y_train)
@@ -2292,7 +2278,7 @@ gnb.fit(X_train, Y_train)
 print('Train accuracy: {:.2f}'.format(cross_val_score(gnb, X_train, Y_train, cv=skf, scoring='recall').mean()))
 print('Recall score test dataset: {:.2f}'.format(recall_score(Y_test, gnb.predict(X_test))))
 print('ROC AUC score test dataset: {:.2f}'.format(roc_auc_score(Y_test, gnb.predict_proba(X_test)[:,1])))
-```
+{% endhighlight %}
 
     Train accuracy: 0.67
     Recall score test dataset: 0.67
@@ -2304,7 +2290,7 @@ print('ROC AUC score test dataset: {:.2f}'.format(roc_auc_score(Y_test, gnb.pred
 
 
 
-```python
+{% highlight ruby %}
 # Create lists to save the values of accuracy on training and test sets
 train_acc = []
 test_acc = []
@@ -2324,7 +2310,7 @@ plt.xlabel('No. of trees (n_estimators)')
 plt.ylabel('Accuracies (Recall score)')
 plt.title('XG-Boost: accuracy vs n_estimators');
 
-```
+{% endhighlight %}
 
     Best recall score on test dataset is 66.67% with 10 estimators
 
@@ -2334,7 +2320,7 @@ plt.title('XG-Boost: accuracy vs n_estimators');
 
 
 
-```python
+{% highlight ruby %}
 #model
 model_xg = XGBClassifier(random_state=42)
 model_xg.fit(X_train, Y_train)
@@ -2342,7 +2328,7 @@ model_xg.fit(X_train, Y_train)
 print('Train accuracy:', cross_val_score(model_xg, X_train, Y_train, cv=skf, scoring='recall').mean())
 print('Recall score on test dataset:', recall_score(Y_test, model_xg.predict(X_test)))
 print('ROC AUC score on test dataset:', roc_auc_score(Y_test, model_xg.predict_proba(X_test)[:,1]))
-```
+{% endhighlight %}
 
     Train accuracy: 0.45
     Recall score on test dataset: 0.5
@@ -2350,7 +2336,7 @@ print('ROC AUC score on test dataset:', roc_auc_score(Y_test, model_xg.predict_p
 
 
 
-```python
+{% highlight ruby %}
 # Initialize the set of parameters for exhaustive search and fit 
 parameters = {'max_features': [7, 10, 16, 18], 
               'min_samples_leaf': [1, 3, 5, 7], 
@@ -2358,7 +2344,7 @@ parameters = {'max_features': [7, 10, 16, 18],
 model_xg = XGBClassifier(n_estimators=10, random_state=42, n_jobs=-1)
 gcv = GridSearchCV(model_xg, parameters, n_jobs=-1, cv=skf, verbose=1, scoring='recall')
 gcv_fit= gcv.fit(X_train, Y_train)
-```
+{% endhighlight %}
 
     Fitting 10 folds for each of 64 candidates, totalling 640 fits
 
@@ -2370,9 +2356,9 @@ gcv_fit= gcv.fit(X_train, Y_train)
 
 
 
-```python
+{% highlight ruby %}
 gcv.best_params_, gcv.best_score_
-```
+{% endhighlight %}
 
 
 
@@ -2382,7 +2368,7 @@ gcv.best_params_, gcv.best_score_
 
 
 
-```python
+{% highlight ruby %}
 # evaluate on train and test datasets
 cross_val= cross_val_score(gcv_fit.best_estimator_, X_train, Y_train, cv=skf,scoring='recall').mean()
 recall_sc=recall_score(Y_test,gcv_fit.best_estimator_.predict(X_test))
@@ -2393,7 +2379,7 @@ print("GCV best score: {:.2f}".format(gcv.best_score_))
 print("Cross val score on train dataset: {:.2f}".format(cross_val))
 print("Recall score on test dataset: {:.2f}".format(recall_sc))
 print("ROC AUC score on test dataset: {:.2f}".format(roc_sc))
-```
+{% endhighlight %}
 
     GCV best parameters:  {'max_depth': 15, 'max_features': 7, 'min_samples_leaf': 1}
     GCV best score: 0.46
@@ -2405,7 +2391,7 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_sc))
 ### 7.6 KNN 
 
 
-```python
+{% highlight ruby %}
 from sklearn.neighbors import KNeighborsClassifier
 knn= KNeighborsClassifier(n_neighbors = 1)
 knn.fit(X_train, Y_train)
@@ -2413,7 +2399,7 @@ knn.fit(X_train, Y_train)
 print('Train accuracy:{:.2f}'.format(cross_val_score(knn, X_train, Y_train, cv=skf, scoring='recall').mean()))
 print('Recall score on test dataset:{:.2f}'.format(recall_score(Y_test, knn.predict(X_test))))
 print("ROC AUC score on test dataset: {:.2f}".format(roc_auc_score(Y_test,gcv_fit.best_estimator_.predict_proba(X_test)[:, 1])))
-```
+{% endhighlight %}
 
     Train accuracy:0.49
     Recall score on test dataset:0.35
@@ -2433,14 +2419,10 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_auc_score(Y_test,gcv_fi
 Gaussian NB model gives the highest recall score and AUC ROC. Hence, we choose this model.
 
 
-```python
+{% highlight ruby %}
 import jovian
-```
-
-
-```python
 jovian.commit()
-```
+{% endhighlight %}
 
 ## References and Future Work
 
@@ -2460,14 +2442,14 @@ Try models:
 2. Support Vector Classification
 
 
-```python
+{% highlight ruby %}
 import jovian
-```
+{% endhighlight %}
 
 
-```python
+{% highlight ruby %}
 jovian.commit()
-```
+{% endhighlight %}
 
     [jovian] Detected Colab notebook...[0m
     [jovian] Uploading colab notebook to Jovian...[0m
@@ -2483,7 +2465,7 @@ jovian.commit()
 
 
 
-```python
+{% highlight ruby %}
 
 ```
 
