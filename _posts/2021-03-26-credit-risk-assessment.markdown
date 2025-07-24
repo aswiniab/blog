@@ -380,7 +380,7 @@ The pie chart shows that 30% of the loan applicants defaulted. From this informa
 {% highlight ruby %}
 german_df[['credit_amount','duration','age']].describe()
 {% endhighlight %}
-```output
+
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -479,6 +479,7 @@ german_df[['credit_amount','duration','age']].describe()
     .dataframe thead th {
         text-align: right;
     }
+    
 
 </style>
 <table border="1" class="dataframe">
@@ -542,7 +543,7 @@ german_df[['credit_amount','duration','age']].describe()
   </tbody>
 </table>
 </div>
-```
+
 {% highlight ruby %}
 
 # histograms of continues variables
