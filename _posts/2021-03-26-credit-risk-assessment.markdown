@@ -496,7 +496,6 @@ german_df[['credit_amount','duration','age']].describe()
 {% endhighlight %}
 
 
-
 ```output
 <div>
 <style scoped>
