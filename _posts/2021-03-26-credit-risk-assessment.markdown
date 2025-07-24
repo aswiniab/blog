@@ -292,7 +292,536 @@ german_df= german_df.replace(['A11','A12','A13','A14', 'A171','A172','A173','A17
 {% endhighlight %}
 
 
+## 3. Exploratory Data Analysis and Visualization
 
+{% highlight ruby %}
+
+# import libraries for visualizations
+
+import numpy as np
+import seaborn as sns
+import matplotlib
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+sns.set_style('darkgrid')
+matplotlib.rcParams['font.size'] = 14
+matplotlib.rcParams['figure.figsize'] = (9, 5)
+matplotlib.rcParams['figure.facecolor'] = '#00000000'
+{% endhighlight %}
+
+**3.1 Examine missing values**
+
+{% highlight ruby %}
+
+# check for missing values
+
+german_df.isna().any().any()
+{% endhighlight %}
+```output
+    False
+```
+**3.1 Examine distribution of target column**
+
+{% highlight ruby %}
+german_df.target.unique()
+{% endhighlight %}
+```output
+    array([1, 2])
+```
+The `target` column has two values:
+
+- 1: representing a good loan
+- 2: representing a bad (defaulted) loan.
+
+The usual convention is to use '1' for bad loans and '0' for good loans. Let's replace the values to comply to the convention.
+
+{% endhighlight %}
+from sklearn.preprocessing import LabelEncoder
+
+le= LabelEncoder()
+le.fit(german_df.target)
+german_df.target=le.transform(german_df.target)
+german_df.target.head(5)
+{% endhighlight %}
+```output
+    0    0
+    1    1
+    2    0
+    3    0
+    4    1
+    Name: target, dtype: int64
+```
+An understanding of the percentage of good and bad loans would be useful for the further analysis. A pie chart would be best tool to help with this.
+
+{% highlight ruby %}
+good_bad_per=round(((german_df.target.value_counts()/german_df.target.count())\*100))
+good_bad_per
+plt.pie(good_bad_per,labels=['Good loans', 'Bad loans'], autopct='%1.0f%%', startangle=90)
+plt.title('Percentage of good and bad loans');
+{% endhighlight %}
+
+![png](german-credit-risk-blog_files/german-credit-risk-blog_24_0.png)
+
+The pie chart shows that 30% of the loan applicants defaulted. From this information, we see that this is an imbalanced class problem. Hence, we will have to weigh the classes by their representation in the data to reflect this imbalance.
+
+**4.2 Exploration of continues variables**
+
+- Summary statistics
+- Histograms
+- Box-plots
+
+**Observations**
+
+- A glance of the distribution of the continues variables shows that there is a wide gap in the range of variables. The credit amount variable might have to be transformed to bring all variables to similar range.
+- The histogram suggests that the credit amount is approximatly normally distributed. However, age and duration have a skewed distribution.
+- The box plots show that most of the credits amounts are between 1000 to 4500 dollars. The credit amount is positively skewed. Most of the loan duration is from 15 to 30 months. Majority of the loan applicants have age between 28 - 43.
+
+{% highlight ruby %}
+german_df[['credit_amount','duration','age']].describe()
+{% endhighlight %}
+```output
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>credit_amount</th>
+      <th>duration</th>
+      <th>age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3271.258000</td>
+      <td>20.903000</td>
+      <td>35.546000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2822.736876</td>
+      <td>12.058814</td>
+      <td>11.375469</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>250.000000</td>
+      <td>4.000000</td>
+      <td>19.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1365.500000</td>
+      <td>12.000000</td>
+      <td>27.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2319.500000</td>
+      <td>18.000000</td>
+      <td>33.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3972.250000</td>
+      <td>24.000000</td>
+      <td>42.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>18424.000000</td>
+      <td>72.000000</td>
+      <td>75.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+{% highlight ruby %}
+german_df['credit_amount']=np.log(german_df['credit_amount'])
+{% endhighlight %}
+
+{% highlight ruby %}
+german_df[['credit_amount','duration','age']].describe()
+{% endhighlight %}
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>credit_amount</th>
+      <th>duration</th>
+      <th>age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>7.788691</td>
+      <td>20.903000</td>
+      <td>35.546000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.776474</td>
+      <td>12.058814</td>
+      <td>11.375469</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>5.521461</td>
+      <td>4.000000</td>
+      <td>19.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>7.219276</td>
+      <td>12.000000</td>
+      <td>27.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>7.749107</td>
+      <td>18.000000</td>
+      <td>33.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>8.287088</td>
+      <td>24.000000</td>
+      <td>42.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>9.821409</td>
+      <td>72.000000</td>
+      <td>75.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
+{% highlight ruby %}
+
+# histograms of continues variables
+
+fig, axes = plt.subplots(1,3, figsize=(16,8))
+plt.suptitle('Histogram of continuous variables')
+axes[0].hist(german_df['duration'])
+axes[0].set_xlabel('No. of observations')
+axes[0].set_ylabel('Years')
+axes[0].set_title('Histogram of loan duration');
+
+axes[1].hist(german_df['credit_amount'])
+axes[1].set_xlabel('No. of observations')
+axes[1].set_ylabel('Credit amount (dollars)')
+axes[1].set_title('Histogram of Credit amount');
+
+axes[2].hist(german_df['age'])
+axes[2].set_xlabel('No. of observations')
+axes[2].set_ylabel('Age')
+axes[2].set_title('Histogram of Age');
+{% endhighlight %}
+
+![png](german-credit-risk-blog_files/german-credit-risk-blog_30_0.png)
+
+{% highlight ruby %}
+
+# box-plots of continues variables
+
+fig, ax = plt.subplots(1,3,figsize=(20,5))
+plt.suptitle('BOX PLOTS')
+sns.boxplot(german_df['credit_amount'], ax=ax[0]);
+sns.boxplot(german_df['duration'], ax=ax[1], color='salmon');
+sns.boxplot(german_df['age'], ax=ax[2], color='darkviolet');
+{% endhighlight %}
+```output
+    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+      FutureWarning
+    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+      FutureWarning
+    /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+      FutureWarning
+```
+![png](german-credit-risk-blog_files/german-credit-risk-blog_31_1.png)
+
+**4.2 Relationship between the credit amount and repayment duration**
+
+- scatter plot
+
+**Observations**
+
+The scatter plot shows that in general, larger loans have longer duration of repayment. Cases where large loans are given with short repayment period have turned out to be bad loans.
+
+{% highlight ruby %}
+sns.scatterplot(y=german_df.credit_amount,
+x=german_df.duration,
+hue=german_df.target,
+s=100,
+);
+{% endhighlight %}
+
+![png](german-credit-risk-blog_files/german-credit-risk-blog_33_0.png)
+
+**4.3 Exploration of categorical variables**
+
+**Relationship between credit risk and skills of loan applicant**
+
+- Bar-graph
+
+**Observations**
+
+The graph shows that candidates who are umeployed/unskilled pose a high risk
+
+{% highlight ruby %}
+german_df.groupby('job')['target'].value_counts().unstack(level=1).plot.barh(stacked=True, figsize=(10, 6))
+{% endhighlight %}
+```output
+    <matplotlib.axes._subplots.AxesSubplot at 0x7effccf2f210>
+```
+![png](german-credit-risk-blog_files/german-credit-risk-blog_35_1.png)
+
+**4.4 Relationship between credit amount and duration of the loan**
+
+- Line graph
+
+**Observation**
+
+There is a linear relationship between the credit amount and duration. The larger the credit amount, the longer is the repayment duration.
+
+{% highlight ruby %}
+sns.lineplot(data=german_df, x='duration', y='credit_amount', hue='target', palette='deep');
+{% endhighlight %}
+
+![png](german-credit-risk-blog_files/german-credit-risk-blog_37_0.png)
+
+**4.5 Relationship between the most valuable asset of the candidate and the credit amount, credit risk**
+
+- stacked bar chart
+- scatter plot
+
+The categorical coding used in the graphs is :
+
+- A121 : real estate
+- A122 : if not A121 : building society savings agreement/life insurance
+- A123 : if not A121/A122 : car or other, not in attribute 6
+- A124 : unknown / no property
+
+**Observations**
+
+The graphs show that people with real estate assets are very risky.
+
+{% highlight ruby %}
+german_df.groupby('most_valuable_asset')['target'].value_counts().unstack(level=1).plot.barh(stacked=True, figsize=(10, 6))
+{% endhighlight %}
+```output
+    <matplotlib.axes._subplots.AxesSubplot at 0x7effcce61d90>
+```
+![png](german-credit-risk-blog_files/german-credit-risk-blog_39_1.png)
+
+{% highlight ruby %}
+sns.scatterplot(y=german_df.credit_amount,
+x=german_df.most_valuable_asset,
+hue=german_df.target,
+s=100,
+);
+{% endhighlight %}
+
+![png](german-credit-risk-blog_files/german-credit-risk-blog_40_0.png)
+
+## 4. Encode categorical variables
+
+Most machine learning models cannot deal with categorical variables. So we need to encode the 13 categorical variables that we have in the german dataset.
+
+{% highlight ruby %}
+
+# Number of unique classes in each object column
+
+german_df.select_dtypes('object').apply(pd.Series.nunique, axis = 0)
+{% endhighlight %}
+```output
+    account_bal             3
+    payment_status          5
+    purpose                10
+    savings_bond_value      5
+    employed_since          5
+    sex_marital             4
+    guarantor               3
+    most_valuable_asset     4
+    concurrent_credits      3
+    type_of_housing         3
+    job                     3
+    telephon                2
+    foreign                 2
+    dtype: int64
+```
+We have categorical variables with 2 to 10 categories. We go for Label encoding for variables with only two categories where as for variables with more than two categories, we go for one-hot encoding. In label encoding, we assign each unique category in a categorical variable with an integer. No new columns are created. In one-hot encoding, we create a new column for each unique category in a categorical variable. The only downside to one-hot encoding is that the number of features (dimensions of the data) can explode with categorical variables with many categories. To deal with this, we can perform one-hot encoding followed by PCA or other dimensionality reduction methods to reduce the number of dimensions (while still trying to preserve information).
+
+For label encoding, we use the Scikit-Learn LabelEncoder and for one-hot encoding, the pandas get_dummies(df) function.
+
+{% highlight ruby %}
+
+# sklearn preprocessing for dealing with categorical variables
+
+from sklearn.preprocessing import LabelEncoder
+
+# Create a label encoder object
+
+le = LabelEncoder()
+le_count = 0
+
+# Iterate through the columns
+
+for col in german_df:
+if german_df[col].dtype == 'object': # If 2 or fewer unique categories
+if len(list(german_df[col].unique())) <= 2: # Train on the training data
+le.fit(german_df[col]) # Transform both training and testing data
+german_df[col] = le.transform(german_df[col])
+```output
+            # Keep track of how many columns were label encoded
+            le_count += 1
+```
+
+print('%d columns were label encoded.' % le_count)
+{% endhighlight %}
+```output
+    2 columns were label encoded.
+```
+{% highlight ruby %}
+
+# one-hot encoding of categorical variables
+
+german_df = pd.get_dummies(german_df)
+
+print('Encoded Features shape: ', german_df.shape)
+{% endhighlight %}
+```output
+    Encoded Features shape:  (1000, 58)
+```
+Now that we have encoded the variables, let's continue with the EDA.
+
+**4.1 Correlation between the variables**
+
+Let's look at correlations between the features and the target using Pearson correlation coefficient. In this case, a postive correlation represnets correlation with credit default while a negative correlation represnets correlation with credit repayment.
+
+**Observations:**
+
+Positive correlation:
+
+- People with checking accounts with a negative balance (`account_bal_A11`) are likely to default the loan.
+
+- Longer duration loans (`duration`) tends to be defaulted.
+
+Negative correlation:
+
+- People with no checking account (`account_bal_A14`) are likely to repay the loan.
+
+{% highlight ruby %}
+
+# Find correlations with the target and sort
+
+correlations = german_df.corr()['target'].sort_values()
+
+# Display correlations
+
+print('Most Positive Correlations:\n', correlations.tail(15))
+print('\nMost Negative Correlations:\n', correlations.head(15))
+{% endhighlight %}
+```output
+    Most Positive Correlations:
+     sex_marital_A92                    0.075493
+    type_of_housing_A153               0.081556
+    account_bal_positive_bal           0.089895
+    type_of_housing_A151               0.092785
+    concurrent_credits_A141            0.096510
+    purpose_A40                        0.096900
+    employed_since_A72                 0.106397
+    credit_amount                      0.109570
+    most_valuable_asset_real_estate    0.125750
+    payment_status_A31                 0.134448
+    payment_status_A30                 0.144767
+    savings_bond_value_A61             0.161007
+    duration                           0.214927
+    account_bal_neg_bal                0.258333
+    target                             1.000000
+    Name: target, dtype: float64
+
+    Most Negative Correlations:
+     account_bal_no_acc         -0.322436
+    payment_status_A34         -0.181713
+    type_of_housing_A152       -0.134589
+    savings_bond_value_A65     -0.129238
+    most_valuable_asset_none   -0.119300
+    concurrent_credits_A143    -0.113285
+    purpose_A43                -0.106922
+    purpose_A41                -0.099791
+    age                        -0.091127
+    savings_bond_value_A64     -0.085749
+    foreign                    -0.082079
+    sex_marital_A93            -0.080677
+    employed_since_A74         -0.075980
+    savings_bond_value_A63     -0.070954
+    employed_since_A75         -0.059733
+    Name: target, dtype: float64
+```
+Let's look at the heatmap of significant correlations.
+
+{% highlight ruby %}
+
+# Extract the significantly correlated variables
+
+corr_data = german_df[['target', 'account_bal_neg_bal','duration','account_bal_no_acc']]
+corr_data_corrs = corr_data.corr()
+
+# Heatmap of correlations
+
+sns.heatmap(corr_data_corrs, cmap = plt.cm.RdYlBu_r, vmin = -0.25, annot = True, vmax = 0.6)
+plt.title('Correlation Heatmap');
+{% endhighlight %}
+
+![png](german-credit-risk-blog_files/german-credit-risk-blog_49_0.png)
 
 
 
