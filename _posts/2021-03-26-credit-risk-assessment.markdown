@@ -32,9 +32,9 @@ Let's begin by downloading the data from the [UCI Machine Learning repository](h
 from urllib.request import urlretrieve
 urlretrieve('http://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data', 'german.data')
 {% endhighlight %}
-
+```output
     ('german.data', <http.client.HTTPMessage at 0x7effdfbb5550>)
-
+```
 The dataset has been downloaded and extracted.
 
 ## 2. Data Preparation and Cleaning
@@ -56,7 +56,7 @@ Now, let's have an over-view of the dataset.
 {% highlight ruby %}
 german_df.info()
 {% endhighlight %}
-
+```output
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 1000 entries, 0 to 999
     Data columns (total 21 columns):
@@ -85,7 +85,7 @@ german_df.info()
      20  20      1000 non-null   int64
     dtypes: int64(8), object(13)
     memory usage: 164.2+ KB
-
+```
 The dataset contains 21 variables and 1000 observatios. 8 variables are of numeric type and 13 of object type. As the object type variables do not have any null values, we can conclude that they are of categorical type.
 
 **2.2 Label the columns**
@@ -98,7 +98,7 @@ f = open('german.doc')
 german_doc= f.read()
 print(german_doc)
 {% endhighlight %}
-
+```output
     Description of the German credit dataset.
 
     1. Title: German Credit data
@@ -273,7 +273,7 @@ print(german_doc)
 
     It is worse to class a customer as good when they are bad (5),
     than it is to class a customer as bad when they are good (1).
-
+```
 Based on the description, we name the columns.
 
 {% highlight ruby %}
