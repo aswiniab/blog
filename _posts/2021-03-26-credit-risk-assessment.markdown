@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 
+title: Credit Risk Assessment
 date: 2021-03-26 00:00:00 +0300
 description: Credit Risk Assessment
 img: cred.jpg # Add image post (optional)
