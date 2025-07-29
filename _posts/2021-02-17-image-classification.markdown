@@ -2,7 +2,7 @@
 layout: post
 title: Image Classification- Cassava Leaf Disease
 date: 2021-02-17 00:00:00 +0300
-description: using Deep Neural Networks
+description: Comparison of different neural network models using PyTorch.
 
 img: cassavaCOLLAGE.jpg 
 tags: [Deep Learning, Neural Networks, Machine Learning]
