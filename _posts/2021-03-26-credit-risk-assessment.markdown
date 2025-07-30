@@ -1355,32 +1355,12 @@ log_reg_poly = LogisticRegression(C = 0.0001, random_state=42, solver='lbfgs', m
 log_reg_poly.fit(X_train, Y_train)
 print('Dataset: german_df_poly\n Recall score on train set: {:.2f}'.format(cross_val_score(log_reg_poly, X_train, Y_train, cv=skf, scoring='recall').mean()))
 
-'''
-# Evaluate on test dataset
-recall_test= recall_score(y_test,log_reg.predict(x_test))
-roc_test=roc_auc_score(y_test,log_reg.predict_proba(x_test)[:, 1])
-print('LR',' recall_test:', round(recall_test,2),' auc_roc_test:', round(roc_test,2))
-tuned_models_test.append(('LR',' recall_test:', round(recall_test,2),' auc_roc_test:', round(roc_test,2)))
-
-# Evaluate on train dataset
-roc_train= cross_val_score(log_reg, x_train, y_train, cv=skf, scoring='roc_auc').mean()
-recall_train= cross_val_score(log_reg, x_train, y_train, cv=skf, scoring='recall').mean()
-print('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_train,2))
-tuned_models_train.append(('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_train,2)))
-print(classification_report(y_test, log_reg.predict(x_test)))
-'''
 ```
 
     Dataset: german_df
      Recall score on train set: 0.01
     Dataset: german_df_poly
      Recall score on train set: 0.18
-
-
-
-
-
-    "\n# Evaluate on test dataset\nrecall_test= recall_score(y_test,log_reg.predict(x_test))\nroc_test=roc_auc_score(y_test,log_reg.predict_proba(x_test)[:, 1])\nprint('LR',' recall_test:', round(recall_test,2),' auc_roc_test:', round(roc_test,2))\ntuned_models_test.append(('LR',' recall_test:', round(recall_test,2),' auc_roc_test:', round(roc_test,2)))\n\n# Evaluate on train dataset\nroc_train= cross_val_score(log_reg, x_train, y_train, cv=skf, scoring='roc_auc').mean()\nrecall_train= cross_val_score(log_reg, x_train, y_train, cv=skf, scoring='recall').mean()\nprint('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_train,2))\ntuned_models_train.append(('LR',' recall_train:', round(recall_train,2),' auc_roc_train:', round(roc_train,2)))\nprint(classification_report(y_test, log_reg.predict(x_test)))\n"
 
 
 
@@ -1398,8 +1378,6 @@ for c in C:
   log_reg_poly = LogisticRegression(C = c, random_state=42, solver='lbfgs', max_iter=5000).fit(X_train, Y_train)
   train_recall.append(cross_val_score(log_reg_poly, X_test, Y_test, cv=skf,scoring='recall').mean())
   test_recall.append(recall_score(Y_test, log_reg_poly.predict(X_test)))
-
-#print("Best recall score on test dataset is {:.2f}% with C={} ".format(max(test_recall)*100, C[np.argmax(test_recall)]))
 
 # plot graph of recall score vs. C
 plt.plot(C, train_recall, label='train')
@@ -1481,7 +1459,7 @@ plt.title('Random-Forest: accuracy vs n_estimators');
 
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_90_1.png)
+![credit11]({{site.baseurl}}/assets/img/credit-risk/11.png)
 
 
 Best accuracy is achived with 20 tress.
@@ -1577,7 +1555,7 @@ plt.title('XG-Boost: accuracy vs n_estimators');
 
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_97_1.png)
+![credit12]({{site.baseurl}}/assets/img/credit-risk/12.png)
 
 
 
