@@ -31,8 +31,6 @@ urlretrieve('http://archive.ics.uci.edu/ml/machine-learning-databases/statlog/ge
 ```
 
 
-
-
     ('german.data', <http.client.HTTPMessage at 0x7effdfbb5550>)
 
 
@@ -1657,15 +1655,6 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_auc_score(Y_test,gcv_fi
 
 Gaussian NB model gives the highest recall score and AUC ROC. Hence, we choose this model.
 
-
-```python
-import jovian
-```
-
-
-```python
-jovian.commit()
-```
 
 ## References and Future Work
 
