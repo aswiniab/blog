@@ -388,7 +388,7 @@ plt.title('Percentage of good and bad loans');
 ```
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_24_0.png)
+![credit1]({{site.baseurl}}/assets/img/credit-risk/german-credit-risk-blog_1.png)
 
 
 The pie chart shows that 30% of the loan applicants defaulted. From this information, we see that this is an imbalanced class problem. Hence, we will have to weigh the classes by their representation in the data to reflect this imbalance.
