@@ -2,7 +2,7 @@
 layout: post
 title: Credit Risk Assessment
 date: 2021-03-26 00:00:00 +0300
-description: Credit Risk Assessment
+description: Compare efficiency of different models (Logistic Regression, Random Forest, XG Bosst, KNN, GaussianNB)
 img: cred.jpg # Add image post (optional)
 fig-caption: Photo from Unsplash by CardMapr.nl
 tags: [Credit Risk, Machine Learning] # add tag
