@@ -605,7 +605,7 @@ axes[2].set_title('Histogram of Age');
 ```
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_30_0.png)
+![credit2]({{site.baseurl}}/assets/img/credit-risk/german-credit-risk-blog_2.png)
 
 
 
@@ -628,7 +628,7 @@ sns.boxplot(german_df['age'], ax=ax[2], color='darkviolet');
 
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_31_1.png)
+![credit3]({{site.baseurl}}/assets/img/credit-risk/german-credit-risk-blog_3.png)
 
 
 **4.2 Relationship between the credit amount and repayment duration**
@@ -649,7 +649,7 @@ sns.scatterplot(y=german_df.credit_amount,
 ```
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_33_0.png)
+![credit4]({{site.baseurl}}/assets/img/credit-risk/german-credit-risk-blog_4.png)
 
 
 **4.3 Exploration of categorical variables**
@@ -675,7 +675,7 @@ german_df.groupby('job')['target'].value_counts().unstack(level=1).plot.barh(sta
 
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_35_1.png)
+![credit5]({{site.baseurl}}/assets/img/credit-risk/german-credit-risk-blog_5.png)
 
 
 **4.4 Relationship between credit amount and duration of the loan**
@@ -692,7 +692,7 @@ sns.lineplot(data=german_df, x='duration', y='credit_amount', hue='target', pale
 ```
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_37_0.png)
+![credit6]({{site.baseurl}}/assets/img/credit-risk/german-credit-risk-blog_6.png)
 
 
 **4.5 Relationship between the most valuable asset of the candidate and the credit amount, credit risk**
@@ -724,7 +724,7 @@ german_df.groupby('most_valuable_asset')['target'].value_counts().unstack(level=
 
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_39_1.png)
+![credit7]({{site.baseurl}}/assets/img/credit-risk/german-credit-risk-blog_7.png)
 
 
 
@@ -737,7 +737,7 @@ sns.scatterplot(y=german_df.credit_amount,
 ```
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_40_0.png)
+![credit8]({{site.baseurl}}/assets/img/credit-risk/8.png)
 
 
 ## 4. Encode categorical variables
@@ -892,7 +892,7 @@ plt.title('Correlation Heatmap');
 ```
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_49_0.png)
+![credit9]({{site.baseurl}}/assets/img/credit-risk/9.png)
 
 
 ## 5. Feature engineering
@@ -1411,7 +1411,7 @@ plt.title('Logistic regression: recall score vs C');
 ```
 
 
-![png](german-credit-risk-blog_files/german-credit-risk-blog_83_0.png)
+![credit10]({{site.baseurl}}/assets/img/credit-risk/10.png)
 
 
 
