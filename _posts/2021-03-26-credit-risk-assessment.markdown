@@ -18,7 +18,7 @@ In this project, the relationship between the credit risk and various attribues 
 4. Feature engineering
 5. Models
 6. Summary
-7. References, future work
+7. References
 
 ## 1. Import data
 
