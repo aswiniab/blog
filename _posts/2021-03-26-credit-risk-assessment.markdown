@@ -1666,10 +1666,3 @@ Machine learning can be used on this dataset to develop a model that can predict
 3. https://pandas.pydata.org
 4. MLCourse.ai (https://mlcourse.ai/lectures)
 5. Accuracy, precision, recall, or F1 by Koo Ping Shung (https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9)
-
-**Future work:**
-
-Try models:
-1. Neural network model
-2. Support Vector Classification
-
