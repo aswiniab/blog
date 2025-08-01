@@ -296,8 +296,8 @@ german_df.columns=['account_bal','duration','payment_status','purpose',
 
 ```python
 german_df= german_df.replace(['A11','A12','A13','A14', 'A171','A172','A173','A174','A121','A122','A123','A124'],
-                  ['neg_bal','positive_bal','positive_bal','no_acc','unskilled','unskilled','skilled','highly_skilled',
-                   'none','car','life_insurance','real_estate'])
+['neg_bal','positive_bal','positive_bal','no_acc','unskilled','unskilled','skilled','highly_skilled',
+'none','car','life_insurance','real_estate'])
 ```
 
 ## 3. Exploratory Data Analysis and Visualization
