@@ -9,7 +9,7 @@ tags: [Credit Risk, Machine Learning] # add tag
 ---
 Loans form an integral part of banking operations. However, not all the loans are promptly returned and hence it is important for a bank to closely monitor its loan applications.  This project is an analysis of the German credit dataset from the UCI Machine Learning repository. The dataset contains  details of 1000 loan applicants with 21 attributes along with the classification as good or bad credit. 
 
-In this project, the relationship between the credit risk and various attribues will be explored through basic statistical techniques, and presented through visualizations.
+In this project, the relationship between the credit risk and various attributes will be explored through basic statistical techniques and presented through visualizations.
 
 **Contents**
 1. Import data
@@ -52,7 +52,7 @@ german_df = pd.read_csv('http://archive.ics.uci.edu/ml/machine-learning-database
                         delimiter=' ',header=None)
 ```
 
-Now, let's have an over-view of the dataset.
+Now, let's have an overview of the dataset.
 
 
 ```python
@@ -89,7 +89,7 @@ german_df.info()
     memory usage: 164.2+ KB
 
 
-The dataset contains 21 variables and 1000 observatios. 8 variables are of numeric type and 13 of object type. As the object type variables do not have any null values, we can conclude that they are of categorical type. 
+The dataset contains 21 variables and 1000 observations. 8 variables are of numeric type and 13 of object type. As the object type variables do not have any null values, we can conclude that they are of categorical type. 
 
 **2.2 Label the columns**
 
@@ -127,7 +127,7 @@ print(german_doc)
     and several indicator variables added to make it suitable for 
     algorithms which cannot cope with categorical variables.   Several
     attributes that are ordered categorical (such as attribute 17) have
-    been coded as integer.    This was the form used by StatLog.
+    been coded as an integer.    This was the form used by StatLog.
     
     
     6. Number of Attributes german: 20 (7 numerical, 13 categorical)
@@ -174,7 +174,7 @@ print(german_doc)
     Attribute 5:  (numerical)
     	      Credit amount
     
-    Attibute 6:  (qualitative)
+    Attribute 6:  (qualitative)
     	      Savings account/bonds
     	      A61 :          ... <  100 DM
     	      A62 :   100 <= ... <  500 DM
@@ -375,7 +375,7 @@ german_df.target.head(5)
 
 
 
-An understanding of the percentage of good and bad loans would be useful for the further analysis. A pie chart would be best tool to help with this.
+An understanding of the percentage of good and bad loans would be useful for further analysis. A pie chart would be the best tool to help with this.
 
 
 ```python
@@ -400,7 +400,7 @@ The pie chart shows that 30% of the loan applicants defaulted. From this informa
 **Observations**
 
 * A glance of the distribution of the continues variables shows that there is a wide gap in the range of variables. The credit amount variable might have to be transformed to bring all variables to similar range.
-* The histogram suggests that the credit amount is approximatly normally distributed. However, age and duration have a skewed distribution. 
+* The histogram suggests that the credit amount is approximately normally distributed. However, age and duration have a skewed distribution. 
 * The box plots show that most of the credits amounts are between 1000 to 4500 dollars. The credit amount is positively skewed. Most of the loan duration is from 15 to 30 months. Majority of the loan applicants have age between 28 - 43.
 
 
@@ -658,7 +658,7 @@ sns.scatterplot(y=german_df.credit_amount,
 
 **Observations**
 
-The graph shows that candidates who are umeployed/unskilled pose a high risk
+The graph shows that candidates who are unemployed/unskilled pose a high risk
 
 
 ```python
@@ -682,7 +682,7 @@ german_df.groupby('job')['target'].value_counts().unstack(level=1).plot.barh(sta
 
 **Observation**
 
-There is a linear relationship between the credit amount and duration. The larger the credit amount, the longer is the repayment duration.
+There is a linear relationship between the credit amount and duration. The larger the credit amount, the longer the repayment duration is.
 
 
 ```python
@@ -698,7 +698,7 @@ sns.lineplot(data=german_df, x='duration', y='credit_amount', hue='target', pale
 * stacked bar chart
 * scatter plot
 
-The categorical coding used in the graphs is :
+The categorical coding used in the graphs is:
 
 * A121 : real estate
 * A122 : if not A121 : building society savings agreement/life insurance
@@ -740,7 +740,7 @@ sns.scatterplot(y=german_df.credit_amount,
 
 ## 4. Encode categorical variables
 
-Most machine learning models cannot deal with categorical variables. So we need to encode the 13 categorical variables that we have in the german dataset. 
+Most machine learning models cannot deal with categorical variables. So, we need to encode the 13 categorical variables that we have in the German dataset. 
 
 
 ```python
@@ -768,7 +768,7 @@ german_df.select_dtypes('object').apply(pd.Series.nunique, axis = 0)
 
 
 
-We have categorical variables with 2 to 10 categories. We go for Label encoding for variables with only two categories where as for variables with more than two categories, we go for one-hot encoding. In label encoding, we assign each unique category in a categorical variable with an integer. No new columns are created. In one-hot encoding, we create a new column for each unique category in a categorical variable. The only downside to one-hot encoding is that the number of features (dimensions of the data) can explode with categorical variables with many categories. To deal with this, we can perform one-hot encoding followed by PCA or other dimensionality reduction methods to reduce the number of dimensions (while still trying to preserve information).
+We have categorical variables of 2 to 10 categories. We go for Label encoding for variables with only two categories where as for variables with more than two categories, we go for one-hot encoding. In label encoding, we assign each unique category in a categorical variable with an integer. No new columns are created. In one-hot encoding, we create a new column for each unique category in a categorical variable. The only downside to one-hot encoding is that the number of features (dimensions of the data) can explode with categorical variables with many categories. To deal with this, we can perform one-hot encoding followed by PCA or other dimensionality reduction methods to reduce the number of dimensions (while still trying to preserve information).
 
 For label encoding, we use the Scikit-Learn LabelEncoder and for one-hot encoding, the pandas get_dummies(df) function.
 
@@ -815,14 +815,14 @@ Now that we have encoded the variables, let's continue with the EDA.
 
 **4.1 Correlation between the variables**
 
-Let's look at correlations between the features and the target using Pearson correlation coefficient. In this case, a postive correlation represnets correlation with credit default while a negative correlation represnets correlation with credit repayment.
+Let's look at correlations between the features and the target using Pearson correlation coefficient. In this case, a positive correlation represents correlation with credit default while a negative correlation represents correlation with credit repayment.
 
 **Observations:**
 
 Positive correlation:
 * People with checking accounts with a negative balance (`account_bal_A11`) are likely to default the loan. 
 
-* Longer duration loans (`duration`) tends to be defaulted.
+* Longer duration loans (`duration`) tend to be defaulted.
 
 Negative correlation:
 
@@ -896,12 +896,12 @@ plt.title('Correlation Heatmap');
 ## 5. Feature engineering
 Feature engineering refers to creating most useful features out of the data. This represents one of the patterns in machine learning: feature engineering has a greater return on investment than model building and hyperparameter tuning. [[Source]](https://www.featurelabs.com/blog/secret-to-data-science-success/)
 
-Feature engineering refers to a geneal process and can involve both **feature construction**: adding new features from the existing data, and **feature selection**: choosing only the most important features or other methods of dimensionality reduction. There are many techniques we can use to both create features and select features.
+Feature engineering refers to a general process and can involve both **feature construction**: adding new features from the existing data, and **feature selection**: choosing only the most important features or other methods of dimensionality reduction. There are many techniques we can use to both create features and select features.
 
 For this problem, we will try to construct polynomial features.
 
 ### Polynomial Features
-Here, we find interactions between the significant features. The correlation between the interaction features are target are checked.If the interaction features are found to have greater correlation with the target compared to the original features, they are included in the machine learning model as they can help the model learn better. 
+Here, we find interactions between significant features. The correlation between the interaction features are target are checked. If the interaction features are found to have greater correlation with the target compared to the original features, they are included in the machine learning model as they can help the model learn better. 
 
 
 ```python
@@ -985,7 +985,7 @@ poly_corrs
 
 
 All the new variables have a greater (in terms of absolute magnitude) correlation with the target than the original features. 
-We will add these features to a copy of the german dataset and then evaluate models with and without the features. 
+We will add these features to a copy of the German dataset and then evaluate models with and without the features. 
 
 
 ```python
@@ -1039,7 +1039,7 @@ list(poly_features)
 # Print shape of original german_df
 print('Original features shape: ', german_df.shape)
 
-# Merge polnomial features into the dataframe
+# Merge polynomial features into the dataframe
 german_df_poly = german_df.merge(poly_features, left_index=True, right_index=True, how = 'left')
 
 # Print out the new shapes
@@ -1139,7 +1139,7 @@ list(german_df_poly)
 
 ## 6. Data split to train and test datasets
 
-As the german dataset is an imabalnced dataset with more number repayers compared to defaulters, we used stratified random `test_train_split` to split the dataset into random test and train datasets so that relative class frequencies are preserved.  
+As the German dataset is an imbalanced dataset with more number repayors compared to defaulters, we used stratified random `test_train_split` to split the dataset into random test and train datasets so that relative class frequencies are preserved.  
 
 
 ```python
@@ -1226,15 +1226,15 @@ Let's have a look at the different options available.
 |F1 | 2* precision * recall / (precision + recall)
 |AUC ROC| Area Under ROC Curve  (TPR Vs. FPR for all classification thresholds)
 
-* Accuracy: The german dataset is an imbalanced dataset. Accuracy would give a high score by predicting the majority class but would fail to predict the minority class, which is the defaulters. Hence, this is not a suitable metric for this dataset.
+* Accuracy: The German dataset is an imbalanced dataset. Accuracy would give a high score by predicting the majority class but would fail to predict the minority class, which is the defaulters. Hence, this is not a suitable metric for this dataset.
 
-* Precision: Precision is a good metric when the costs of false positive is high. Example, email spam detection.
+* Precision: Precision is a good metric when the costs of false positive are high. Example, email spam detection.
 
-* Recall: This metric is suitable when the costs of false negative is high. Example, predicting a defulter as not defaulter. This costs huge loss for the bank. Hence, this is a suitable metric for our case.
+* Recall: This metric is suitable when the costs of false negative are high. Example, predicting a defaulter as not defaulter. This costs a huge loss for the bank. Hence, this is a suitable metric for our case.
 
 * F1: measure of both precision and recall.
 
-* AUC ROC: It is the plot of TPR vs FPR. All other criteria discussed here assumes 0.5 as the decision threshold for the classification. However, it maynot be always true. The AUC helps us evaluate the performance of the model for all classification thresholds. The higher the value of the AUC metric, the better the model.
+* AUC ROC: It is the plot of TPR vs FPR. All other criteria discussed here assume 0.5 as the decision threshold for the classification. However, it may not be always true. The AUC helps us evaluate the performance of the model for all classification thresholds. The higher the value of the AUC metric, the better the model.
  * True positive rate (TPR) = TP/ Total actual positive
  * False positive rate (FPR) = FP/ Total actual negative
 
@@ -1254,7 +1254,7 @@ y.value_counts(normalize=True)
 
 
 
-It means that the baseline accuracy is 70%, ie, even if we classify all the samples as defaulters, we will be 70% accurate. 
+It means that the baseline accuracy is 70%, i.e., even if we classify all the samples as defaulters, we will be 70% accurate. 
 
 **Models without tuning**
 
@@ -1295,7 +1295,7 @@ names = []
 scoring = ['recall', 'roc_auc']
 
 for name, model in models:
-        # split dataset into k folds. use one fold for validation and remaining k-1 folds for training
+        # split dataset into k folds. use one-fold for validation and remaining k-1 folds for training
         skf= StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
         # Evaluate a score by cross-validation. Returns array of scores of the model for each run of the cross validation.
         #cv_results = cross_val_score(model, x_train, y_train, cv=skf, scoring=scoring)
@@ -1323,7 +1323,7 @@ ax.set_xticklabels(names)
 plt.show();
 ```
 
-Gaussian NB model has the highest `roc_auc` score. However, Logistic regression, Randon forests and XGBoost has better AUC score than Gaussian NB. Now let us tune hyperparameters for each of these models.
+Gaussian NB model has the highest `roc_auc` score. However, Logistic regression, Randon forests and XGBoost has a better AUC score than Gaussian NB. Now let us tune hyperparameters for each of these models.
 
 
 ```python
@@ -1334,10 +1334,10 @@ from sklearn.model_selection import GridSearchCV
 
 ### 7.2 Logistic regression
 
-* first, fit on original dataset set. Then, fit on polynomial features obtained by feature engineering
+* first, fit on the original dataset set. Then, fit on polynomial features obtained by feature engineering
 * polynomial features gives better results. Hence, this dataset will be used for further exploration
 
-* C: variable that controls regularization. smaller values indicate higher regularization. Its a penality term that deincentivize overfitting
+* C: variable that controls regularization. Smaller values indicate higher regularization. It's a penalty term that disincentivize overfitting
 
 First let us choose between german_df and german_df_poly. Use C=0.0001 which is randomly chosen.
 
@@ -1362,7 +1362,7 @@ print('Dataset: german_df_poly\n Recall score on train set: {:.2f}'.format(cross
 
 
 
-We see considerable improvement in recall scaore with german_df_poly dataset. Hence, we proceed with german_df_poly for tuning regularization parameter C.
+We see considerable improvement in recall score with german_df_poly dataset. Hence, we proceed with german_df_poly for tuning regularization parameter C.
 
 
 ```python
@@ -1406,11 +1406,11 @@ test_recall
 
 
 
-We get the maximum recall scoee on test set with overfitting at C=0.01
+We get the maximum recall score on test set with overfitting at C=0.01
 
 
 ```python
-# Final logistc model
+# Final logistic model
 log_reg_poly = LogisticRegression(C = 0.01, random_state=42, solver='lbfgs', max_iter=5000).fit(X_train, Y_train)
 print('Recall score on test dataset: {:.2f}'.format(recall_score(Y_test, log_reg_poly.predict(X_test))))
 print('\nAUC ROC score on test dataset: {:.2f}'.format(roc_auc_score(Y_test,log_reg_poly.predict_proba(X_test)[:, 1])))
@@ -1428,7 +1428,7 @@ print('\nAUC ROC score on test dataset: {:.2f}'.format(roc_auc_score(Y_test,log_
 * min number of samples per leaf
 * max features
 
-Now, let's try to improve this result. Let's start with number of trees.
+Now, let's try to improve this result. Let's start with the number of trees.
 
 
 ```python
@@ -1460,7 +1460,7 @@ plt.title('Random-Forest: accuracy vs n_estimators');
 ![credit11]({{site.baseurl}}/assets/img/credit-risk/11.png)
 
 
-Best accuracy is achived with 20 tress.
+Best accuracy is achieved with 20 tress.
 
 
 ```python
@@ -1473,7 +1473,7 @@ gcv = GridSearchCV(rf, parameters, n_jobs=-1, cv=skf, verbose=1, scoring='recall
 gcv_fit= gcv.fit(X_train, Y_train)
 ```
 
-    Fitting 10 folds for each of 64 candidates, totalling 640 fits
+    Fitting 10 folds for each of 64 candidates, totaling 640 fits
 
 
     [Parallel(n_jobs=-1)]: Using backend LokyBackend with 2 concurrent workers.
@@ -1583,7 +1583,7 @@ gcv = GridSearchCV(model_xg, parameters, n_jobs=-1, cv=skf, verbose=1, scoring='
 gcv_fit= gcv.fit(X_train, Y_train)
 ```
 
-    Fitting 10 folds for each of 64 candidates, totalling 640 fits
+    Fitting 10 folds for each of 64 candidates, totaling 640 fits
 
 
     [Parallel(n_jobs=-1)]: Using backend LokyBackend with 2 concurrent workers.
