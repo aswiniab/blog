@@ -295,8 +295,7 @@ german_df.columns=['account_bal','duration','payment_status','purpose',
 
 
 ```python
-german_df= german_df.replace(['A11','A12','A13','A14', 'A171','A172','A173','A174','A121','A122','A123','A124'],
-['neg_bal','positive_bal','positive_bal','no_acc','unskilled','unskilled','skilled','highly_skilled',
+german_df= german_df.replace(['A11','A12','A13','A14', 'A171','A172','A173','A174','A121','A122','A123','A124'],['neg_bal','positive_bal','positive_bal','no_acc','unskilled','unskilled','skilled','highly_skilled',
 'none','car','life_insurance','real_estate'])
 ```
 
@@ -901,7 +900,7 @@ Feature engineering refers to a general process and can involve both **feature c
 For this problem, we will try to construct polynomial features.
 
 ### Polynomial Features
-Here, we find interactions between significant features. The correlation between the interaction features are target are checked. If the interaction features are found to have greater correlation with the target compared to the original features, they are included in the machine learning model as they can help the model learn better. 
+Here, we find interactions between significant features. The correlation between the interaction features and the target is checked. If the interaction features are found to have greater correlation with the target compared to the original features, they are included in the machine learning model as they can help the model learn better. 
 
 
 ```python
