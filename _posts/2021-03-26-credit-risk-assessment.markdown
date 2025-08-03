@@ -17,8 +17,9 @@ In this project, the relationship between the credit risk and various attributes
 3. Exploratory data analysis
 4. Feature engineering
 5. Models
-6. Summary
-7. References
+6. Model evaluation
+7. Conclusion
+8. References
 
 ## 1. Import data
 
@@ -1604,7 +1605,7 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_auc_score(Y_test,gcv_fi
     ROC AUC score on test dataset: 0.73
 
 
-## Summary
+## Model evaluation
 
 |MODEL |Recall score on test data | ROC AUC score on test data 
 |:---|---|---
@@ -1612,6 +1613,9 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_auc_score(Y_test,gcv_fi
 |Random Forest|0.40|0.74
 |XGBoost|0.43|0.73
 |KNN|0.35|0.75
+
+## Conclusion
+Recall, also known as sensitivity, is calculated as `True Positives / Total Actual Positives`, or `TP / (TP + FN)`. A perfect recall score is 1, which occurs when there are no false negatives (FN = 0). In the context of a credit risk prediction model, our goal is to correctly identify all defaulters. Therefore, we prioritize models with the highest recall. In this case, the XGBoost model achieves the highest recall score and is thus the preferred choice.
 
 ## References and Future Work
 
