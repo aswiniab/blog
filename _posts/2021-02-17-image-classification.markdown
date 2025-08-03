@@ -19,8 +19,7 @@ This is a project to classify the images of cassava plant leaves into five categ
 1.   Feed Forward Neural Network
 2.   Convolutional Neural Network
 3.   Resnet34 pretrained architecture
-4.   Efficientnet-B4 pretrained architecture
-5.   Resnext50_32x4d pretrained architecture
+
 
 
 The project is inspired from the [Zero to GANs](https://jovian.ai/learn/deep-learning-with-pytorch-zero-to-gans) course by the data science learning platform, [Jovian](https://www.jovian.ai).
@@ -1302,6 +1301,7 @@ opt_func = torch.optim.Adam
 |Feed Forward Neural Network|05.05% |1.60944 |29:01 |
 |Convolutional Neural Network|61.45% |1.18407 | 46:52|
 |Resnet34|64.92%|0.94607|34:30|
+
 
 
 
