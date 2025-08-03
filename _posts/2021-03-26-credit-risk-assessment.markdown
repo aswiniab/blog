@@ -1432,7 +1432,7 @@ trees_grid = [5, 10, 15, 20, 30, 50, 75, 100]
 
 for ntrees in trees_grid:
     rf = RandomForestClassifier(n_estimators=ntrees, random_state=42, n_jobs=-1).fit(X_train, Y_train)
-    train_acc.append(cross_val_score(rf, X_test, Y_test, cv=skf, scoring='recall').mean())
+    train_acc.append(cross_val_score(rf, X_train, Y_train, cv=skf, scoring='recall').mean())
     test_acc.append(recall_score(rf.predict(X_test), Y_test))
 print("Best recall score on test dataset is {:.2f}% with {} trees".format(max(test_acc)*100, 
                                                          trees_grid[np.argmax(test_acc)]))
