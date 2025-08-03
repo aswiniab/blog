@@ -1592,7 +1592,7 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_sc))
     ROC AUC score on test dataset: 0.73
 
 
-### 7.6 KNN 
+### 7.5 KNN 
 
 
 ```python
