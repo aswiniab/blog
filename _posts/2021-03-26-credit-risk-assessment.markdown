@@ -2,7 +2,7 @@
 layout: post
 title: Credit Risk Assessment
 date: 2021-03-26 00:00:00 +0300
-description: Compare efficiency of different models (Logistic Regression, Random Forest, XG Bosst, KNN, GaussianNB)
+description: Compare efficiency of different models (Logistic Regression, Random Forest, XG Bosst, KNN)
 img: cred.jpg # Add image post (optional)
 fig-caption: Photo from Unsplash by CardMapr.nl
 tags: [Credit Risk, Machine Learning] # add tag
@@ -1264,10 +1264,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
 from xgboost import XGBClassifier
 
 from sklearn.metrics import roc_auc_score, recall_score, classification_report
@@ -1281,10 +1277,8 @@ models = []
 models.append(('DT', DecisionTreeClassifier(random_state=42)))
 models.append(('LR', LogisticRegression(random_state=42)))
 models.append(('RF', RandomForestClassifier(random_state=42)))
-models.append(('NB', GaussianNB())) 
 models.append(('XGB', XGBClassifier(random_state=42)))
 models.append(('KNN', KNeighborsClassifier())) 
-models.append(('SVM', SVC(gamma='auto',random_state=42)))
 
 # evaluate each model in turn
 results_recall = []
