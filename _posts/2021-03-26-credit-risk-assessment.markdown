@@ -1503,28 +1503,7 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_sc))
     ROC AUC score on test dataset: 0.74
 
 
-### 7.4 GaussianNB
-
-
-```python
-# model
-gnb= GaussianNB()
-gnb.fit(X_train, Y_train)
-#evaluate
-print('Train accuracy: {:.2f}'.format(cross_val_score(gnb, X_train, Y_train, cv=skf, scoring='recall').mean()))
-print('Recall score test dataset: {:.2f}'.format(recall_score(Y_test, gnb.predict(X_test))))
-print('ROC AUC score test dataset: {:.2f}'.format(roc_auc_score(Y_test, gnb.predict_proba(X_test)[:,1])))
-```
-
-    Train accuracy: 0.67
-    Recall score test dataset: 0.67
-    ROC AUC score test dataset: 0.78
-
-
-### 7.5 XGBoost
-
-
-
+### 7.4 XGBoost
 
 ```python
 # Create lists to save the values of accuracy on training and test sets
@@ -1550,10 +1529,7 @@ plt.title('XG-Boost: accuracy vs n_estimators');
 
     Best recall score on test dataset is 66.67% with 10 estimators
 
-
-
 ![credit12]({{site.baseurl}}/assets/img/credit-risk/12.png)
-
 
 
 ```python
@@ -1569,8 +1545,6 @@ print('ROC AUC score on test dataset:', roc_auc_score(Y_test, model_xg.predict_p
     Train accuracy: 0.45
     Recall score on test dataset: 0.5
     ROC AUC score on test dataset: 0.7957142857142858
-
-
 
 ```python
 # Initialize the set of parameters for exhaustive search and fit 
@@ -1591,17 +1565,11 @@ gcv_fit= gcv.fit(X_train, Y_train)
     [Parallel(n_jobs=-1)]: Done 640 out of 640 | elapsed:   33.0s finished
 
 
-
 ```python
 gcv.best_params_, gcv.best_score_
 ```
 
-
-
-
     ({'max_depth': 15, 'max_features': 7, 'min_samples_leaf': 1}, 0.4625)
-
-
 
 
 ```python
@@ -1648,12 +1616,8 @@ print("ROC AUC score on test dataset: {:.2f}".format(roc_auc_score(Y_test,gcv_fi
 |:---|---|---
 |Logistic Regression|0.42|0.78 
 |Random Forest|0.40|0.74
-|GaussianNB|0.67|0.78
 |XGBoost|0.43|0.73
 |KNN|0.35|0.75
-
-Gaussian NB model gives the highest recall score and AUC ROC. Hence, we choose this model.
-
 
 ## References and Future Work
 
