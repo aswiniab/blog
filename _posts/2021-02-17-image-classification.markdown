@@ -904,9 +904,9 @@ class CnnModel(ImageClassificationBase):
     def __init__(self, num_classes):
         super().__init__()
         self.network = nn.Sequential(
-            nn.Conv2d(3, 32, kernel_size=3, padding=1),
+            nn.Conv2d(3, 32, kernel_size=3, padding=1), # input: 3 x 128 x 128, output: 32 x 128 x 128
             nn.ReLU(),
-            nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1), # output: 64 x 128 x 128
             nn.ReLU(),
             nn.MaxPool2d(2, 2), # output: 64 x 64 x 64
             nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
@@ -1301,6 +1301,7 @@ opt_func = torch.optim.Adam
 |Feed Forward Neural Network|05.05% |1.60944 |29:01 |
 |Convolutional Neural Network|61.45% |1.18407 | 46:52|
 |Resnet34|64.92%|0.94607|34:30|
+
 
 
 
