@@ -768,7 +768,7 @@ german_df.select_dtypes('object').apply(pd.Series.nunique, axis = 0)
 
 
 
-We have categorical variables of 2 to 10 categories. We go for Label encoding for variables with only two categories where as for variables with more than two categories, we go for one-hot encoding. In label encoding, we assign each unique category in a categorical variable with an integer. No new columns are created. In one-hot encoding, we create a new column for each unique category in a categorical variable. The only downside to one-hot encoding is that the number of features (dimensions of the data) can explode with categorical variables with many categories. To deal with this, we can perform one-hot encoding followed by PCA or other dimensionality reduction methods to reduce the number of dimensions (while still trying to preserve information).
+We have categorical variables of 2 to 10 categories. We go for `Label encoding` for variables with only two categories where as for variables with more than two categories, we go for `one-hot encoding`. In label encoding, we assign each unique category in a categorical variable with an integer. No new columns are created. In one-hot encoding, we create a new column for each unique category in a categorical variable. The only downside to one-hot encoding is that the number of features (dimensions of the data) can explode with categorical variables with many categories. To deal with this, we can perform one-hot encoding followed by PCA or other dimensionality reduction methods to reduce the number of dimensions (while still trying to preserve information).
 
 For label encoding, we use the Scikit-Learn LabelEncoder and for one-hot encoding, the pandas get_dummies(df) function.
 
